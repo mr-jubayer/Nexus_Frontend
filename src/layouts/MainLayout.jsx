@@ -4,7 +4,9 @@ function MainLayout() {
   return (
     <div>
       {/* navbar */}
-      <NavBar />
+      <div className="md:px-5 px-3 py-5">
+        <NavBar />
+      </div>
       {/* dynamic page */}
 
       {/* footer */}
