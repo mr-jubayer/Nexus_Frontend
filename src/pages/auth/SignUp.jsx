@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import SocialLogin from "./SocialLogin";
 import { ImSpinner9 } from "react-icons/im";
+import useAuth from "../../hooks/useAuth";
+import { updateProfile } from "firebase/auth";
 
 function SignUp() {
   const {
@@ -15,17 +17,22 @@ function SignUp() {
   } = useForm();
   const [isVisible, setIsVisible] = useState(false);
   const [err, setErr] = useState("");
-  const [loading, setLoadin] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { signUpWithEmailAndPassword } = useAuth();
 
-  const signUpSubmitHandler = (userCredetial) => {
-    if (!userCredetial?.password) return;
-    if (userCredetial.password !== userCredetial.conPass)
-      setErr("Confirm password and try again!");
-    /**
-     * Password Validation
-     *
-     *
-     */
+  const signUpSubmitHandler = async (userCredetial) => {
+    setLoading(true);
+    const { password, conPass, email, fullName } = userCredetial;
+    if (!password) return;
+    if (password !== conPass) return setErr("Confirm password and try again!");
+
+    try {
+      const res = await signUpWithEmailAndPassword(email, password);
+      await updateProfile(res.user, { displayName: "", photoURL: "" });
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
 
     console.log(userCredetial);
   };
@@ -114,7 +121,7 @@ function SignUp() {
           <FilledBtn className="flex justify-center items-center bg-myGreen text-white py-1.5 mt-2 hover:bg-myGreen/80 active:bg-myGreen uppercase rounded-none">
             {loading ? (
               <span>
-                <ImSpinner9 className="animate-spin duration-100" />
+                <ImSpinner9 className="animate-spin duration-100 text-xl " />
               </span>
             ) : (
               "Resister"
