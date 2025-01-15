@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import logo from "../../assets/logo2.png";
 import BtnOutline from "../buttons/BtnOutline";
 import FilledBtn from "../buttons/FilledBtn";
@@ -15,10 +14,10 @@ function NavBar() {
     { label: "Premium Articles ", path: "/h" },
   ];
 
-  const Links = ({ className = "" }) => (
+  const Links = () => (
     <ul className="flex lg:flex-row flex-col gap-8 lg:items-center">
       {defaultRoutes.map((route) => (
-        <Navlink key={route.label} className={className} path={route.path}>
+        <Navlink key={route.label} className={"lg:bg-white"} path={route.path}>
           {route.label}
         </Navlink>
       ))}
@@ -48,11 +47,11 @@ function NavBar() {
               </ul>
             </div>
           </div>
-          <img src={logo} alt="brand name" className="md:h-10 h-8" />
+          <img src={logo} alt="brand name" className="md:h-10 h-[26px]" />
         </div>
         <div>
           <div className="hidden lg:block">
-            <Links className="bg-gray-200" />
+            <Links />
           </div>
         </div>
         <div>

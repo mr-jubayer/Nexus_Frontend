@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import NavBar from "../components/common/NavBar";
 
 function MainLayout() {
@@ -8,10 +9,11 @@ function MainLayout() {
         <NavBar />
       </div>
       {/* dynamic page */}
-
+      <div className="max-w-6xl mx-auto">
+        <Outlet />
+      </div>
       {/* footer */}
     </div>
   );
 }
-
 export default MainLayout;

@@ -7,3 +7,28 @@
 body {
   font-family: "Outfit", serif;
 }
+html {
+  overflow-y: scroll; /* Ensure the vertical scrollbar appears */
+  scrollbar-color: gray transparent;
+  scrollbar-width: thin;
+}
+
+/* Webkit Scrollbar Customization */
+html::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent; /* Track background */
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: gray; /* Scrollbar thumb background color */
+  border-radius: 40px; /* Rounded corners */
+  border: 1px solid transparent; /* Optional border for better visuals */
+  background-clip: content-box; /* Clip background to the content box */
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: darkgray; /* Change color on hover */
+}
