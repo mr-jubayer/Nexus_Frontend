@@ -5,7 +5,7 @@ function MainLayout() {
   return (
     <div>
       {/* navbar */}
-      <div className="md:px-5 px-3 py-5">
+      <div className="md:px-5 px-3 py-5 shadow-sm">
         <NavBar />
       </div>
       {/* dynamic page */}

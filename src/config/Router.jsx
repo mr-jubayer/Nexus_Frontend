@@ -8,6 +8,7 @@ import {
   Login,
   SignUp,
 } from ".";
+import NotFound from "../pages/error/NotFound";
 
 const Router = () => {
   return (
@@ -22,6 +23,8 @@ const Router = () => {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
+        {/* not found page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

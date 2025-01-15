@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 import { FcGoogle } from "react-icons/fc";
 import FilledBtn from "../../components/buttons/FilledBtn";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 function SocialLogin({ label }) {
-  const handleSocialLogin = () => {
-    console.log("login is proccesing..");
+  const { googleLogin } = useAuth();
+  const navigate = useNavigate();
+  const handleSocialLogin = async () => {
+    await googleLogin();
+    navigate("/");
   };
   return (
     <div className="flex justify-center">

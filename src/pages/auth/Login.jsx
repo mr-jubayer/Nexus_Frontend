@@ -1,16 +1,48 @@
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import FilledBtn from "../../components/buttons/FilledBtn";
 import InputBox from "../../components/inputs/InputBox";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import SocialLogin from "./SocialLogin";
+import useAuth from "../../hooks/useAuth";
+import { ImSpinner9 } from "react-icons/im";
 
 function Login() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [isVisible, setIsVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { signInWithEmailAndPass } = useAuth();
+  const [firebaseErr, setFirebaseErr] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const submitHandler = (userCredetial) => {
+  const submitHandler = async (userCredetial) => {
+    const { password, email } = userCredetial;
     console.log(userCredetial);
+    setLoading(true);
+    setFirebaseErr("");
+    try {
+      await signInWithEmailAndPass(email, password);
+      reset();
+      navigate(location?.state?.from || "/");
+    } catch (error) {
+      console.log(error);
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          setFirebaseErr("The email address is already in use!");
+          break;
+        case "auth/invalid-credential":
+          setFirebaseErr("The credetial is invalid.");
+          break;
+        case "auth/weak-password":
+          setFirebaseErr("The password is too weak.");
+          break;
+        default:
+          setFirebaseErr("An error occurred: " + error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="w-[450px]">
@@ -34,13 +66,16 @@ function Login() {
             name={"email"}
             type={"email"}
             id={"email"}
+            required={true}
             register={{ ...register("email") }}
           />
+          <p className="text-sm text-error mt-1">{firebaseErr} </p>
           <InputBox
             label={"Password"}
             name={"password"}
             type={isVisible ? "text " : "password"}
             id={"password"}
+            required={true}
             register={{ ...register("password") }}
           >
             <div
@@ -56,8 +91,14 @@ function Login() {
           </InputBox>
           {/* set up reChaptcha */}
           <div></div>
-          <FilledBtn className="bg-myGreen text-white py-1.5 mt-2 hover:bg-myGreen/80 active:bg-myGreen uppercase rounded-none">
-            Login
+          <FilledBtn className="bg-myGreen text-white py-1.5 mt-2 hover:bg-myGreen/80 active:bg-myGreen uppercase rounded-none flex justify-center  items-center">
+            {loading ? (
+              <span>
+                <ImSpinner9 className="animate-spin duration-100 text-xl " />
+              </span>
+            ) : (
+              "Login"
+            )}
           </FilledBtn>
         </form>
         <div className="flex gap-2 mt-3 justify-center">

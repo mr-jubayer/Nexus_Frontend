@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import FilledBtn from "../../components/buttons/FilledBtn";
 import InputBox from "../../components/inputs/InputBox";
 import { useForm } from "react-hook-form";
@@ -12,29 +12,44 @@ function SignUp() {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
   const [isVisible, setIsVisible] = useState(false);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const { signUpWithEmailAndPassword } = useAuth();
+  const [firebaseErr, setFirebaseErr] = useState("");
+  const navigate = useNavigate();
 
   const signUpSubmitHandler = async (userCredetial) => {
-    setLoading(true);
     const { password, conPass, email, fullName } = userCredetial;
     if (!password) return;
     if (password !== conPass) return setErr("Confirm password and try again!");
-
+    setLoading(true);
+    setFirebaseErr("");
     try {
       const res = await signUpWithEmailAndPassword(email, password);
-      await updateProfile(res.user, { displayName: "", photoURL: "" });
-      setLoading(false);
+      await updateProfile(res.user, { displayName: fullName, photoURL: "" });
+      reset();
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          setFirebaseErr("The email address is already in use!");
+          break;
+        case "auth/invalid-credential":
+          setFirebaseErr("The credetial is invalid.");
+          break;
+        case "auth/weak-password":
+          setFirebaseErr("The password is too weak.");
+          break;
+        default:
+          setFirebaseErr("An error occurred: " + error.message);
+      }
+    } finally {
+      setLoading(false);
     }
-
-    console.log(userCredetial);
   };
   return (
     <div className="w-[450px]">
@@ -68,7 +83,10 @@ function SignUp() {
             type={"email"}
             id={"email"}
             register={{ ...register("email") }}
-          />
+          >
+            {" "}
+            <p className="text-sm text-error mt-1">{firebaseErr} </p>
+          </InputBox>
           <InputBox
             label={"Password"}
             name={"password"}
