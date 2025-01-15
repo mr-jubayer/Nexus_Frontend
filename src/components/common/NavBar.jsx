@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import logo from "../../assets/logo2.png";
 import BtnOutline from "../buttons/BtnOutline";
 import FilledBtn from "../buttons/FilledBtn";
@@ -30,13 +31,13 @@ function NavBar() {
         <div className="flex items-center gap-1">
           <div className="drawer lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content p-1 active:scale-95 transition-all text-3xl ">
+            <div className="drawer-content p-1 active:scale-95 transition-all text-3xl z-50">
               {/* Page content here */}
               <label htmlFor="my-drawer" className="cursor-pointer">
                 <IoMenuSharp />
               </label>
             </div>
-            <div className="drawer-side ">
+            <div className="drawer-side  z-50">
               <label
                 htmlFor="my-drawer"
                 aria-label="close sidebar"
@@ -56,10 +57,15 @@ function NavBar() {
         </div>
         <div>
           <div>
-            <BtnOutline>Login</BtnOutline>
-            <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90">
-              Sign Up
-            </FilledBtn>
+            <Link to={"/auth/login"}>
+              {" "}
+              <BtnOutline>Login</BtnOutline>
+            </Link>
+            <Link to={"/auth/signup"}>
+              <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90">
+                Sign Up
+              </FilledBtn>
+            </Link>
           </div>
         </div>
       </div>

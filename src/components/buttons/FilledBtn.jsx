@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 
 function FilledBtn(
   { children = "button", className = "", onClick = () => {} },
@@ -7,8 +6,8 @@ function FilledBtn(
 ) {
   return (
     <button
-      className={`${className}  py-1 px-3 rounded-md `}
-      onClick={onclick}
+      className={`  py-1 px-3 rounded-md  transition-all duration-150 ${className}`}
+      onClick={onClick}
       type={type}
     >
       {children}

@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
+import "./styles.css";
 
 import { Navigation, Autoplay } from "swiper/modules";
 
@@ -15,19 +16,19 @@ export default function Banner() {
         modules={[Navigation, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide style={{ backgroundColor: "#ffadad" }}>
+        <SwiperSlide style={{ backgroundColor: "#ce6d6d" }}>
           Slide 1
         </SwiperSlide>
-        <SwiperSlide style={{ backgroundColor: "#ffd6a5" }}>
+        <SwiperSlide style={{ backgroundColor: "#df7e08" }}>
           Slide 2
         </SwiperSlide>
-        <SwiperSlide style={{ backgroundColor: "#fdffb6" }}>
+        <SwiperSlide style={{ backgroundColor: "#7c8103" }}>
           Slide 3
         </SwiperSlide>
-        <SwiperSlide style={{ backgroundColor: "#caffbf" }}>
+        <SwiperSlide style={{ backgroundColor: "#25d003" }}>
           Slide 4
         </SwiperSlide>
-        <SwiperSlide style={{ backgroundColor: "#9bf6ff" }}>
+        <SwiperSlide style={{ backgroundColor: "#05b2c1" }}>
           Slide 5
         </SwiperSlide>
       </Swiper>
