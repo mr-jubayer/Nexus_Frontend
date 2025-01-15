@@ -7,6 +7,7 @@ import SocialLogin from "./SocialLogin";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 function SignUp() {
   const {
@@ -33,6 +34,7 @@ function SignUp() {
       await updateProfile(res.user, { displayName: fullName, photoURL: "" });
       reset();
       navigate("/");
+      toast.success("SignUp Successfull!");
     } catch (error) {
       switch (error.code) {
         case "auth/email-already-in-use":

@@ -6,6 +6,7 @@ import { useState } from "react";
 import SocialLogin from "./SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
+import toast from "react-hot-toast";
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
@@ -25,6 +26,7 @@ function Login() {
       await signInWithEmailAndPass(email, password);
       reset();
       navigate(location?.state?.from || "/");
+      toast.success("Login Successfull!");
     } catch (error) {
       console.log(error);
       switch (error.code) {

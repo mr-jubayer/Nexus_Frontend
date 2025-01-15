@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import FilledBtn from "../../components/buttons/FilledBtn";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
+import { toast } from "react-hot-toast";
 
 function SocialLogin({ label }) {
   const { googleLogin } = useAuth();
@@ -10,6 +11,7 @@ function SocialLogin({ label }) {
   const handleSocialLogin = async () => {
     await googleLogin();
     navigate("/");
+    toast.success("Login Successfull!");
   };
   return (
     <div className="flex justify-center">
