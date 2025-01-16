@@ -11,7 +11,7 @@ export default function Banner() {
     <div className="p-5 xl:h-[550px] w-full md:h-[500px] h-[560px]">
       <Swiper
         navigation={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         modules={[Navigation, Autoplay]}
         className="mySwiper"
