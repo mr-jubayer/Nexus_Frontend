@@ -13,6 +13,8 @@ import uploadImg from "../../../../utils/uploadImg";
 import toast from "react-hot-toast";
 import urlRecucer from "../../../../utils/urlReducer";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { ImSpinner9 } from "react-icons/im";
+import useUserInfo from "../../../../hooks/useUserInfo";
 
 const animatedComponents = makeAnimated();
 
@@ -23,6 +25,8 @@ function AddArticle() {
   const [publisher, setPublisher] = useState(publishers[2]);
   const [selectedImg, setSelectedImg] = useState("(Optinal)");
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
+  const { userInfo } = useUserInfo();
 
   const submitPostHandler = async (postData) => {
     // Todo: get all data from 'form'
@@ -30,7 +34,7 @@ function AddArticle() {
     // todo: make object and put all data on it (like: title, desc, image, tags, userCredentials, etc)
     // todo: test it
     // then -> set up backend for it
-
+    setLoading(true);
     try {
       const img = inputRef.current.files[0];
       const upladedImage = await uploadImg(img);
@@ -44,11 +48,13 @@ function AddArticle() {
         creationTime: Date.now(),
         authorInfo: {
           name: "",
-          profileProto: "",
+          profileProto: upladedImage.url,
         },
       };
       console.log(uploadPost);
+
       await axiosSecure.post(`/api/articles`, uploadPost);
+      setLoading(false);
       toast.success("article uploaded!");
     } catch (error) {
       console.log(error);
@@ -142,7 +148,13 @@ function AddArticle() {
               className={`bg-myGreen cursor-pointer hover:bg-myGreen/90 active:bg-myGreen/80 transition-all duration-200  text-white  py-2  flex justify-center text-[22px] px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30   `}
               type={"submit"}
             >
-              Publish
+              {loading ? (
+                <span>
+                  <ImSpinner9 className="animate-spin duration-100 text-xl " />
+                </span>
+              ) : (
+                "Publish"
+              )}
             </FilledBtn>
           </div>
         </form>

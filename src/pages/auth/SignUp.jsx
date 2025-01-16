@@ -9,8 +9,8 @@ import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaFileUpload } from "react-icons/fa";
 import urlRecucer from "../../utils/urlReducer";
+import uploadImg from "../../utils/uploadImg";
 
 function SignUp() {
   const {
@@ -38,10 +38,12 @@ function SignUp() {
     try {
       const res = await signUpWithEmailAndPassword(email, password);
       await updateProfile(res.user, { displayName: fullName, photoURL: "" });
+      const img = inputRef.current.files[0];
+      const upladedImage = await uploadImg(img);
       const user = {
         email: email,
         fullName: fullName,
-        // profilePhoto: res.user.photoURL,
+        profilePhoto: upladedImage.url,
       };
 
       await axiosSecure.post("/api/users", user);
@@ -112,7 +114,7 @@ function SignUp() {
             {" "}
             <p className="text-sm text-error mt-1">{firebaseErr} </p>
             <div
-              className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+              className={`mt-4 flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
             >
               {/* hide it */}
               <input
@@ -125,12 +127,12 @@ function SignUp() {
               {/* on click button run input file */}
               <button
                 type={"button"}
-                className="flex  items-center gap-2 bg-myGreen rounded-sm px-5 py-3 text-white"
+                className="flex  items-center gap-2 bg-myGreen rounded-sm px-4 py-2 text-white text-lg"
                 onClick={handleUploadThumbnail}
               >
-                Upload Thumbnail <FaFileUpload className="text-3xl" />
+                Upload Photo
               </button>
-              {selectedImg}
+              <p className="text-lg"> {selectedImg}</p>
             </div>
           </InputBox>
           <InputBox

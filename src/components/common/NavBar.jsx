@@ -7,9 +7,11 @@ import { IoMenuSharp } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import { LuLogOut } from "react-icons/lu";
 import { toast } from "react-hot-toast";
+import useUserInfo from "../../hooks/useUserInfo";
 
 function NavBar() {
   const { user, logoutUser } = useAuth();
+  const { userInfo } = useUserInfo();
   const defaultRoutes = [
     { label: "Home", path: "/" },
     { label: "Subscription", path: "/s" },
@@ -102,7 +104,7 @@ function NavBar() {
               </BtnOutline>
               <div className="avatar online cursor-pointer rounded-full">
                 <div className="w-12 rounded-full">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  <img src={userInfo.profilePhoto} />
                 </div>
               </div>
             </div>
