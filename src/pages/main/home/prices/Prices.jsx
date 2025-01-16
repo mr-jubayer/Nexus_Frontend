@@ -1,4 +1,5 @@
 import FilledBtn from "../../../../components/buttons/FilledBtn";
+import Heading from "../../../../components/Heading";
 
 const plans = [
   {
@@ -51,16 +52,10 @@ const plans = [
 export default function Prices() {
   return (
     <div className="relative">
-      <div className="mx-auto max-w-4xl text-center">
-        <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-3xl">
-          Choose your plan
-        </p>
-      </div>
-      <p className="mx-auto mt-2 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8">
-        Choose the plan that fits your needs and get started today.
-      </p>
-      <div className="mx-auto my-10 grid lg:grid-cols-3 sm:grid-cols-2 items-center gap-y-6 gap-x-5 sm:mt-20 sm:gap-y-0">
-        {plans.map((plan, index) => (
+      <Heading title=" Choose your plan" />
+
+      <div className="mx-auto my-8 grid lg:grid-cols-3 sm:grid-cols-2 items-center gap-y-6 gap-x-5 sm:mt-10 sm:gap-y-0">
+        {plans.map((plan) => (
           <div
             key={plan.id}
             className={` p-8 ring-2 ring-gray-900/10 sm:p-10 bg-white flex flex-col justify-between h-full rounded-md `}

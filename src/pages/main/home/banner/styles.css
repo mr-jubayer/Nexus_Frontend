@@ -28,16 +28,27 @@
 /* Change color of navigation arrows */
 .swiper-button-next,
 .swiper-button-prev {
-  transition: all 0.1s linear;
-  color: #ffffff; /* Change this to your desired color */
+  transition: all 0.2s linear;
+  color: #ffffff;
   text-shadow: 0 1px 40px #000;
+  transform: scale(0.8);
 }
 
-/* Change color on hover */
 .swiper-button-next:hover {
   transform: translateX(4px);
+  transform: scale(0.8);
 }
 
 .swiper-button-prev:hover {
   transform: translateX(-4px);
+  transform: scale(0.8);
+}
+
+@media only screen and (max-width: 600px) {
+  .swiper-button-next,
+  .swiper-button-prev,
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    transform: scale(0.6);
+  }
 }

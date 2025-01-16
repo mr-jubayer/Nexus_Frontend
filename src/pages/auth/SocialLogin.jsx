@@ -4,12 +4,21 @@ import FilledBtn from "../../components/buttons/FilledBtn";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function SocialLogin({ label }) {
   const { googleLogin } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const handleSocialLogin = async () => {
-    await googleLogin();
+    const res = await googleLogin();
+    const user = {
+      email: res.user.email,
+      fullName: res.user.displayName,
+      profilePhoto: res.user.photoURL,
+    };
+
+    await axiosSecure.post("/api/users", user);
     navigate("/");
     toast.success("Login Successfull!");
   };

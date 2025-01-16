@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 
 function BtnOutline(
   { children = "button outline", className = "", onClick = () => {} },
@@ -8,7 +7,7 @@ function BtnOutline(
   return (
     <button
       className={`${className}  py-1 px-3 rounded-md `}
-      onClick={onclick}
+      onClick={onClick}
       type={type}
     >
       {children}

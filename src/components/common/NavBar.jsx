@@ -4,11 +4,16 @@ import BtnOutline from "../buttons/BtnOutline";
 import FilledBtn from "../buttons/FilledBtn";
 import Navlink from "../NavLink";
 import { IoMenuSharp } from "react-icons/io5";
+import useAuth from "../../hooks/useAuth";
+import { LuLogOut } from "react-icons/lu";
+import { toast } from "react-hot-toast";
 
 function NavBar() {
+  const { user, logoutUser } = useAuth();
   const defaultRoutes = [
     { label: "Home", path: "/" },
     { label: "Subscription", path: "/s" },
+    { label: "Add Articles", path: "/add-article" },
     { label: "All Articles", path: "/a" },
     { label: "Dashboard ", path: "/v" },
     { label: "My Articles ", path: "/e" },
@@ -16,14 +21,45 @@ function NavBar() {
   ];
 
   const Links = () => (
-    <ul className="flex lg:flex-row flex-col gap-8 lg:items-center">
+    <ul className="flex lg:flex-row flex-col  lg:items-center">
       {defaultRoutes.map((route) => (
-        <Navlink key={route.label} className={"lg:bg-white"} path={route.path}>
+        <Navlink key={route.label} path={route.path}>
           {route.label}
         </Navlink>
       ))}
     </ul>
   );
+
+  const logoutHandler = () => {
+    console.log("logout");
+
+    const logginOut = (id) => {
+      toast.promise(logoutUser(), {
+        loading: "Processing...",
+        success: <b>Logout Successfull!</b>,
+        error: <b>Logout failed.</b>,
+      });
+      toast.dismiss(id);
+    };
+
+    toast((t) => (
+      <span>
+        Are you <b>sure</b>?
+        <button
+          onClick={() => toast.dismiss(t.id)}
+          className="bg-gray-400 px-3 py-1 rounded-md shadow-inner mx-3 text-white"
+        >
+          no
+        </button>
+        <button
+          onClick={() => logginOut(t.id)}
+          className="bg-orange-400 px-3 py-1 rounded-md shadow-inner  text-white"
+        >
+          yes
+        </button>
+      </span>
+    ));
+  };
 
   return (
     <nav>
@@ -56,17 +92,33 @@ function NavBar() {
           </div>
         </div>
         <div>
-          <div>
-            <Link to={"/auth/login"}>
-              {" "}
-              <BtnOutline>Login</BtnOutline>
-            </Link>
-            <Link to={"/auth/signup"}>
-              <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90">
-                Sign Up
-              </FilledBtn>
-            </Link>
-          </div>
+          {user ? (
+            <div className="flex items-center">
+              <BtnOutline
+                onClick={logoutHandler}
+                className="flex gap-2 text-lg items-center"
+              >
+                Logout <LuLogOut className="text-2xl" />
+              </BtnOutline>
+              <div className="avatar online cursor-pointer rounded-full">
+                <div className="w-12 rounded-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <Link to={"/auth/login"}>
+                {" "}
+                <BtnOutline>Login</BtnOutline>
+              </Link>
+              <Link to={"/auth/signup"}>
+                <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90">
+                  Sign Up
+                </FilledBtn>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

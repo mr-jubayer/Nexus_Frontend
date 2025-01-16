@@ -2,12 +2,15 @@ import { Link, useNavigate } from "react-router";
 import FilledBtn from "../../components/buttons/FilledBtn";
 import InputBox from "../../components/inputs/InputBox";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SocialLogin from "./SocialLogin";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { FaFileUpload } from "react-icons/fa";
+import urlRecucer from "../../utils/urlReducer";
 
 function SignUp() {
   const {
@@ -22,6 +25,9 @@ function SignUp() {
   const { signUpWithEmailAndPassword } = useAuth();
   const [firebaseErr, setFirebaseErr] = useState("");
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
+  const inputRef = useRef();
+  const [selectedImg, setSelectedImg] = useState("Select An Image");
 
   const signUpSubmitHandler = async (userCredetial) => {
     const { password, conPass, email, fullName } = userCredetial;
@@ -32,6 +38,13 @@ function SignUp() {
     try {
       const res = await signUpWithEmailAndPassword(email, password);
       await updateProfile(res.user, { displayName: fullName, photoURL: "" });
+      const user = {
+        email: email,
+        fullName: fullName,
+        // profilePhoto: res.user.photoURL,
+      };
+
+      await axiosSecure.post("/api/users", user);
       reset();
       navigate("/");
       toast.success("SignUp Successfull!");
@@ -52,6 +65,16 @@ function SignUp() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const changeHandler = () => {
+    const img = inputRef.current.files[0];
+    // reducing the url - first check if its small ok if long slice it
+    setSelectedImg(urlRecucer(img?.name));
+  };
+
+  const handleUploadThumbnail = () => {
+    inputRef.current.click();
   };
   return (
     <div className="w-[450px]">
@@ -88,6 +111,27 @@ function SignUp() {
           >
             {" "}
             <p className="text-sm text-error mt-1">{firebaseErr} </p>
+            <div
+              className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+            >
+              {/* hide it */}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                ref={inputRef}
+                onChange={changeHandler}
+              />
+              {/* on click button run input file */}
+              <button
+                type={"button"}
+                className="flex  items-center gap-2 bg-myGreen rounded-sm px-5 py-3 text-white"
+                onClick={handleUploadThumbnail}
+              >
+                Upload Thumbnail <FaFileUpload className="text-3xl" />
+              </button>
+              {selectedImg}
+            </div>
           </InputBox>
           <InputBox
             label={"Password"}
