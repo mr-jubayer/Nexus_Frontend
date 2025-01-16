@@ -15,6 +15,7 @@ import urlRecucer from "../../../../utils/urlReducer";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { ImSpinner9 } from "react-icons/im";
 import useUserInfo from "../../../../hooks/useUserInfo";
+import { useNotifications } from "reapop";
 
 const animatedComponents = makeAnimated();
 
@@ -27,6 +28,7 @@ function AddArticle() {
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
   const { userInfo } = useUserInfo();
+  const { notify } = useNotifications();
 
   const submitPostHandler = async (postData) => {
     // Todo: get all data from 'form'
@@ -47,15 +49,17 @@ function AddArticle() {
         publisher: publisher,
         creationTime: Date.now(),
         authorInfo: {
-          name: "",
-          profileProto: upladedImage.url,
+          userId: userInfo._id,
         },
       };
       console.log(uploadPost);
 
       await axiosSecure.post(`/api/articles`, uploadPost);
       setLoading(false);
-      toast.success("article uploaded!");
+      notify(
+        "You article has be requested! you will be notify when admin accept your request.",
+        "info"
+      );
     } catch (error) {
       console.log(error);
     }
@@ -70,6 +74,7 @@ function AddArticle() {
   const handleUploadThumbnail = () => {
     inputRef.current.click();
   };
+
   return (
     <div className="my-10">
       <Heading title="Create an Article" />
@@ -77,6 +82,7 @@ function AddArticle() {
       <div className="mt-12 mx-auto max-w-[800px] ">
         <form onSubmit={handleSubmit(submitPostHandler)} className="space-y-3">
           {/* title */}
+
           <Input
             className="md:h-20 h-16 text-3xl px-6"
             name="Title"
@@ -150,7 +156,7 @@ function AddArticle() {
             >
               {loading ? (
                 <span>
-                  <ImSpinner9 className="animate-spin duration-100 text-xl " />
+                  <ImSpinner9 className="animate-spin duration-100 text-2xl " />
                 </span>
               ) : (
                 "Publish"

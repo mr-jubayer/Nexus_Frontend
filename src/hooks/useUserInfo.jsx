@@ -6,7 +6,7 @@ function useUserInfo() {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data, isLoading } = useQuery({
-    queryKey: [user.email],
+    queryKey: [user?.email],
     enabled: !loading,
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/api/users/user/${user.email}`);
