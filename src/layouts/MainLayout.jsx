@@ -1,13 +1,13 @@
 import { Outlet } from "react-router";
 import NavBar from "../components/common/NavBar";
 import Footer from "../components/common/Footer";
-import useUserInfo from "../hooks/useUserInfo";
 import PageLoader from "../components/spinners/PageLoader";
 import ReapopToaster from "../components/reapopToaster";
+import useAuth from "../hooks/useAuth";
 
 function MainLayout() {
-  const { userInfo } = useUserInfo();
-  if (!userInfo) return <PageLoader />;
+  const { loading } = useAuth();
+  if (loading) return <PageLoader />;
   return (
     <div>
       {/* navbar */}

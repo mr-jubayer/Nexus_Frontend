@@ -49,19 +49,21 @@ function AddArticle() {
         publisher: publisher,
         creationTime: Date.now(),
         authorInfo: {
-          userId: userInfo._id,
+          userId: userInfo?._id,
         },
       };
       console.log(uploadPost);
 
       await axiosSecure.post(`/api/articles`, uploadPost);
-      setLoading(false);
+
       notify(
         "You article has be requested! you will be notify when admin accept your request.",
         "info"
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

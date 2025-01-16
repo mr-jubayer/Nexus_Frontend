@@ -62,7 +62,6 @@ function NavBar() {
       </span>
     ));
   };
-
   return (
     <nav>
       <div className="flex items-center justify-between">
@@ -86,7 +85,7 @@ function NavBar() {
               </ul>
             </div>
           </div>
-          <img src={logo} alt="brand name" className="md:h-10 h-[26px]" />
+          <img src={logo} alt="brand name" className="md:h-9 h-[24px]" />
         </div>
         <div>
           <div className="hidden lg:block">
@@ -104,7 +103,7 @@ function NavBar() {
               </BtnOutline>
               <div className="avatar online cursor-pointer rounded-full">
                 <div className="w-12 rounded-full">
-                  <img src={userInfo.profilePhoto} />
+                  <img src={userInfo?.profilePhoto} />
                 </div>
               </div>
             </div>

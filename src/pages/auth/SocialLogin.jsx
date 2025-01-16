@@ -15,7 +15,7 @@ function SocialLogin({ label }) {
     const user = {
       email: res.user.email,
       fullName: res.user.displayName,
-      profilePhoto: res.user.photoURL,
+      profilePhoto: res?.user?.photoURL,
     };
 
     await axiosSecure.post("/api/users", user);

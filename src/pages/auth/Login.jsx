@@ -19,7 +19,6 @@ function Login() {
 
   const submitHandler = async (userCredetial) => {
     const { password, email } = userCredetial;
-    console.log(userCredetial);
     setLoading(true);
     setFirebaseErr("");
     try {
@@ -28,7 +27,6 @@ function Login() {
       navigate(location?.state?.from || "/");
       toast.success("Login Successfull!");
     } catch (error) {
-      console.log(error);
       switch (error.code) {
         case "auth/email-already-in-use":
           setFirebaseErr("The email address is already in use!");
