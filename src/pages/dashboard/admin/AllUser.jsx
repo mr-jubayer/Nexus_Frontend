@@ -1,88 +1,104 @@
-import {
-  BsBarChart,
-  BsCashStack,
-  BsPeopleFill,
-  BsPersonPlus,
-} from "react-icons/bs";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import useUserInfo from "../../../hooks/useUserInfo";
+import Spinner1 from "../../../components/spinners/Spinner1";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-function AllUser() {
-  console.log("users");
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
+
+export default function AllUser() {
+  const { userInfo, isLoading } = useUserInfo();
+  const axiosSecure = useAxiosSecure();
+
+  const { data } = useQuery({
+    queryKey: [userInfo.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/api/users`);
+      return data;
+    },
+  });
+
+  console.log(data);
+
+  if (isLoading) return <Spinner1 />;
+  console.log(userInfo);
   return (
     <div>
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <div className="flex items-center space-x-4">
-            <BsCashStack className="text-2xl text-orange-500" />
-            <div>
-              <p className="text-sm font-semibold text-gray-600">
-                Todays Money
-              </p>
-              <h3 className="text-xl font-bold">$53k</h3>
-              <p className="text-xs text-green-500">+55% than last week</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <div className="flex items-center space-x-4">
-            <BsPeopleFill className="text-2xl text-orange-500" />
-            <div>
-              <p className="text-sm font-semibold text-gray-600">
-                Todays Users
-              </p>
-              <h3 className="text-xl font-bold">2,300</h3>
-              <p className="text-xs text-green-500">+3% than last month</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <div className="flex items-center space-x-4">
-            <BsPersonPlus className="text-2xl text-orange-500" />
-            <div>
-              <p className="text-sm font-semibold text-gray-600">New Clients</p>
-              <h3 className="text-xl font-bold">3,462</h3>
-              <p className="text-xs text-red-500">-2% than yesterday</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <div className="flex items-center space-x-4">
-            <BsBarChart className="text-2xl text-orange-500" />
-            <div>
-              <p className="text-sm font-semibold text-gray-600">Sales</p>
-              <h3 className="text-xl font-bold">$103,430</h3>
-              <p className="text-xs text-green-500">+5% than yesterday</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Graphs Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h3 className="text-sm font-semibold text-gray-600">Website View</h3>
-          <p className="text-xs text-gray-400">Last Campaign Performance</p>
-          <div className="mt-4 h-40 bg-gray-200 rounded-md"></div>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h3 className="text-sm font-semibold text-gray-600">Daily Sales</h3>
-          <p className="text-xs text-gray-400">Increase in Sales</p>
-          <div className="mt-4 h-40 bg-gray-200 rounded-md"></div>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h3 className="text-sm font-semibold text-gray-600">
-            Completed Tasks
-          </h3>
-          <p className="text-xs text-gray-400">Last Campaign Performance</p>
-          <div className="mt-4 h-40 bg-gray-200 rounded-md"></div>
-        </div>
-      </div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>User Profile</StyledTableCell>
+              <StyledTableCell align="right">Email</StyledTableCell>
+              <StyledTableCell align="right">Status</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <StyledTableRow key={row.name}>
+                <StyledTableCell component="th" scope="row">
+                  <div className="flex gap-2">
+                    <div>
+                      <img
+                        src={userInfo.profilePhoto}
+                        className="h-12 w-12 rounded-full "
+                        alt="user profile photo"
+                      />
+                    </div>
+                    <div className="">
+                      <p>{userInfo.fullName} </p>
+                      <p>{userInfo.role}</p>
+                    </div>
+                  </div>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {userInfo.email}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <button>Add mimn</button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
-
-export default AllUser;

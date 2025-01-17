@@ -12,6 +12,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AddPublisher from "../pages/dashboard/admin/AddPublisher";
 import AllArticles from "../pages/dashboard/admin/AllArticles";
 import AllUser from "../pages/dashboard/admin/AllUser";
+import Dashboard from "../pages/dashboard/admin/Dashboard";
 import NotFound from "../pages/error/NotFound";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
 import PrivetRoutes from "../routes/PrivetRoutes";
@@ -35,6 +36,7 @@ const Router = () => {
         </Route>
         {/* dashboard */}
         <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="root" element={<Dashboard />} />
           <Route path="users" element={<AllUser />} />
           <Route path="articles" element={<AllArticles />} />
           <Route path="add-publisher" element={<AddPublisher />} />

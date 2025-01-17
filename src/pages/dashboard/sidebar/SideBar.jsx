@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import logo from "../../../assets/logo2.png";
-import { MdOutlineMenu } from "react-icons/md";
+import { MdDashboard, MdOutlineMenu } from "react-icons/md";
 import { FaBookReader, FaUser } from "react-icons/fa";
 import { TbBrandSoundcloud } from "react-icons/tb";
 import { useRef } from "react";
@@ -9,6 +9,12 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 export default function SideBar() {
   const asideRef = useRef();
   const adminRoutes = [
+    {
+      path: "root",
+      value: "Dashboard",
+      icon: <MdDashboard />,
+    },
+
     {
       path: "users",
       value: "Users",
@@ -36,7 +42,7 @@ export default function SideBar() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-full">
       <button
         className="text-xl cursor-pointer md:hidden top-2 left-2 rounded-md absolute hover:bg-slate-100 focus:bg-slate-200 transition-all duration-200 p-1"
         onClick={handleSidebar}
@@ -45,7 +51,7 @@ export default function SideBar() {
       </button>
       <aside
         ref={asideRef}
-        className="transition-all duration-300 w-64 bg-white md:shadow-md shadow-2xl h-screen md:relative fixed top-0 left-0  md:-translate-x-0 -translate-x-72"
+        className="transition-all duration-300 w-64 bg-white md:shadow-md shadow-2xl h-full md:relative  fixed top-0 left-0  md:-translate-x-0 -translate-x-72"
       >
         <div className="p-4 border-b border-gray-200 flex justify-between">
           <img

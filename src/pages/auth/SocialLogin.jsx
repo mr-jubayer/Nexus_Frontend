@@ -19,6 +19,7 @@ function SocialLogin({ label }) {
     };
 
     await axiosSecure.post("/api/users", user);
+
     navigate("/");
     toast.success("Login Successfull!");
   };

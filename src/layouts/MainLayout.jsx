@@ -7,6 +7,7 @@ import useAuth from "../hooks/useAuth";
 
 function MainLayout() {
   const { loading } = useAuth();
+
   if (loading) return <PageLoader />;
   return (
     <div>

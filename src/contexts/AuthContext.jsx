@@ -9,12 +9,14 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
   const signUpWithEmailAndPassword = (email, pass) => {
     setLoading(true);
@@ -32,7 +34,7 @@ function AuthProvider({ children }) {
   };
 
   const logoutUser = () => {
-    setLoading();
+    setLoading(true);
     return signOut(auth);
   };
   const authMethods = {
@@ -45,9 +47,24 @@ function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    const clearObserver = onAuthStateChanged(auth, (userCredential) => {
+    const clearObserver = onAuthStateChanged(auth, async (userCredential) => {
       setUser(userCredential);
       setLoading(false);
+
+      if (userCredential) {
+        if (!localStorage.getItem("access-token")) {
+          const { data } = await axiosSecure.post(`/jwt/api/create`, {
+            id: userCredential.uid,
+            email: userCredential.email,
+          });
+          localStorage.setItem("access-token", data.token);
+        }
+      } else {
+        // logout remove token
+        if (localStorage.getItem("access-token")) {
+          localStorage.removeItem("access-token");
+        }
+      }
       console.log(userCredential);
     });
 
