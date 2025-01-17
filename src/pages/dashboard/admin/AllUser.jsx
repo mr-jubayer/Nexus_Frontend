@@ -6,10 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useUserInfo from "../../../hooks/useUserInfo";
 import Spinner1 from "../../../components/spinners/Spinner1";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,34 +31,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export default function AllUser() {
-  const { userInfo, isLoading } = useUserInfo();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data } = useQuery({
-    queryKey: [userInfo.email],
+  const { data, isLoading } = useQuery({
+    queryKey: [user?.email],
+    enabled: !loading,
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/api/users`);
       return data;
     },
   });
 
+  if (isLoading || loading) return <Spinner1 />;
   console.log(data);
 
-  if (isLoading) return <Spinner1 />;
-  console.log(userInfo);
   return (
     <div>
       <TableContainer component={Paper}>
@@ -71,26 +59,24 @@ export default function AllUser() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
+            {data.map((user) => (
+              <StyledTableRow key={user._id}>
                 <StyledTableCell component="th" scope="row">
                   <div className="flex gap-2">
                     <div>
                       <img
-                        src={userInfo.profilePhoto}
+                        src={user.profilePhoto}
                         className="h-12 w-12 rounded-full "
                         alt="user profile photo"
                       />
                     </div>
                     <div className="">
-                      <p>{userInfo.fullName} </p>
-                      <p>{userInfo.role}</p>
+                      <p>{user.fullName} </p>
+                      <p>{user.role}</p>
                     </div>
                   </div>
                 </StyledTableCell>
-                <StyledTableCell align="right">
-                  {userInfo.email}
-                </StyledTableCell>
+                <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">
                   <button>Add mimn</button>
                 </StyledTableCell>

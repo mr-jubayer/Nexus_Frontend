@@ -11,6 +11,8 @@ export default function useAxiosSecure() {
     const requestInterceptor = instance.interceptors.request.use(
       (request) => {
         // put the token from local storage with request header
+        const token = localStorage.getItem("access-token");
+        request.headers.authorization = token;
         return request;
       },
       (err) => {

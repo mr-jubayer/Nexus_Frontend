@@ -53,14 +53,16 @@ function AuthProvider({ children }) {
 
       if (userCredential) {
         if (!localStorage.getItem("access-token")) {
-          const { data } = await axiosSecure.post(`/jwt/api/create`, {
+          // create token
+          const { data } = await axiosSecure.post(`/api/jwt/create`, {
             id: userCredential.uid,
             email: userCredential.email,
           });
+
           localStorage.setItem("access-token", data.token);
         }
       } else {
-        // logout remove token
+        //  remove token
         if (localStorage.getItem("access-token")) {
           localStorage.removeItem("access-token");
         }
@@ -69,7 +71,7 @@ function AuthProvider({ children }) {
     });
 
     return () => clearObserver;
-  }, []);
+  }, [axiosSecure]);
   return (
     <AuthContext.Provider value={authMethods}>{children}</AuthContext.Provider>
   );
