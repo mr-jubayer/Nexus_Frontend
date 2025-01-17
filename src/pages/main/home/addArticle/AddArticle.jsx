@@ -10,7 +10,6 @@ import FilledBtn from "../../../../components/buttons/FilledBtn";
 import { Tags } from "./tags";
 import { publishers } from "./publishers";
 import uploadImg from "../../../../utils/uploadImg";
-import toast from "react-hot-toast";
 import urlRecucer from "../../../../utils/urlReducer";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { ImSpinner9 } from "react-icons/im";
@@ -52,7 +51,6 @@ function AddArticle() {
           userId: userInfo?._id,
         },
       };
-      console.log(uploadPost);
 
       await axiosSecure.post(`/api/articles`, uploadPost);
 
@@ -60,8 +58,7 @@ function AddArticle() {
         "You article has be requested! you will be notify when admin accept your request.",
         "info"
       );
-    } catch (error) {
-      console.log(error);
+      reset();
     } finally {
       setLoading(false);
     }

@@ -17,7 +17,7 @@ function NavBar() {
     { label: "Subscription", path: "/s" },
     { label: "Add Articles", path: "/add-article" },
     { label: "All Articles", path: "/a" },
-    { label: "Dashboard ", path: "/v" },
+    { label: "Dashboard ", path: "/dashboard" },
     { label: "My Articles ", path: "/e" },
     { label: "Premium Articles ", path: "/h" },
   ];
@@ -33,8 +33,6 @@ function NavBar() {
   );
 
   const logoutHandler = () => {
-    console.log("logout");
-
     const logginOut = (id) => {
       toast.promise(logoutUser(), {
         loading: "Processing...",
