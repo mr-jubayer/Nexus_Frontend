@@ -22,6 +22,7 @@ export default function ArticleCard({ article, refetch }) {
   const [loading, setLoading] = useState(false);
   const { notify } = useNotifications();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isPremiumeModalOpen, setIsPremiumeModalOpen] = useState(false);
 
   const {
     _id,
@@ -33,6 +34,7 @@ export default function ArticleCard({ article, refetch }) {
     creationTime,
     thumbnail,
     status,
+    isPremium,
   } = article || {};
 
   const time = new Date(creationTime).toLocaleDateString();
@@ -71,7 +73,18 @@ export default function ArticleCard({ article, refetch }) {
     }
   };
 
-  const handlePremium = () => console.log("Marked as premium");
+  const handlePremium = async () => {
+    try {
+      await axiosSecure.patch(`/api/articles/premiume/${_id}`);
+
+      refetch();
+      notify("Article is Premium", "success");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsPremiumeModalOpen(false);
+    }
+  };
   const handleDelete = async () => {
     try {
       await axiosSecure.delete(`/api/articles/delete/${_id}`);
@@ -88,7 +101,9 @@ export default function ArticleCard({ article, refetch }) {
   if (loading) return <Spinner1 />;
 
   return (
-    <div className="max-w-lg mx-auto border bg-white/50 rounded-lg shadow-sm overflow-hidden">
+    <div
+      className={`${isPremium ? "border-2 border-purple-600" : ""} max-w-lg mx-auto border bg-white/50 rounded-lg shadow-sm overflow-hidden `}
+    >
       {/* Header */}
       <div className="flex p-4 border-b justify-between">
         <div className="flex items-center">
@@ -97,6 +112,7 @@ export default function ArticleCard({ article, refetch }) {
             alt={authorInfo.fullName || "Author"}
             className="w-12 h-12 rounded-full mr-4"
           />
+
           <div>
             <p className="font-bold">{authorInfo.fullName}</p>
             <p className="text-sm">{authorInfo.email}</p>
@@ -108,11 +124,18 @@ export default function ArticleCard({ article, refetch }) {
       </div>
 
       {/* Thumbnail */}
-      <img
-        src={thumbnail}
-        alt="Article Thumbnail"
-        className="w-full h-48 object-cover"
-      />
+      <div className="relative">
+        <img
+          src={thumbnail}
+          alt="Article Thumbnail"
+          className="w-full h-48 object-cover"
+        />
+        {isPremium && (
+          <div className="px-3 py-1 bg-purple-600 text-white absolute top-0 right-0 rounded-none">
+            Premiume
+          </div>
+        )}
+      </div>
 
       {/* Content */}
       <div className="p-4">
@@ -161,12 +184,18 @@ export default function ArticleCard({ article, refetch }) {
           </div>
         )}
         <div className="space-x-3 ">
-          <button
-            className="text-yellow-600 hover:text-yellow-800"
-            onClick={handlePremium}
-          >
-            <StarIcon fontSize="large" />
-          </button>
+          {isPremium ? (
+            <button className="text-yellow-600 cursor-default">
+              <StarIcon fontSize="large" />
+            </button>
+          ) : (
+            <button
+              className="text-yellow-950 hover:text-yellow-600"
+              onClick={() => setIsPremiumeModalOpen(true)}
+            >
+              <StarIcon fontSize="large" />
+            </button>
+          )}
           <button
             className="text-gray-600 hover:text-gray-800"
             onClick={() => setIsDeleteModalOpen(true)}
@@ -206,7 +235,6 @@ export default function ArticleCard({ article, refetch }) {
         </DialogActions>
       </Dialog>
       {/* delete modal */}
-      {/* Decline Modal */}
       <Dialog
         open={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -222,6 +250,17 @@ export default function ArticleCard({ article, refetch }) {
           </Button>
           <Button onClick={handleDelete} variant="contained" color="error">
             Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* Confirm premium modal */}
+      <Dialog
+        open={isPremiumeModalOpen}
+        onClose={() => setIsPremiumeModalOpen(false)}
+      >
+        <DialogActions>
+          <Button onClick={handlePremium} variant="contained" color="error">
+            Confirm Update Premiume
           </Button>
         </DialogActions>
       </Dialog>
