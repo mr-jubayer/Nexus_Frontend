@@ -10,6 +10,7 @@ import Spinner1 from "../../../components/spinners/Spinner1";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import FilledBtn from "../../../components/buttons/FilledBtn";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,13 +37,14 @@ export default function AllUser() {
   const axiosSecure = useAxiosSecure();
 
   const { data, isLoading } = useQuery({
-    queryKey: [user?.email],
-    enabled: !loading,
+    queryKey: ["user"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/api/users`);
       return data;
     },
   });
+
+  console.log(data);
 
   if (isLoading || loading) return <Spinner1 />;
   console.log(data);
@@ -62,7 +64,7 @@ export default function AllUser() {
             {data.map((user) => (
               <StyledTableRow key={user._id}>
                 <StyledTableCell component="th" scope="row">
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <div>
                       <img
                         src={user.profilePhoto}
@@ -71,14 +73,16 @@ export default function AllUser() {
                       />
                     </div>
                     <div className="">
-                      <p>{user.fullName} </p>
-                      <p>{user.role}</p>
+                      <p className="text-lg ">{user.fullName} </p>
+                      <p className="opacity-80">{user.role}</p>
                     </div>
                   </div>
                 </StyledTableCell>
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">
-                  <button>Add mimn</button>
+                  <FilledBtn className="bg-myGreen text-white">
+                    Make Admin
+                  </FilledBtn>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

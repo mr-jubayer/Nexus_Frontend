@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import logo from "../../../assets/logo2.png";
 import { MdDashboard, MdOutlineMenu } from "react-icons/md";
-import { FaBookReader, FaUser } from "react-icons/fa";
+import { FaBookReader, FaHome, FaUser } from "react-icons/fa";
 import { TbBrandSoundcloud } from "react-icons/tb";
 import { useRef } from "react";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
@@ -29,6 +29,14 @@ export default function SideBar() {
       path: "add-publisher",
       value: "Add Publisher",
       icon: <TbBrandSoundcloud />,
+    },
+  ];
+
+  const defaultRoute = [
+    {
+      path: "/",
+      value: "Home",
+      icon: <FaHome />,
     },
   ];
 
@@ -77,7 +85,20 @@ export default function SideBar() {
             </NavLink>
           ))}
 
-          <div className="mt-4 border-t pt-4 border-gray-200"></div>
+          <div className="mt-4 border-t pt-4 border-gray-200">
+            {defaultRoute.map((route) => (
+              <NavLink
+                key={route.value}
+                to={route.path}
+                className={({ isActive }) =>
+                  `${isActive ? "border-l-4 bg-green-100" : ""} flex items-center px-4 py-2 text-gray-700 hover:bg-green-100 transition-all duration-200 border-l-green-600  gap-2 `
+                }
+              >
+                <span>{route.icon}</span>
+                {route.value}
+              </NavLink>
+            ))}
+          </div>
         </nav>
       </aside>
     </div>

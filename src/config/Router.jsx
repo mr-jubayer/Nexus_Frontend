@@ -10,7 +10,7 @@ import {
 } from ".";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddPublisher from "../pages/dashboard/admin/AddPublisher";
-import AllArticles from "../pages/dashboard/admin/AllArticles";
+import AllArticles from "../pages/dashboard/admin/allArticle/AllArticles";
 import AllUser from "../pages/dashboard/admin/AllUser";
 import Dashboard from "../pages/dashboard/admin/Dashboard";
 import NotFound from "../pages/error/NotFound";
