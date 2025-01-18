@@ -12,11 +12,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import StarIcon from "@mui/icons-material/Star";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Spinner1 from "../../../../components/spinners/Spinner1";
+import { useNotifications } from "reapop";
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, refetch }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [declineReason, setDeclineReason] = useState("");
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
+  const { notify } = useNotifications();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const {
     _id,
@@ -32,18 +37,55 @@ export default function ArticleCard({ article }) {
 
   const time = new Date(creationTime).toLocaleDateString();
 
+  // approve the article
   const handleApprove = async () => {
-    console.log("Article approved");
+    setLoading(true);
+    try {
+      await axiosSecure.patch(`/api/articles/approve/${_id}`);
 
-    const res = await axiosSecure.patch(`/api/articles/approve/${_id}`);
-    console.log(res);
+      refetch();
+      notify(
+        "Article has been publihsed. Now every one can read this. ",
+        "success"
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  // decline the article
+  const handleSubmitDecline = async () => {
+    try {
+      await axiosSecure.patch(`/api/articles/reject/${_id}`, {
+        declineReason: declineReason,
+      });
+
+      refetch();
+      notify("Article Declined!", "success");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsModalOpen(false);
+    }
+  };
+
   const handlePremium = () => console.log("Marked as premium");
-  const handleDelete = () => console.log("Article deleted");
-  const handleSubmitDecline = () => {
-    console.log("Decline reason:", declineReason);
-    setIsModalOpen(false);
+  const handleDelete = async () => {
+    try {
+      await axiosSecure.delete(`/api/articles/delete/${_id}`);
+
+      refetch();
+      notify("Article Deleted!", "success");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsDeleteModalOpen(true);
+    }
   };
+
+  if (loading) return <Spinner1 />;
 
   return (
     <div className="max-w-lg mx-auto border bg-white/50 rounded-lg shadow-sm overflow-hidden">
@@ -127,7 +169,7 @@ export default function ArticleCard({ article }) {
           </button>
           <button
             className="text-gray-600 hover:text-gray-800"
-            onClick={handleDelete}
+            onClick={() => setIsDeleteModalOpen(true)}
           >
             <DeleteIcon fontSize="large" />
           </button>
@@ -160,6 +202,26 @@ export default function ArticleCard({ article }) {
             color="error"
           >
             Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* delete modal */}
+      {/* Decline Modal */}
+      <Dialog
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+      >
+        <DialogTitle>Are you sure to delete it?</DialogTitle>
+
+        <DialogActions>
+          <Button
+            onClick={() => setIsDeleteModalOpen(false)}
+            variant="outlined"
+          >
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} variant="contained" color="error">
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
