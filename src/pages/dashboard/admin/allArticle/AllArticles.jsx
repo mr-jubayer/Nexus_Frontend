@@ -18,7 +18,7 @@ function AllArticles() {
   if (isLoading) return <Spinner1 />;
   return (
     <div>
-      <div>
+      <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-3 ">
         {data.map((article) => (
           <ArticleCard key={article._id} article={article} />
         ))}
