@@ -17,10 +17,17 @@ function NavBar() {
     { label: "Subscription", path: "/s" },
     { label: "Add Articles", path: "/add-article" },
     { label: "All Articles", path: "/a" },
-    { label: "Dashboard ", path: "/dashboard" },
+
     { label: "My Articles ", path: "/e" },
-    { label: "Premium Articles ", path: "/h" },
   ];
+
+  if (userInfo?.role == "admin") {
+    defaultRoutes.push({ label: "Dashboard ", path: "/dashboard" });
+  }
+
+  if (userInfo.premiume) {
+    defaultRoutes.push({ label: "Premium Articles ", path: "/h" });
+  }
 
   const Links = () => (
     <ul className="flex lg:flex-row flex-col  lg:items-center">
@@ -101,7 +108,9 @@ function NavBar() {
               </BtnOutline>
               <div className="avatar online cursor-pointer rounded-full">
                 <div className="w-12 rounded-full">
-                  <img src={userInfo?.profilePhoto} />
+                  <Link to={"profile"}>
+                    <img src={userInfo.profilePhoto} alt="profile photo" />
+                  </Link>
                 </div>
               </div>
             </div>

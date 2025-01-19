@@ -13,6 +13,7 @@ import AddPublisher from "../pages/dashboard/admin/AddPublisher";
 import AllArticles from "../pages/dashboard/admin/allArticle/AllArticles";
 import AllUser from "../pages/dashboard/admin/AllUser";
 import Dashboard from "../pages/dashboard/admin/Dashboard";
+import Profile from "../pages/dashboard/common/Profile";
 import NotFound from "../pages/error/NotFound";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
 import PrivetRoutes from "../routes/PrivetRoutes";
@@ -27,6 +28,9 @@ const Router = () => {
           {/* privet routes */}
           <Route element={<PrivetRoutes />}>
             <Route path="add-article" element={<AddArticle />} />
+          </Route>
+          <Route element={<PrivetRoutes />}>
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
         {/* auth routes */}

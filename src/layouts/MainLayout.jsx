@@ -4,11 +4,13 @@ import Footer from "../components/common/Footer";
 import PageLoader from "../components/spinners/PageLoader";
 import ReapopToaster from "../components/reapopToaster";
 import useAuth from "../hooks/useAuth";
+import useUserInfo from "../hooks/useUserInfo";
 
 function MainLayout() {
   const { loading } = useAuth();
+  const { isLoading } = useUserInfo();
 
-  if (loading) return <PageLoader />;
+  if (loading || isLoading) return <PageLoader />;
   return (
     <div>
       {/* navbar */}
