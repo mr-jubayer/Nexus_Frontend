@@ -77,6 +77,8 @@ function PaymentCard() {
           //  save payment information to database
           setTransition(paymentIntent.id);
 
+          console.log(paymentIntent);
+
           // set plan token time based on user prefferance - store as millisecond
           const premiumeCardEstimatedTime = new Date().getTime() + amount.value;
 
