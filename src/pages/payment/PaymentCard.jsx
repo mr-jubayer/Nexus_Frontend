@@ -18,7 +18,7 @@ function PaymentCard() {
   const [transition, setTransition] = useState("");
   const { notify } = useNotifications();
   const loc = useLocation();
-  const amount = loc?.state?.amount || 0;
+  const amount = loc?.state?.amount;
 
   useEffect(() => {
     (async function () {
@@ -28,8 +28,6 @@ function PaymentCard() {
           amount: amount?.amount,
         }
       );
-      console.log(data);
-
       setClientSecret(data.clientSecret);
     })();
   }, [axiosSecure, amount]);
@@ -78,7 +76,23 @@ function PaymentCard() {
         if (paymentIntent.status === "succeeded") {
           //  save payment information to database
           setTransition(paymentIntent.id);
-          console.log(paymentIntent);
+
+          // set plan token time based on user prefferance - store as millisecond
+          const premiumeCardEstimatedTime = new Date().getTime() + amount.value;
+
+          const paymentInfo = {
+            email: userInfo.email,
+            amount: amount.amount,
+            estimatedTokenDate: premiumeCardEstimatedTime, // it's millisecond format you have to convert it to date
+            transitionId: paymentIntent.id,
+            paymentTime: Date.now(),
+          };
+
+          const { data } = await axiosSecure.post(
+            `/api/payment/payments-data`,
+            paymentInfo
+          );
+          console.log(data);
 
           notify(
             `Payment Succedded with the Transition Id: ${paymentIntent.id}`,

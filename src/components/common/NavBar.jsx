@@ -108,7 +108,7 @@ function NavBar() {
               <div className="avatar online cursor-pointer rounded-full">
                 <div className="w-12 rounded-full">
                   <Link to={"profile"}>
-                    <img src={userInfo.profilePhoto} alt="profile photo" />
+                    <img src={userInfo?.profilePhoto} alt="profile photo" />
                   </Link>
                 </div>
               </div>

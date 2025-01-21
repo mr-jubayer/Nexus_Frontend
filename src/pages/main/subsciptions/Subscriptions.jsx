@@ -5,10 +5,10 @@ import { Link } from "react-router";
 import { useState } from "react";
 
 export const colourOptions = [
-  { value: "1 min", label: "For 1 Minute", amount: 1 },
-  { value: "5 day", label: "For 5 Days", amount: 3 },
-  { value: "10 day", label: "For 10 Days", amount: 5 },
-  { value: "1 mon", label: "For 1 Month", amount: 12 },
+  { value: 60000, label: "For 1 Minute", amount: 1 },
+  { value: 432000000, label: "For 5 Days", amount: 3 },
+  { value: 864000000, label: "For 10 Days", amount: 5 },
+  { value: 2628000000, label: "For 1 Month", amount: 12 },
 ];
 
 function Subscriptions() {
