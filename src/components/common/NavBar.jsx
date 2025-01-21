@@ -24,7 +24,7 @@ function NavBar() {
     defaultRoutes.push({ label: "Dashboard ", path: "/dashboard" });
   }
 
-  if (userInfo.premiume) {
+  if (userInfo?.premiume) {
     defaultRoutes.push({ label: "Premium Articles ", path: "/h" });
   }
 

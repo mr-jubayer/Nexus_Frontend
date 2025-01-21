@@ -3,7 +3,7 @@ import FilledBtn from "../../components/buttons/FilledBtn";
 import Heading from "../../components/Heading";
 import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUserInfo from "../../hooks/useUserInfo";
 import { useNotifications } from "reapop";
@@ -18,7 +18,7 @@ function PaymentCard() {
   const [transition, setTransition] = useState("");
   const { notify } = useNotifications();
   const loc = useLocation();
-  const amount = loc?.state?.amount;
+  const amount = loc?.state?.amount || 0;
 
   useEffect(() => {
     (async function () {
@@ -93,7 +93,7 @@ function PaymentCard() {
     }
   };
 
-  if (!amount) return <Navigate to={"subscriptions"} />;
+  if (!amount) return <Navigate to={"/subscriptions"} />;
 
   return (
     <div className="max-w-[600px] mx-auto my-12 p-8 rounded-lg  border-2 border-myGreen">
