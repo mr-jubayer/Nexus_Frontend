@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 function FilledBtn(
-  { children = "button", className = "", onClick = () => {} },
+  { children = "button", disabled, className = "", onClick = () => {} },
   type = "button"
 ) {
   return (
@@ -9,6 +9,7 @@ function FilledBtn(
       className={`  py-1 px-3 rounded-md  transition-all duration-150 ${className}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </button>

@@ -14,11 +14,10 @@ function NavBar() {
   const { userInfo } = useUserInfo();
   const defaultRoutes = [
     { label: "Home", path: "/" },
-    { label: "Subscription", path: "/s" },
     { label: "Add Articles", path: "/add-article" },
     { label: "All Articles", path: "/a" },
-
     { label: "My Articles ", path: "/e" },
+    { label: "Subscription", path: "subscriptions" },
   ];
 
   if (userInfo?.role == "admin") {
