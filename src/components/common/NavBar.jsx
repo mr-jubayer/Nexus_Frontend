@@ -15,8 +15,8 @@ function NavBar() {
 
   const defaultRoutes = [
     { label: "Home", path: "/" },
-    { label: "Add Articles", path: "/add-article" },
-    { label: "All Articles", path: "/a" },
+    { label: "Add Articles", path: "add-article" },
+    { label: "All Articles", path: "all-articles" },
     { label: "My Articles ", path: "/e" },
     { label: "Subscription", path: "subscriptions" },
   ];

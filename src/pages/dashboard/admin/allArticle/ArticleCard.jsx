@@ -190,7 +190,9 @@ export default function ArticleCard({ article, refetch }) {
             </button>
           ) : (
             <button
-              className="text-yellow-950 hover:text-yellow-600"
+              className={`
+                  ${status === "requested" ? "text-yellow-950" : "text-yellow-950  hover:text-yellow-600"}`}
+              disabled={status === "requested"}
               onClick={() => setIsPremiumeModalOpen(true)}
             >
               <StarIcon fontSize="large" />

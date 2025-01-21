@@ -8,23 +8,31 @@ import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 import FilledBtn from "../../../../components/buttons/FilledBtn";
 import { Tags } from "./tags";
-import { publishers } from "./publishers";
 import uploadImg from "../../../../utils/uploadImg";
 import urlRecucer from "../../../../utils/urlReducer";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { ImSpinner9 } from "react-icons/im";
 import useUserInfo from "../../../../hooks/useUserInfo";
 import { useNotifications } from "reapop";
+import { useQuery } from "@tanstack/react-query";
 
 const animatedComponents = makeAnimated();
 
 function AddArticle() {
+  const axiosSecure = useAxiosSecure();
+  const { data: publishers = [] } = useQuery({
+    queryKey: ["publishers"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/api/publisher`);
+      return data;
+    },
+  });
   const { register, reset, handleSubmit } = useForm();
   const inputRef = useRef();
   const [tags, setTags] = useState([Tags[1]]);
   const [publisher, setPublisher] = useState(publishers[2]);
   const [selectedImg, setSelectedImg] = useState("(< click)");
-  const axiosSecure = useAxiosSecure();
+
   const [loading, setLoading] = useState(false);
   const { userInfo } = useUserInfo();
   const { notify } = useNotifications();

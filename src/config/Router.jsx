@@ -15,6 +15,7 @@ import AllUser from "../pages/dashboard/admin/AllUser";
 import Dashboard from "../pages/dashboard/admin/Dashboard";
 import Profile from "../pages/dashboard/common/Profile";
 import NotFound from "../pages/error/NotFound";
+import AllArticle from "../pages/main/allArticle/AllArticle";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
 import Subscriptions from "../pages/main/subsciptions/Subscriptions";
 import Payment from "../pages/payment/Payment";
@@ -36,6 +37,9 @@ const Router = () => {
           </Route>
           <Route element={<PrivetRoutes />}>
             <Route path="subscriptions" element={<Subscriptions />} />
+          </Route>
+          <Route element={<PrivetRoutes />}>
+            <Route path="all-articles" element={<AllArticle />} />
           </Route>
           <Route element={<PrivetRoutes />}>
             <Route path="payment" element={<Payment />} />
