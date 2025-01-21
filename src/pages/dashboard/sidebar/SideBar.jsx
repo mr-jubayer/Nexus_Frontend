@@ -50,7 +50,7 @@ export default function SideBar() {
   };
 
   return (
-    <div className="relative h-full">
+    <div className="relative h-full ">
       <button
         className="text-xl cursor-pointer md:hidden top-2 left-2 rounded-md absolute hover:bg-slate-100 focus:bg-slate-200 transition-all duration-200 p-1"
         onClick={handleSidebar}

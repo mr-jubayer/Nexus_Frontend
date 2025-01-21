@@ -12,6 +12,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 function NavBar() {
   const { user, logoutUser } = useAuth();
   const { userInfo } = useUserInfo();
+
   const defaultRoutes = [
     { label: "Home", path: "/" },
     { label: "Add Articles", path: "/add-article" },
@@ -20,12 +21,12 @@ function NavBar() {
     { label: "Subscription", path: "subscriptions" },
   ];
 
-  if (userInfo?.role == "admin") {
-    defaultRoutes.push({ label: "Dashboard ", path: "/dashboard" });
+  if (userInfo?.premiumeToken) {
+    defaultRoutes.push({ label: "Premium Articles ", path: "/h" });
   }
 
-  if (userInfo?.premiume) {
-    defaultRoutes.push({ label: "Premium Articles ", path: "/h" });
+  if (userInfo?.role == "admin") {
+    defaultRoutes.push({ label: "Dashboard ", path: "/dashboard" });
   }
 
   const Links = () => (

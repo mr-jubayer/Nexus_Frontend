@@ -23,7 +23,7 @@ function AddArticle() {
   const inputRef = useRef();
   const [tags, setTags] = useState([Tags[1]]);
   const [publisher, setPublisher] = useState(publishers[2]);
-  const [selectedImg, setSelectedImg] = useState("(Optinal)");
+  const [selectedImg, setSelectedImg] = useState("(< click)");
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
   const { userInfo } = useUserInfo();

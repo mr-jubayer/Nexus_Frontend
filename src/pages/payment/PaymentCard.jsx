@@ -16,6 +16,8 @@ function PaymentCard() {
   const { userInfo } = useUserInfo();
   const [clientSecret, setClientSecret] = useState("");
   const [transition, setTransition] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const { notify } = useNotifications();
   const loc = useLocation();
   const amount = loc?.state?.amount;
@@ -42,21 +44,19 @@ function PaymentCard() {
     const card = elements.getElement(CardElement);
     if (!card) return;
     setLoading(true);
+    setError("");
 
     try {
       // Create the payment method
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
+      const { error } = await stripe.createPaymentMethod({
         type: "card",
         card,
       });
 
       if (error) {
-        console.error("Payment Method Error:", error.message);
+        setError(error.message);
       } else {
-        console.log("Payment Method Created:", paymentMethod);
-
-        // Further processing logic (e.g., sending paymentMethod.id to the server)
-        console.log(amount);
+        setError("");
       }
 
       const { paymentIntent, error: confirmationError } =
@@ -71,39 +71,30 @@ function PaymentCard() {
         });
 
       if (confirmationError) {
-        console.log(confirmationError);
+        return;
       } else {
         if (paymentIntent.status === "succeeded") {
           //  save payment information to database
           setTransition(paymentIntent.id);
 
-          console.log(paymentIntent);
-
-          // set plan token time based on user prefferance - store as millisecond
-          const premiumeCardEstimatedTime = new Date().getTime() + amount.value;
-
           const paymentInfo = {
             email: userInfo.email,
             amount: amount.amount,
-            estimatedTokenDate: premiumeCardEstimatedTime, // it's millisecond format you have to convert it to date
+            tokenDate: amount.value, // it's millisecond format you have to convert it to date
             transitionId: paymentIntent.id,
             paymentTime: Date.now(),
           };
 
-          const { data } = await axiosSecure.post(
-            `/api/payment/payments-data`,
-            paymentInfo
-          );
-          console.log(data);
-
+          await axiosSecure.post(`/api/payment/payments-data`, paymentInfo);
           notify(
             `Payment Succedded with the Transition Id: ${paymentIntent.id}`,
             "success"
           );
+          navigate("/");
         }
       }
     } catch (error) {
-      console.error("Error in payment submission:", error);
+      notify("Error in payment submission:", error.message);
     } finally {
       setLoading(false);
     }
@@ -153,6 +144,10 @@ function PaymentCard() {
             `Pay $${amount?.amount} for ${amount.label}`
           )}
         </FilledBtn>
+        <p className="text-red-600 mt-2">{error}</p>
+        {transition && (
+          <p className="text-green-600"> Your transaction id: {transition}</p>
+        )}
       </form>
     </div>
   );
