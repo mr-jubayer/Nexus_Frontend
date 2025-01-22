@@ -1,12 +1,14 @@
-/* eslint-disable react/prop-types */
 import { Divider } from "@mui/material";
 import FilledBtn from "../../../components/buttons/FilledBtn";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import usePremiumeUser from "../../../hooks/usePremiumeUser";
-
-export default function MainArticleCard({ article }) {
+function ArticleDetails() {
   const { premiumeUser } = usePremiumeUser();
 
+  const params = useParams();
+  console.log(params);
+
+  return;
   const {
     authorInfo,
     title,
@@ -115,3 +117,5 @@ export default function MainArticleCard({ article }) {
     </div>
   );
 }
+
+export default ArticleDetails;

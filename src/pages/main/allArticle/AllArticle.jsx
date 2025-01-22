@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Spinner1 from "../../../components/spinners/Spinner1";
 import MainArticleCard from "./MainArticleCard";
+import usePremiumeUser from "../../../hooks/usePremiumeUser";
 
 function AllArticle() {
   const axiosSecure = useAxiosSecure();
@@ -12,6 +13,9 @@ function AllArticle() {
       return data;
     },
   });
+  const { premiumeUser, isLoading: loading } = usePremiumeUser();
+  console.log(premiumeUser);
+
   if (isLoading) return <Spinner1 />;
   return (
     <div>
