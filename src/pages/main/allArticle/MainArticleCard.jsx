@@ -3,9 +3,11 @@ import { Divider } from "@mui/material";
 import FilledBtn from "../../../components/buttons/FilledBtn";
 import { Link } from "react-router";
 import usePremiumeUser from "../../../hooks/usePremiumeUser";
+import useUserInfo from "../../../hooks/useUserInfo";
 
 export default function MainArticleCard({ article }) {
   const { premiumeUser } = usePremiumeUser();
+  const { userInfo } = useUserInfo();
 
   const {
     _id,
@@ -77,7 +79,7 @@ export default function MainArticleCard({ article }) {
         <Divider />
         <p className="text-sm text-gray-500 mt-3 ">
           <strong>Tags:</strong>{" "}
-          {tags.length ? tags.map((tag) => `#${tag.label} `) : "No tags"}
+          {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
         </p>
         <p className="text-sm font-medium my-1">
           <strong>Status:</strong>{" "}
@@ -89,12 +91,12 @@ export default function MainArticleCard({ article }) {
             {status}
           </span>
         </p>
-        <p className="mb-2 text-sm text-gray-500">{`Publisher: ${publisher.value}`}</p>
+        <p className="mb-2 text-sm text-gray-500">{`Publisher: ${publisher}`}</p>
         <Divider />
         <div className="flex justify-center">
           {isPremium ? (
-            premiumeUser ? (
-              <Link to={"all-articles/details"}>
+            premiumeUser || userInfo.role === "admin" ? (
+              <Link to={`details/${_id}`}>
                 <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5">
                   Read Article
                 </FilledBtn>

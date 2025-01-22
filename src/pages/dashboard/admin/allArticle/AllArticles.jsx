@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import ArticleCard from "./ArticleCard";
 import Spinner1 from "../../../../components/spinners/Spinner1";
 
 function AllArticles() {
-  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
     data = [],
@@ -18,8 +16,8 @@ function AllArticles() {
       return data;
     },
   });
-  console.log(data);
   if (isLoading) return <Spinner1 />;
+
   return (
     <div>
       <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-3 ">

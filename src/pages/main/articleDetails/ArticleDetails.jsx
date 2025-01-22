@@ -74,9 +74,9 @@ function ArticleDetails() {
               Premiume
             </div>
           )}
-          <p className="text-gray-500 p-2">
+          <p className="text-gray-500 text-xl p-2">
             Published in:{" "}
-            <span className="text-black font-bold">{publisher.label}</span>`
+            <span className="text-black font-bold ">{publisher}</span>`
           </p>
         </div>
 
@@ -87,7 +87,7 @@ function ArticleDetails() {
           <h2 className="my-4 font-semibold text-xl">More Info</h2>
           <p className=" text-gray-500 mt-3 ">
             <strong>Tags:</strong>{" "}
-            {tags.length ? tags.map((tag) => `#${tag.label} `) : "No tags"}
+            {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
           </p>
           <p className=" font-medium my-1">
             <strong>Status:</strong>{" "}

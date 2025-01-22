@@ -52,8 +52,8 @@ function AddArticle() {
         title: postData.title,
         description: postData.description,
         thumbnail: upladedImage.url,
-        tags: tags,
-        publisher: publisher,
+        tags: tags.map((tag) => tag.label),
+        publisher: publisher.label,
         creationTime: Date.now(),
         authorInfo: {
           userId: userInfo?._id,

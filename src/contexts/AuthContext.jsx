@@ -67,7 +67,6 @@ function AuthProvider({ children }) {
           localStorage.removeItem("access-token");
         }
       }
-      console.log(userCredential);
     });
 
     return () => clearObserver;

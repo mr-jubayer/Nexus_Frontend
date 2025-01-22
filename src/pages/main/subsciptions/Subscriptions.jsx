@@ -15,7 +15,6 @@ function Subscriptions() {
   const [amount, setAmount] = useState();
 
   const handleSlectPlan = (e) => {
-    console.log("Selected Plan Duration:", e.value);
     setAmount(e);
   };
 

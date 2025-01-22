@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function AllUser() {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data, isLoading } = useQuery({
@@ -44,10 +44,7 @@ export default function AllUser() {
     },
   });
 
-  console.log(data);
-
   if (isLoading || loading) return <Spinner1 />;
-  console.log(data);
 
   return (
     <div>

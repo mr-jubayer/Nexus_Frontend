@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Spinner1 from "../../../../components/spinners/Spinner1";
 import { useNotifications } from "reapop";
+import { useState } from "react";
 
 export default function ArticleCard({ article, refetch }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,8 +50,6 @@ export default function ArticleCard({ article, refetch }) {
         "Article has been publihsed. Now every one can read this. ",
         "success"
       );
-    } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -66,8 +64,6 @@ export default function ArticleCard({ article, refetch }) {
 
       refetch();
       notify("Article Declined!", "success");
-    } catch (error) {
-      console.log(error);
     } finally {
       setIsModalOpen(false);
     }
@@ -79,8 +75,6 @@ export default function ArticleCard({ article, refetch }) {
 
       refetch();
       notify("Article is Premium", "success");
-    } catch (error) {
-      console.log(error);
     } finally {
       setIsPremiumeModalOpen(false);
     }
@@ -91,8 +85,6 @@ export default function ArticleCard({ article, refetch }) {
 
       refetch();
       notify("Article Deleted!", "success");
-    } catch (error) {
-      console.log(error);
     } finally {
       setIsDeleteModalOpen(true);
     }
@@ -148,7 +140,7 @@ export default function ArticleCard({ article, refetch }) {
         <Divider />
         <p className="text-sm text-gray-500 mt-3 ">
           <strong>Tags:</strong>{" "}
-          {tags.length ? tags.map((tag) => `#${tag.label} `) : "No tags"}
+          {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
         </p>
         <p className="text-sm font-medium my-1">
           <strong>Status:</strong>{" "}
@@ -160,7 +152,7 @@ export default function ArticleCard({ article, refetch }) {
             {status}
           </span>
         </p>
-        <p className="text-sm text-gray-500">{`Publisher: ${publisher.value}`}</p>
+        <p className="text-sm text-gray-500">{`Publisher: ${publisher}`}</p>
       </div>
 
       {/* Actions */}
