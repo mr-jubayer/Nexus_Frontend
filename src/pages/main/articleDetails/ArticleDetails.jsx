@@ -2,13 +2,24 @@ import { Divider } from "@mui/material";
 import FilledBtn from "../../../components/buttons/FilledBtn";
 import { Link, useParams } from "react-router";
 import usePremiumeUser from "../../../hooks/usePremiumeUser";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Spinner1 from "../../../components/spinners/Spinner1";
 function ArticleDetails() {
   const { premiumeUser } = usePremiumeUser();
-
   const params = useParams();
-  console.log(params);
+  const axiosSecure = useAxiosSecure();
 
-  return;
+  const { data: article, isLoading } = useQuery({
+    queryKey: ["article"],
+    queryFn: async () => {
+      const { data } = await axiosSecure(
+        `/api/articles/article/${params.articleId}`
+      );
+      return data;
+    },
+  });
+
   const {
     authorInfo,
     title,
@@ -23,95 +34,71 @@ function ArticleDetails() {
 
   const time = new Date(creationTime).toLocaleDateString();
 
+  if (isLoading) return <Spinner1 />;
   return (
-    <div
-      className={`${isPremium ? "border-2 border-purple-600" : ""} max-w-lg mx-auto border bg-white/50 rounded-lg shadow-sm overflow-hidden `}
-    >
-      {/* Header */}
-      <div className="flex p-4 border-b justify-between">
-        <div className="flex items-center">
+    <div className="md:my-14 my-5">
+      <h3
+        className={`md:text-5xl text-2xl capitalize relative font-semibold mb-3 `}
+      >
+        {title}
+      </h3>
+      <div className={` mx-auto border bg-white/50   `}>
+        {/* Header */}
+        <div className="flex p-4 border-b justify-between">
+          <div className="flex items-center">
+            <img
+              src={authorInfo.profilePhoto || "https://via.placeholder.com/40"}
+              alt={authorInfo.fullName || "Author"}
+              className="w-14 h-14 rounded-full mr-4"
+            />
+
+            <div>
+              <p className="font-bold">{authorInfo.fullName}</p>
+              <p className="text-sm">{authorInfo.email}</p>
+            </div>
+          </div>
+          <div className="self-start text-lg ">
+            <p>{time} </p>
+          </div>
+        </div>
+
+        {/* Thumbnail */}
+        <div className="relative">
           <img
-            src={authorInfo.profilePhoto || "https://via.placeholder.com/40"}
-            alt={authorInfo.fullName || "Author"}
-            className="w-12 h-12 rounded-full mr-4"
+            src={thumbnail}
+            alt="Article Thumbnail"
+            className=" w-full xl:h-[450px] md:h-[400px] h-[200px] object-cover"
           />
-
-          <div>
-            <p className="font-bold">{authorInfo.fullName}</p>
-            <p className="text-sm">{authorInfo.email}</p>
-          </div>
-        </div>
-        <div className="self-start text-xs ">
-          <p>{time} </p>
-        </div>
-      </div>
-
-      {/* Thumbnail */}
-      <div className="relative">
-        <img
-          src={thumbnail}
-          alt="Article Thumbnail"
-          className="w-full h-48 object-cover"
-        />
-        {isPremium && (
-          <div className="px-3 py-1 bg-purple-600 text-white absolute top-0 right-0 rounded-none">
-            Premiume
-          </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="p-4">
-        <h3
-          className={`text-lg relative font-semibold mb-2 ${isPremium && "pl-3"}`}
-        >
-          {title}
           {isPremium && (
-            <span className="absolute top-0 left-0 w-1 h-full bg-purple-600"></span>
+            <div className="px-3 py-1 bg-purple-600 text-white absolute top-0 right-0 rounded-none">
+              Premiume
+            </div>
           )}
-        </h3>
-        <p className="text-sm text-gray-700 mb-2">
-          {description.length > 120
-            ? `${description.slice(0, 120)}...`
-            : description}
-        </p>
-        <Divider />
-        <p className="text-sm text-gray-500 mt-3 ">
-          <strong>Tags:</strong>{" "}
-          {tags.length ? tags.map((tag) => `#${tag.label} `) : "No tags"}
-        </p>
-        <p className="text-sm font-medium my-1">
-          <strong>Status:</strong>{" "}
-          <span
-            className={`${
-              status === "published" ? "text-green-600" : "text-orange-500"
-            } font-bold`}
-          >
-            {status}
-          </span>
-        </p>
-        <p className="mb-2 text-sm text-gray-500">{`Publisher: ${publisher.value}`}</p>
-        <Divider />
-        <div className="flex justify-center">
-          {isPremium ? (
-            premiumeUser ? (
-              <Link>
-                <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5">
-                  Read Article
-                </FilledBtn>
-              </Link>
-            ) : (
-              <FilledBtn className="bg-gray-400 text-white rounded-sm mt-5 cursor-default">
-                Read Article
-              </FilledBtn>
-            )
-          ) : (
-            <Link>
-              <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5 ">
-                Read Article
-              </FilledBtn>
-            </Link>
-          )}
+          <p className="text-gray-500 p-2">
+            Published in:{" "}
+            <span className="text-black font-bold">{publisher.label}</span>`
+          </p>
+        </div>
+
+        {/* Content */}
+        <div className="p-4">
+          <p className="text-lg text-gray-700 mb-2">{description}</p>
+          <Divider />
+          <h2 className="my-4 font-semibold text-xl">More Info</h2>
+          <p className=" text-gray-500 mt-3 ">
+            <strong>Tags:</strong>{" "}
+            {tags.length ? tags.map((tag) => `#${tag.label} `) : "No tags"}
+          </p>
+          <p className=" font-medium my-1">
+            <strong>Status:</strong>{" "}
+            <span
+              className={`${
+                status === "published" ? "text-green-600" : "text-orange-500"
+              } font-bold`}
+            >
+              {status}
+            </span>
+          </p>
         </div>
       </div>
     </div>

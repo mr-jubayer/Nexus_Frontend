@@ -16,6 +16,7 @@ import Dashboard from "../pages/dashboard/admin/Dashboard";
 import Profile from "../pages/dashboard/common/Profile";
 import NotFound from "../pages/error/NotFound";
 import AllArticle from "../pages/main/allArticle/AllArticle";
+import ArticleDetails from "../pages/main/articleDetails/ArticleDetails";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
 import Subscriptions from "../pages/main/subsciptions/Subscriptions";
 import Payment from "../pages/payment/Payment";
@@ -40,6 +41,12 @@ const Router = () => {
           </Route>
           <Route element={<PrivetRoutes />}>
             <Route path="all-articles" element={<AllArticle />} />
+          </Route>
+          <Route element={<PrivetRoutes />}>
+            <Route
+              path="all-articles/details/:articleId"
+              element={<ArticleDetails />}
+            />
           </Route>
           <Route element={<PrivetRoutes />}>
             <Route path="payment" element={<Payment />} />

@@ -8,6 +8,7 @@ export default function MainArticleCard({ article }) {
   const { premiumeUser } = usePremiumeUser();
 
   const {
+    _id,
     authorInfo,
     title,
     description,
@@ -93,7 +94,7 @@ export default function MainArticleCard({ article }) {
         <div className="flex justify-center">
           {isPremium ? (
             premiumeUser ? (
-              <Link>
+              <Link to={"all-articles/details"}>
                 <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5">
                   Read Article
                 </FilledBtn>
@@ -104,7 +105,7 @@ export default function MainArticleCard({ article }) {
               </FilledBtn>
             )
           ) : (
-            <Link>
+            <Link to={`details/${_id}`}>
               <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5 ">
                 Read Article
               </FilledBtn>
