@@ -20,6 +20,7 @@ export default function MainArticleCard({ article }) {
     thumbnail,
     status,
     isPremium,
+    views,
   } = article || {};
 
   const time = new Date(creationTime).toLocaleDateString();
@@ -32,7 +33,7 @@ export default function MainArticleCard({ article }) {
       <div className="flex p-4 border-b justify-between">
         <div className="flex items-center">
           <img
-            src={authorInfo.profilePhoto || "https://via.placeholder.com/40"}
+            src={authorInfo?.profilePhoto}
             alt={authorInfo.fullName || "Author"}
             className="w-12 h-12 rounded-full mr-4"
           />
@@ -77,7 +78,8 @@ export default function MainArticleCard({ article }) {
             : description}
         </p>
         <Divider />
-        <p className="text-sm text-gray-500 mt-3 ">
+        <p className="text-sm  mt-3  ">views: {views || 0}</p>
+        <p className="text-sm text-gray-500 ">
           <strong>Tags:</strong>{" "}
           {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
         </p>

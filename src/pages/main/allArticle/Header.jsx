@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Select } from "@headlessui/react";
 import clsx from "clsx";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";

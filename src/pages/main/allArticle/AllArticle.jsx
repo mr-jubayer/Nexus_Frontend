@@ -1,26 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Spinner1 from "../../../components/spinners/Spinner1";
 import MainArticleCard from "./MainArticleCard";
 import Header from "./Header";
 import debounceHandler from "./debounce";
 import { useEffect, useState } from "react";
+import Spinner1 from "../../../components/spinners/Spinner1";
 
 function AllArticle() {
   const axiosSecure = useAxiosSecure();
-  const {
-    data = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["articles"],
-    queryFn: async () => {
-      const { data } = await axiosSecure(`/api/articles/published`);
-      return data;
-    },
-  });
+  const [loading, setLoading] = useState(true);
 
-  const [articles, setArticles] = useState(data);
+  const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState({
     title: "",
     publisher: "",
@@ -28,12 +17,14 @@ function AllArticle() {
   });
 
   useEffect(() => {
+    setLoading(true);
     debounceHandler(async () => {
       try {
         const { data } = await axiosSecure.get(`/api/articles/filter`, {
           params: filter,
         });
-        setArticles(data); // Update articles state with filtered results
+        setArticles(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching filtered articles:", error);
       }
@@ -54,8 +45,6 @@ function AllArticle() {
     setFilter({ ...filter, title });
   };
 
-  if (isLoading) return <Spinner1 />;
-
   return (
     <div>
       <Header
@@ -64,14 +53,12 @@ function AllArticle() {
         searchChangeHandler={searchChangeHandler}
       />
 
-      {articles.length ? (
+      {loading ? (
+        <Spinner1 />
+      ) : articles.length ? (
         <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-3 mb-10">
           {articles.map((article) => (
-            <MainArticleCard
-              key={article._id}
-              article={article}
-              refetch={refetch}
-            />
+            <MainArticleCard key={article._id} article={article} />
           ))}
         </div>
       ) : (

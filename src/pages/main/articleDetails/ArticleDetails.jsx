@@ -1,16 +1,18 @@
 import { Divider } from "@mui/material";
-import FilledBtn from "../../../components/buttons/FilledBtn";
-import { Link, useParams } from "react-router";
-import usePremiumeUser from "../../../hooks/usePremiumeUser";
+import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Spinner1 from "../../../components/spinners/Spinner1";
+import { useEffect } from "react";
 function ArticleDetails() {
-  const { premiumeUser } = usePremiumeUser();
   const params = useParams();
   const axiosSecure = useAxiosSecure();
 
-  const { data: article, isLoading } = useQuery({
+  const {
+    data: article,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["article"],
     queryFn: async () => {
       const { data } = await axiosSecure(
@@ -19,6 +21,13 @@ function ArticleDetails() {
       return data;
     },
   });
+
+  useEffect(() => {
+    (async function () {
+      await axiosSecure.post(`/api/articles/views/${params.articleId}`);
+      refetch();
+    })();
+  }, [axiosSecure, params.articleId, refetch]);
 
   const {
     authorInfo,
@@ -30,6 +39,7 @@ function ArticleDetails() {
     thumbnail,
     status,
     isPremium,
+    views,
   } = article || {};
 
   const time = new Date(creationTime).toLocaleDateString();
@@ -57,7 +67,7 @@ function ArticleDetails() {
               <p className="text-sm">{authorInfo.email}</p>
             </div>
           </div>
-          <div className="self-start text-lg ">
+          <div className="self-start md:text-lg ">
             <p>{time} </p>
           </div>
         </div>
@@ -74,10 +84,15 @@ function ArticleDetails() {
               Premiume
             </div>
           )}
-          <p className="text-gray-500 text-xl p-2">
-            Published in:{" "}
-            <span className="text-black font-bold ">{publisher}</span>`
-          </p>
+          <div className="flex justify-between items-center ">
+            <p className="text-gray-500 md:text-xl p-2">
+              Published in:{" "}
+              <span className="text-black font-bold ">{publisher}</span>`
+            </p>
+            <p className="md:text-lg text-xs text-nowrap pr-3">
+              Views: {views || 0}
+            </p>
+          </div>
         </div>
 
         {/* Content */}
