@@ -12,7 +12,7 @@ export default function Profile() {
     setActiveTab(newValue);
   };
 
-  const { fullName, bio, profilePhoto, email } = userInfo || {};
+  const { fullName, profilePhoto, email } = userInfo || {};
 
   return (
     <div className="flex flex-col items-center py-8 px-4 mb-44">
@@ -51,8 +51,7 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Stats Section
-        <div className="flex justify-between mt-6 border-t pt-4">
+        {/* <div className="flex justify-between mt-6 border-t pt-4">
           <div className="text-center">
             <h2 className="text-xl font-semibold">{articles?.length}</h2>
             <p className="text-gray-500">Articles</p>

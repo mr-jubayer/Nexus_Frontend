@@ -16,7 +16,7 @@ export default function Banner() {
   const axiosSecure = useAxiosSecure();
   const [activeIndex, setActiveIndex] = useState(0); // Track active slide index
 
-  const { data: popularArticles = [], isLoading } = useQuery({
+  const { data: popularArticles = [] } = useQuery({
     queryKey: ["popularArticles"],
     queryFn: async () => {
       const { data } = await axiosSecure(`/api/articles/popular`);
@@ -50,7 +50,7 @@ export default function Banner() {
               <div className="bg-black/40 w-full h-full md:px-32 p-10 flex flex-col justify-center items-center">
                 <motion.h1
                   key={activeIndex} // Unique key to reset animation on each slide
-                  className="text-white text-5xl font-medium mb-2 uppercase"
+                  className="text-white md:text-5xl text-3xl font-medium mb-2 uppercase"
                   initial={{ opacity: 0, x: "40%" }} // Starts off-screen
                   animate={{ opacity: 1, x: "0%" }} // Animates to position
                   transition={{
@@ -64,7 +64,7 @@ export default function Banner() {
                 {/* Subtitle */}
                 <motion.h2
                   key={`desc-${activeIndex}`}
-                  className="text-white text-lg drop-shadow-2xl mb-2"
+                  className="text-white md:text-lg text-base drop-shadow-2xl mb-2"
                   initial={{ opacity: 0, x: "40%" }}
                   animate={{ opacity: 1, x: "0%" }}
                   transition={{

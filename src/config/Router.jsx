@@ -18,6 +18,8 @@ import NotFound from "../pages/error/NotFound";
 import AllArticle from "../pages/main/allArticle/AllArticle";
 import ArticleDetails from "../pages/main/articleDetails/ArticleDetails";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
+import MyArticles from "../pages/main/myArticles/MyArticles";
+import PremiumeArtilces from "../pages/main/premiumeArticles/PremiumeArtilces";
 import Subscriptions from "../pages/main/subsciptions/Subscriptions";
 import Payment from "../pages/payment/Payment";
 import PrivetRoutes from "../routes/PrivetRoutes";
@@ -41,6 +43,12 @@ const Router = () => {
           </Route>
           <Route element={<PrivetRoutes />}>
             <Route path="all-articles" element={<AllArticle />} />
+          </Route>
+          <Route element={<PrivetRoutes />}>
+            <Route path="premiume-articles" element={<PremiumeArtilces />} />
+          </Route>
+          <Route element={<PrivetRoutes />}>
+            <Route path="my-articles" element={<MyArticles />} />
           </Route>
           <Route element={<PrivetRoutes />}>
             <Route

@@ -17,12 +17,15 @@ function NavBar() {
     { label: "Home", path: "/" },
     { label: "Add Articles", path: "add-article" },
     { label: "All Articles", path: "all-articles" },
-    { label: "My Articles ", path: "/e" },
+    { label: "My Articles ", path: "/my-articles" },
     { label: "Subscription", path: "subscriptions" },
   ];
 
-  if (userInfo?.premiumeToken) {
-    defaultRoutes.push({ label: "Premium Articles ", path: "/h" });
+  if (userInfo?.premiumeToken || userInfo?.role === "admin") {
+    defaultRoutes.push({
+      label: "Premium Articles ",
+      path: "premiume-articles",
+    });
   }
 
   if (userInfo?.role == "admin") {
@@ -73,10 +76,10 @@ function NavBar() {
         <div className="flex items-center gap-1">
           <div className="drawer lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content p-1 active:scale-95 transition-all text-3xl z-50">
+            <div className="drawer-content p-1 active:scale-95 transition-all z-50">
               {/* Page content here */}
-              <label htmlFor="my-drawer" className="cursor-pointer">
-                <IoMenuSharp />
+              <label htmlFor="my-drawer" className="cursor-pointer x">
+                <IoMenuSharp className="text-2xl" />
               </label>
             </div>
             <div className="drawer-side  z-50">
@@ -90,7 +93,7 @@ function NavBar() {
               </ul>
             </div>
           </div>
-          <img src={logo} alt="brand name" className="md:h-9 h-[24px]" />
+          <img src={logo} alt="brand name" className="md:h-8 h-[22px]" />
         </div>
         <div>
           <div className="hidden lg:block">
@@ -99,15 +102,15 @@ function NavBar() {
         </div>
         <div>
           {user ? (
-            <div className="flex items-center">
+            <div className="flex items-center ">
               <BtnOutline
                 onClick={logoutHandler}
-                className="flex gap-2 text-lg items-center"
+                className="flex gap-2 text-base items-center  border-myGreen border mr-2"
               >
-                Logout <LuLogOut className="text-2xl" />
+                Logout <LuLogOut className="text-xl" />
               </BtnOutline>
               <div className="avatar online cursor-pointer rounded-full">
-                <div className="w-12 rounded-full">
+                <div className="w-10 rounded-full">
                   <Link to={"profile"}>
                     <img src={userInfo?.profilePhoto} alt="profile photo" />
                   </Link>
