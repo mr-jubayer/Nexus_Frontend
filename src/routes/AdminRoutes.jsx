@@ -1,17 +1,25 @@
 import { Navigate, Outlet, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
 import Spinner1 from "../components/spinners/Spinner1";
+import useUserInfo from "../hooks/useUserInfo";
 
 function AdminRoutes() {
-  const { user, loading } = useAuth();
+  const { isLoading, userInfo } = useUserInfo();
+  const { loading, user } = useAuth();
   const location = useLocation();
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Spinner1 />;
   }
 
-  if (user) {
+  if (userInfo.role === "admin") {
     return <Outlet />;
+  }
+
+  console.log(userInfo.role);
+
+  if (user) {
+    return <Navigate to={"/"} />;
   }
 
   return <Navigate to={"/auth/login"} state={{ from: location.pathname }} />;

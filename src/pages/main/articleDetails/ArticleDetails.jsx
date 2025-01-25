@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Spinner1 from "../../../components/spinners/Spinner1";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 function ArticleDetails() {
   const params = useParams();
   const axiosSecure = useAxiosSecure();
@@ -47,6 +48,10 @@ function ArticleDetails() {
   if (isLoading) return <Spinner1 />;
   return (
     <div className="md:my-14 my-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | {title}</title>
+      </Helmet>
       <h3
         className={`md:text-5xl text-2xl capitalize relative font-semibold mb-3 `}
       >

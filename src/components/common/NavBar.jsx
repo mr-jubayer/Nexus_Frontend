@@ -15,11 +15,16 @@ function NavBar() {
 
   const defaultRoutes = [
     { label: "Home", path: "/" },
-    { label: "Add Articles", path: "add-article" },
     { label: "All Articles", path: "all-articles" },
-    { label: "My Articles ", path: "/my-articles" },
-    { label: "Subscription", path: "subscriptions" },
   ];
+
+  if (user) {
+    defaultRoutes.push(
+      { label: "Add Articles", path: "add-article" },
+      { label: "My Articles ", path: "/my-articles" },
+      { label: "Subscription", path: "subscriptions" }
+    );
+  }
 
   if (userInfo?.premiumeToken || userInfo?.role === "admin") {
     defaultRoutes.push({

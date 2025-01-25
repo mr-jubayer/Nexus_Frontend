@@ -1,4 +1,4 @@
-# **Nexus: Your Gateway to Premium News Content**
+# **Nexus: Your Gateway to Free, Premium News Content**
 
 **Live Site URLs**:
 

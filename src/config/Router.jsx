@@ -19,9 +19,11 @@ import AllArticle from "../pages/main/allArticle/AllArticle";
 import ArticleDetails from "../pages/main/articleDetails/ArticleDetails";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
 import MyArticles from "../pages/main/myArticles/MyArticles";
+import UpdateArticle from "../pages/main/myArticles/UpdateArticle";
 import PremiumeArtilces from "../pages/main/premiumeArticles/PremiumeArtilces";
 import Subscriptions from "../pages/main/subsciptions/Subscriptions";
 import Payment from "../pages/payment/Payment";
+import AdminRoutes from "../routes/AdminRoutes";
 import PrivetRoutes from "../routes/PrivetRoutes";
 
 const Router = () => {
@@ -35,43 +37,55 @@ const Router = () => {
           <Route element={<PrivetRoutes />}>
             <Route path="add-article" element={<AddArticle />} />
           </Route>
+
           <Route element={<PrivetRoutes />}>
             <Route path="profile" element={<Profile />} />
           </Route>
+
           <Route element={<PrivetRoutes />}>
             <Route path="subscriptions" element={<Subscriptions />} />
           </Route>
-          <Route element={<PrivetRoutes />}>
-            <Route path="all-articles" element={<AllArticle />} />
-          </Route>
+
+          <Route path="all-articles" element={<AllArticle />} />
+
           <Route element={<PrivetRoutes />}>
             <Route path="premiume-articles" element={<PremiumeArtilces />} />
           </Route>
+
           <Route element={<PrivetRoutes />}>
             <Route path="my-articles" element={<MyArticles />} />
           </Route>
+
+          <Route element={<PrivetRoutes />}>
+            <Route path="my-articles/update/:id" element={<UpdateArticle />} />
+          </Route>
+
           <Route element={<PrivetRoutes />}>
             <Route
               path="all-articles/details/:articleId"
               element={<ArticleDetails />}
             />
           </Route>
+
           <Route element={<PrivetRoutes />}>
             <Route path="payment" element={<Payment />} />
           </Route>
         </Route>
+
         {/* auth routes */}
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
         <Route element={<PrivetRoutes />}>
-          {/* dashboard */}
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="users" element={<AllUser />} />
-            <Route path="articles" element={<AllArticles />} />
-            <Route path="add-publisher" element={<AddPublisher />} />
+          <Route element={<AdminRoutes />}>
+            {/* dashboard */}
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="users" element={<AllUser />} />
+              <Route path="articles" element={<AllArticles />} />
+              <Route path="add-publisher" element={<AddPublisher />} />
+            </Route>
           </Route>
         </Route>
         {/* not found page */}

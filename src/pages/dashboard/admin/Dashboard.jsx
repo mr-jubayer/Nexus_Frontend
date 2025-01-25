@@ -1,11 +1,15 @@
-import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet-async";
 import AreaChart from "../charts/AreaChart";
 import PieChart from "../charts/PieChart";
-import { useEffect } from "react";
 
 function Dashboard() {
   return (
     <div className="w-full">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <link rel="icon" type="image/png" href="/dashboardfav.png" />
+        <title>Nexus | DashBoard</title>
+      </Helmet>
       <PieChart />
       <AreaChart />
     </div>
@@ -13,3 +17,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+//

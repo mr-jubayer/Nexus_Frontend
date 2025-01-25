@@ -5,6 +5,7 @@ import AdModal from "./homeModal/AdModal";
 import AllPublisher from "./allPublisher/AllPublisher";
 import Statistics from "./statistic/Statistic";
 import Reviews from "./reviews/Reviews";
+import { Helmet } from "react-helmet-async";
 
 function Home() {
   let [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,10 @@ function Home() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | Home</title>
+      </Helmet>
       <Banner />
       <AllPublisher />
       <Prices />

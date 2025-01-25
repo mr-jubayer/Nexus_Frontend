@@ -13,7 +13,7 @@ function PaymentCard() {
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { userInfo } = useUserInfo();
+  const { userInfo, refetch } = useUserInfo();
   const [clientSecret, setClientSecret] = useState("");
   const [transition, setTransition] = useState("");
   const [error, setError] = useState("");
@@ -86,6 +86,7 @@ function PaymentCard() {
           };
 
           await axiosSecure.post(`/api/payment/payments-data`, paymentInfo);
+          refetch();
           notify(
             `Payment Succedded with the Transition Id: ${paymentIntent.id}`,
             "success"

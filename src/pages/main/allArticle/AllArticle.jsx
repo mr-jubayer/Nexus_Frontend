@@ -1,12 +1,13 @@
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import MainArticleCard from "./MainArticleCard";
 import Header from "./Header";
 import debounceHandler from "./debounce";
 import { useEffect, useState } from "react";
 import Spinner1 from "../../../components/spinners/Spinner1";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 function AllArticle() {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(true);
 
   const [articles, setArticles] = useState([]);
@@ -20,7 +21,7 @@ function AllArticle() {
     setLoading(true);
     debounceHandler(async () => {
       try {
-        const { data } = await axiosSecure.get(`/api/articles/filter`, {
+        const { data } = await axiosPublic.get(`/api/articles/filter`, {
           params: filter,
         });
         setArticles(data);
@@ -29,7 +30,7 @@ function AllArticle() {
         console.error("Error fetching filtered articles:", error);
       }
     });
-  }, [filter, axiosSecure]);
+  }, [filter, axiosPublic]);
 
   const tagsChangeHandler = (e) => {
     const tag = e.target.value;
@@ -47,6 +48,10 @@ function AllArticle() {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | All Article</title>
+      </Helmet>
       <Header
         tagsChangeHandler={tagsChangeHandler}
         pubChangeHandler={pubChangeHandler}

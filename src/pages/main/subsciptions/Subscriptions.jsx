@@ -3,6 +3,7 @@ import CreatableSelect from "react-select/creatable";
 import FilledBtn from "../../../components/buttons/FilledBtn";
 import { Link } from "react-router";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export const colourOptions = [
   { value: 60000, label: "For 1 Minute", amount: 1 },
@@ -20,6 +21,10 @@ function Subscriptions() {
 
   return (
     <section className="mt-10 grid md:grid-cols-2 place-items-center gap-6 pb-24">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | Subscriptions</title>
+      </Helmet>
       {/* Left Content */}
       <div>
         <h2 className="text-4xl font-semibold mb-2">

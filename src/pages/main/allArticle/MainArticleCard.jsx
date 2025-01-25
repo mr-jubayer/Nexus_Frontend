@@ -97,7 +97,7 @@ export default function MainArticleCard({ article }) {
         <Divider />
         <div className="flex justify-center">
           {isPremium ? (
-            premiumeUser || userInfo.role === "admin" ? (
+            premiumeUser || userInfo?.role === "admin" ? (
               <Link to={`details/${_id}`}>
                 <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5">
                   Read Article

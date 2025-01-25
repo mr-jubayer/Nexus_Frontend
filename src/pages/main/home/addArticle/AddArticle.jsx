@@ -36,6 +36,7 @@ function AddArticle() {
   const [loading, setLoading] = useState(false);
   const { userInfo } = useUserInfo();
   const { notify } = useNotifications();
+  const [postError, setPostError] = useState("");
 
   const submitPostHandler = async (postData) => {
     // Todo: get all data from 'form'
@@ -45,10 +46,10 @@ function AddArticle() {
     // then -> set up backend for it
     setLoading(true);
     try {
-      const img = inputRef.current.files[0];
+      let img = inputRef.current.files[0];
       const upladedImage = await uploadImg(img);
 
-      const uploadPost = {
+      let uploadPost = {
         title: postData.title,
         description: postData.description,
         thumbnail: upladedImage.url,
@@ -66,7 +67,13 @@ function AddArticle() {
         "You article has be requested! you will be notify when admin accept your request.",
         "info"
       );
+      setSelectedImg("(< click)");
+      uploadPost = {};
+      img = "";
       reset();
+    } catch (err) {
+      console.log(err);
+      setPostError(err?.response?.data?.message);
     } finally {
       setLoading(false);
     }
@@ -156,6 +163,7 @@ function AddArticle() {
               />
             </div>
           </div>
+          <p className="my-2 text-lg text-error">{postError}</p>
           <div>
             <FilledBtn
               className={`bg-myGreen cursor-pointer hover:bg-myGreen/90 active:bg-myGreen/80 transition-all duration-200  text-white  py-2  flex justify-center text-[22px] px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30   `}

@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import FilledBtn from "../../../components/buttons/FilledBtn";
-
+import { toast } from "react-hot-toast";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -36,13 +36,50 @@ export default function AllUser() {
   const { loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/api/users`);
       return data;
     },
   });
+
+  const makeAdminHandler = async (email) => {
+    try {
+      const updatingToo = async () => {
+        await axiosSecure.patch(`/api/users/update/user-role/${email}`);
+        refetch();
+      };
+      const updating = (id) => {
+        toast.promise(updatingToo(), {
+          loading: "Processing...",
+          success: <b>Updated Successfull!</b>,
+          error: <b>Updated failed.</b>,
+        });
+        toast.dismiss(id);
+      };
+
+      toast((t) => (
+        <span>
+          Are you <b>sure</b>?
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="bg-gray-400 px-3 py-1 rounded-md shadow-inner mx-3 text-white"
+          >
+            no
+          </button>
+          <button
+            onClick={() => updating(t.id)}
+            className="bg-orange-400 px-3 py-1 rounded-md shadow-inner  text-white"
+          >
+            yes
+          </button>
+        </span>
+      ));
+    } catch (error) {
+      console.error("Error deleting article:", error);
+    }
+  };
 
   if (isLoading || loading) return <Spinner1 />;
 
@@ -77,9 +114,16 @@ export default function AllUser() {
                 </StyledTableCell>
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">
-                  <FilledBtn className="bg-myGreen text-white">
-                    Make Admin
-                  </FilledBtn>
+                  {user.role === "admin" ? (
+                    <h2>Admin</h2>
+                  ) : (
+                    <FilledBtn
+                      onClick={() => makeAdminHandler(user.email)}
+                      className="bg-myGreen text-white"
+                    >
+                      Make Admin
+                    </FilledBtn>
+                  )}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
