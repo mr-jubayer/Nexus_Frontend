@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -12,6 +12,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import FilledBtn from "../../../components/buttons/FilledBtn";
 import { toast } from "react-hot-toast";
+import { styled } from "@mui/material";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -26,7 +28,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
@@ -36,10 +37,17 @@ export default function AllUser() {
   const { loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
+  // Pagination state
+  const [page, setPage] = useState(1); // Start at page 1
+  const [rowsPerPage, setRowsPerPage] = useState(5); // Default rows per page
+
+  // Fetching paginated data
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", page, rowsPerPage],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/api/users`);
+      const { data } = await axiosSecure.get(
+        `/api/users?page=${page}&limit=${rowsPerPage}`
+      );
       return data;
     },
   });
@@ -53,8 +61,8 @@ export default function AllUser() {
       const updating = (id) => {
         toast.promise(updatingToo(), {
           loading: "Processing...",
-          success: <b>Updated Successfull!</b>,
-          error: <b>Updated failed.</b>,
+          success: <b>Updated Successfully!</b>,
+          error: <b>Update failed.</b>,
         });
         toast.dismiss(id);
       };
@@ -83,6 +91,11 @@ export default function AllUser() {
 
   if (isLoading || loading) return <Spinner1 />;
 
+  // Handle changing the page
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -95,7 +108,7 @@ export default function AllUser() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((user) => (
+            {data?.users?.map((user) => (
               <StyledTableRow key={user._id}>
                 <StyledTableCell component="th" scope="row">
                   <div className="flex gap-2 items-center">
@@ -106,8 +119,8 @@ export default function AllUser() {
                         alt="user profile photo"
                       />
                     </div>
-                    <div className="">
-                      <p className="text-lg ">{user.fullName} </p>
+                    <div>
+                      <p className="text-lg">{user.fullName}</p>
                       <p className="opacity-80">{user.role}</p>
                     </div>
                   </div>
@@ -130,6 +143,40 @@ export default function AllUser() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={() => handleChangePage(page - 1)}
+          disabled={page === 1}
+          className="px-4 py-2 bg-gray-300 rounded-md mr-2 disabled:bg-gray-500"
+        >
+          Previous
+        </button>
+
+        <div className="flex space-x-2">
+          {Array.from(
+            { length: Math.ceil(data?.total / rowsPerPage) },
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => handleChangePage(index + 1)}
+                className={`px-4 py-2 rounded-md ${page === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+        </div>
+
+        <button
+          onClick={() => handleChangePage(page + 1)}
+          disabled={page === Math.ceil(data?.total / rowsPerPage)}
+          className="px-4 py-2 bg-gray-300 rounded-md ml-2 disabled:bg-gray-500"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
