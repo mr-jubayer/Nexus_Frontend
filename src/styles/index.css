@@ -6,6 +6,7 @@
 
 body {
   font-family: "Outfit", serif;
+  overflow: hidden;
 }
 html {
   overflow-y: scroll; /* Ensure the vertical scrollbar appears */

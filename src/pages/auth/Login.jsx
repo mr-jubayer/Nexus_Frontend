@@ -7,6 +7,7 @@ import SocialLogin from "./SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
@@ -46,6 +47,10 @@ function Login() {
   };
   return (
     <div className="w-[450px]">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | Login</title>
+      </Helmet>
       <div className=" border sm:border-black border-black/30 px-8 py-16 my-7">
         <div className="flex justify-center flex-col items-center mb-4">
           <h2 className="text-3xl text-myGreen">Login</h2>

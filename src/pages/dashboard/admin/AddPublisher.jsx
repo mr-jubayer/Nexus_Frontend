@@ -8,6 +8,7 @@ import { ImSpinner9 } from "react-icons/im";
 import urlRecucer from "../../../utils/urlReducer";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNotifications } from "reapop";
+import { Helmet } from "react-helmet-async";
 
 function AddPublisher() {
   const [publisherName, setPublisherName] = useState("");
@@ -57,6 +58,10 @@ function AddPublisher() {
 
   return (
     <div className="max-w-[700px] mx-auto  p-8 border-2  border-myGreen rounded-md">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | Add pulisher</title>
+      </Helmet>
       <Heading title="Add Publisher" />
       <form onSubmit={handleSubmit} className="space-y-3  mt-6">
         {/* title */}

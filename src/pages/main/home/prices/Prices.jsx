@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import FilledBtn from "../../../../components/buttons/FilledBtn";
 import Heading from "../../../../components/Heading";
 
@@ -67,7 +68,7 @@ export default function Prices() {
                   {plan.priceMonthly == "00" ? "Free" : `$${plan.priceMonthly}`}
                 </span>
                 <span className="text-gray-500 text-base">
-                  /{!plan.featured ? "for 1 month" : "month"}{" "}
+                  /{!plan.featured ? "for 3 day" : "month"}{" "}
                 </span>
               </p>
             </div>
@@ -85,11 +86,13 @@ export default function Prices() {
               </ul>
             </div>
             <div>
-              <FilledBtn
-                className={`w-full mt-8 block rounded-full shadow-sm hover:shadow-md transition-all duration-150 hover:bg-myGreen/90 active:bg-myGreen/80 px-3.5 py-2.5 text-center text-sm font-semibold bg-myGreen  text-white`}
-              >
-                {plan.buttonText}
-              </FilledBtn>
+              <Link to={"subscriptions"}>
+                <FilledBtn
+                  className={`w-full mt-8 block rounded-full shadow-sm hover:shadow-md transition-all duration-150 hover:bg-myGreen/90 active:bg-myGreen/80 px-3.5 py-2.5 text-center text-sm font-semibold bg-myGreen  text-white`}
+                >
+                  {plan.buttonText}
+                </FilledBtn>
+              </Link>
               <p className="mt-6 text-base text-gray-600">{plan.description}</p>
             </div>
           </div>

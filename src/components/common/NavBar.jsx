@@ -120,7 +120,6 @@ function NavBar() {
           ) : (
             <div>
               <Link to={"/auth/login"}>
-                {" "}
                 <BtnOutline>Login</BtnOutline>
               </Link>
               <Link to={"/auth/signup"}>

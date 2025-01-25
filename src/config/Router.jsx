@@ -68,7 +68,7 @@ const Router = () => {
         <Route element={<PrivetRoutes />}>
           {/* dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route path="root" element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
             <Route path="users" element={<AllUser />} />
             <Route path="articles" element={<AllArticles />} />
             <Route path="add-publisher" element={<AddPublisher />} />

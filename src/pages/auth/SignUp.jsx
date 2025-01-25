@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import urlRecucer from "../../utils/urlReducer";
 import uploadImg from "../../utils/uploadImg";
+import { Helmet } from "react-helmet-async";
 
 function SignUp() {
   const {
@@ -80,6 +81,10 @@ function SignUp() {
   };
   return (
     <div className="w-[450px]">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Nexus | Signin</title>
+      </Helmet>
       <div className=" border sm:border-black border-black/30 px-8 py-16 my-7">
         <div className="flex justify-center flex-col items-center mb-4">
           <h2 className="text-3xl text-myGreen">Create an Account</h2>
