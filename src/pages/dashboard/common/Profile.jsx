@@ -27,8 +27,14 @@ export default function Profile() {
     const form = e.target;
     const newName = form.name.value;
 
-    const img = inputRef.current.files[0];
-    const upladedImage = await uploadImg(img);
+    const img = inputRef?.current?.files[0];
+    let upladedImage = {};
+
+    if (img) {
+      upladedImage = await uploadImg(img);
+    } else {
+      upladedImage.url = profilePhoto;
+    }
 
     const { data } = await axiosSecure.patch(
       `/api/users/update/${userInfo.email}`,

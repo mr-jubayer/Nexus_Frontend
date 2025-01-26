@@ -10,7 +10,6 @@ function useRole() {
       return data;
     },
   });
-  console.log(data);
 }
 
 export default useRole;

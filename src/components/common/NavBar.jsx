@@ -34,7 +34,7 @@ function NavBar() {
   }
 
   if (userInfo?.role == "admin") {
-    defaultRoutes.push({ label: "Dashboard ", path: "/dashboard" });
+    defaultRoutes.push({ label: "Dashboard ", path: "/dashboard/root" });
   }
 
   const Links = () => (

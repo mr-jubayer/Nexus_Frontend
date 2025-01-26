@@ -29,8 +29,6 @@ export default function UserStates() {
     },
   });
 
-  console.log(states);
-
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-[300px]">

@@ -112,7 +112,6 @@ function UpdateArticle() {
   const handleUploadThumbnail = () => {
     inputRef.current?.click();
   };
-  console.log(article);
 
   if (isLoading) return <Spinner1 />;
 

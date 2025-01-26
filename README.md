@@ -9,7 +9,7 @@
 
 ## **Admin Credentials**
 
-- **Email**: nexus@admin.com
+- **Email**: admin@nexus.com
 - **Password**: @adminN123
 
 ---

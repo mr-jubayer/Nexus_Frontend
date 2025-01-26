@@ -72,7 +72,6 @@ function AddArticle() {
       img = "";
       reset();
     } catch (err) {
-      console.log(err);
       setPostError(err?.response?.data?.message);
     } finally {
       setLoading(false);

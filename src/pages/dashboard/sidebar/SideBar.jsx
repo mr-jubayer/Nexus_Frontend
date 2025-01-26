@@ -1,16 +1,24 @@
-import { NavLink } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import logo from "../../../assets/logo2.png";
 import { MdDashboard, MdOutlineMenu } from "react-icons/md";
 import { FaBookReader, FaHome, FaUser } from "react-icons/fa";
 import { TbBrandSoundcloud } from "react-icons/tb";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 export default function SideBar() {
   const asideRef = useRef();
+  const loc = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loc.pathname === "/dashboard") navigate("/dashboard/root");
+  }, [loc.pathname]);
+
   const adminRoutes = [
     {
-      path: "/dashboard",
+      path: "/dashboard/root",
       value: "Dashboard",
       icon: <MdDashboard />,
     },
@@ -51,6 +59,11 @@ export default function SideBar() {
 
   return (
     <div className="relative h-full ">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <link rel="icon" type="image/png" href="/dashboardfav.png" />
+        <title>Nexus | DashBoard</title>
+      </Helmet>
       <button
         className="text-xl cursor-pointer md:hidden top-2 left-2 rounded-md absolute hover:bg-slate-100 focus:bg-slate-200 transition-all duration-200 p-1"
         onClick={handleSidebar}

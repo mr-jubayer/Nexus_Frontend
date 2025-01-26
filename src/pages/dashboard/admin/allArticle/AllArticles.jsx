@@ -9,7 +9,7 @@ function AllArticles() {
 
   // Pagination state
   const [page, setPage] = useState(1); // Start at page 1
-  const [rowsPerPage, setRowsPerPage] = useState(10); // Default rows per page
+  const [rowsPerPage, setRowsPerPage] = useState(6); // Default rows per page
 
   const {
     data = { articles: [], total: 0 },

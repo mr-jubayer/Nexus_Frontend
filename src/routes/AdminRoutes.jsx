@@ -16,8 +16,6 @@ function AdminRoutes() {
     return <Outlet />;
   }
 
-  console.log(userInfo.role);
-
   if (user) {
     return <Navigate to={"/"} />;
   }

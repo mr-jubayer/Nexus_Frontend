@@ -57,17 +57,13 @@ function Footer() {
               <div className="flex items-center space-x-4">
                 <div className="w-16 h-16 bg-gray-300 flex-shrink-0"></div>
                 <div>
-                  <h6 className="text-md font-medium ">
-                    Frequent TV Series Cancellations Altering Viewer Behavior
-                  </h6>
+                  <h6 className="text-md font-medium ">Vision Media</h6>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <div className="w-16 h-16 bg-gray-300 flex-shrink-0"></div>
                 <div>
-                  <h6 className="text-md font-medium ">
-                    The Top Three Scandinavian Home Décor Trends This Winter
-                  </h6>
+                  <h6 className="text-md font-medium ">Prime News Network</h6>
                 </div>
               </div>
             </div>
