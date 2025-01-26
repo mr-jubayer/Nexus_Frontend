@@ -4,6 +4,7 @@
 
 - **Firebase Instance 1**: [Nexus Live](https://nexus-3e632.web.app/)
 - **Firebase Instance 2**: [Nexus Live2](https://nexus-3e632.firebaseapp.com/)
+- **Surge**: [Nexus Live3](https://nexus-news-gatway.surge.sh)
 
 ---
 
