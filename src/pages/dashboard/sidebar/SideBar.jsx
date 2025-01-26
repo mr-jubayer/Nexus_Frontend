@@ -10,7 +10,7 @@ export default function SideBar() {
   const asideRef = useRef();
   const adminRoutes = [
     {
-      path: "root",
+      path: "/dashboard",
       value: "Dashboard",
       icon: <MdDashboard />,
     },

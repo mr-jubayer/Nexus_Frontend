@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
-import AreaChart from "../charts/AreaChart";
-import PieChart from "../charts/PieChart";
+import PublishersState from "../charts/PublishersState";
+import TagsState from "../charts/TagsState";
+import Divider from "@mui/material/Divider";
+import UserStates from "../charts/UsersStates";
 
 function Dashboard() {
   return (
@@ -10,11 +12,17 @@ function Dashboard() {
         <link rel="icon" type="image/png" href="/dashboardfav.png" />
         <title>Nexus | DashBoard</title>
       </Helmet>
-      <PieChart />
-      <AreaChart />
+      <PublishersState />
+      <div className="my-12">
+        <Divider />
+      </div>
+      <TagsState />
+      <div className="my-12">
+        <Divider />
+      </div>
+      <UserStates />
     </div>
   );
 }
 
 export default Dashboard;
-//
