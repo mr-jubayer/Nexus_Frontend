@@ -98,7 +98,7 @@ export default function MainArticleCard({ article }) {
         <div className="flex justify-center">
           {isPremium ? (
             premiumeUser || userInfo?.role === "admin" ? (
-              <Link to={`details/${_id}`}>
+              <Link to={`/all-articles/details/${_id}`}>
                 <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5">
                   Read Article
                 </FilledBtn>
@@ -109,7 +109,7 @@ export default function MainArticleCard({ article }) {
               </FilledBtn>
             )
           ) : (
-            <Link to={`details/${_id}`}>
+            <Link to={`/all-articles/details/${_id}`}>
               <FilledBtn className="bg-myGreen hover:bg-myGreen/90  active:bg-myGreen text-white rounded-sm mt-5 ">
                 Read Article
               </FilledBtn>

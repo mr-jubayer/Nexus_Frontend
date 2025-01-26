@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import logo from "../../assets/logo2.png";
 import BtnOutline from "../buttons/BtnOutline";
 import FilledBtn from "../buttons/FilledBtn";
@@ -12,6 +12,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 function NavBar() {
   const { user, logoutUser } = useAuth();
   const { userInfo } = useUserInfo();
+  const navigate = useNavigate();
 
   const defaultRoutes = [
     { label: "Home", path: "/" },
@@ -98,7 +99,12 @@ function NavBar() {
               </ul>
             </div>
           </div>
-          <img src={logo} alt="brand name" className="md:h-8 h-[22px]" />
+          <img
+            src={logo}
+            onClick={() => navigate("/")}
+            alt="brand name"
+            className="md:h-8 h-[22px] w-full cursor-pointer"
+          />
         </div>
         <div>
           <div className="hidden lg:block">

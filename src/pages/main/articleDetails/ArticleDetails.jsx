@@ -14,7 +14,7 @@ function ArticleDetails() {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["article"],
+    queryKey: ["article", params.articleId],
     queryFn: async () => {
       const { data } = await axiosSecure(
         `/api/articles/article/${params.articleId}`
