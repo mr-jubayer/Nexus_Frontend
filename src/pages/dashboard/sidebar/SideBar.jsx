@@ -78,7 +78,8 @@ export default function SideBar() {
           <img
             src={logo}
             alt="brand name"
-            className="md:h-9 md:block  h-[20px]"
+            className="md:h-9 md:block  h-[20px] cursor-pointer"
+            onClick={() => navigate("/")}
           />
           <button onClick={closeSlideBar} className="md:hidden">
             <MdOutlineArrowBackIosNew className="text-xl" />
