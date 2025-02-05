@@ -1,6 +1,8 @@
-# **Nexus: Your Gateway to Free, Premium News Content**
+# Nexus: Your Gateway to Free, Premium News Content
 
-**Live Site URLs**:
+![Nexus Screenshot](https://i.ibb.co.com/7d7JwkQ5/Csdfsafsdfdsapture.png)
+
+## Live Site URLs
 
 - **Firebase Instance 1**: [Nexus Live](https://nexus-3e632.web.app/)
 - **Firebase Instance 2**: [Nexus Live2](https://nexus-3e632.firebaseapp.com/)
@@ -8,14 +10,14 @@
 
 ---
 
-## **Admin Credentials**
+## Admin Credentials
 
 - **Email**: admin@nexus.com
 - **Password**: @adminN123
 
 ---
 
-## **Features**
+## Features
 
 1. **Responsive Design**  
    Nexus offers a fully responsive layout, ensuring a seamless user experience across mobile, tablet, and desktop devices.
@@ -49,7 +51,7 @@
 
 ---
 
-## **Tech Stack**
+## Tech Stack
 
 - **Frontend**: React, TailwindCSS, MaterialUI, DaisyUI, Framer Motion
 - **Routing**: React Router
@@ -61,6 +63,62 @@
 
 ---
 
-## [Backend Repo](git@github.com:Programming-Hero-Web-Course4/b10a12-server-side-jubayerahmed46.git)
+## Repositories
 
-## [Frontend Repo](git@github.com:Programming-Hero-Web-Course4/b10a12-client-side-jubayerahmed46.git)
+- **[Backend Repo](git@github.com:Programming-Hero-Web-Course4/b10a12-server-side-jubayerahmed46.git)**
+- **[Frontend Repo](git@github.com:Programming-Hero-Web-Course4/b10a12-client-side-jubayerahmed46.git)**
+
+---
+
+## Run the Project Locally
+
+### Step-by-Step Guide
+
+1. Clone the repositories:
+
+   - **Client-Side**:
+     ```bash
+     git clone <client-repo-url>
+     ```
+
+2. Navigate to the respective project directories:
+
+   - **Client-Side**:
+     ```bash
+     cd client
+     ```
+
+3. Install dependencies:
+
+   - **Client-Side**:
+     ```bash
+     npm install
+     ```
+
+4. Add `.env` files:
+   
+   - **Client-Side**: Add Firebase credentials in `.env`.
+   - **Server-Side**: Add MongoDB credentials in `.env`.
+
+5. Start the servers:
+   
+   - **Client-Side**:
+     ```bash
+     npm run dev
+     ```
+
+---
+
+### Dependencies
+
+- **React**: JavaScript library for building user interfaces.
+- **TailwindCSS**: Utility-first CSS framework for rapid UI development.
+- **MaterialUI**: React component library for fast and customizable UI components.
+- **DaisyUI**: TailwindCSS plugin for beautiful, customizable UI components.
+- **React Query**: For data fetching, caching, and synchronization.
+- **Framer Motion**: For animations and transitions.
+- **Node.js**: JavaScript runtime for building server-side applications.
+- **Express**: Web framework for Node.js.
+- **MongoDB**: NoSQL database for storing application data.
+- **Firebase**: Platform for authentication and hosting.
+- **Stripe**: Payment gateway for subscription management.
