@@ -78,7 +78,7 @@ function NavBar() {
   };
   return (
     <nav>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between  w-full py-4 max-w-7xl mx-auto lg:px-20 md:px-10 px-3 z-20 ">
         <div className="flex items-center gap-1">
           <div className="drawer lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />

@@ -108,7 +108,7 @@ export default function MyArticles() {
   if (userLoading || isLoading) return <Spinner1 />;
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto lg:px-20 md:px-10 px-3 mt-24">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | My Articles</title>

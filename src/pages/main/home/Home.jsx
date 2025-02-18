@@ -17,18 +17,21 @@ function Home() {
     return () => showAd;
   }, []);
   return (
-    <div>
+    <div className="mt-16">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | Home</title>
       </Helmet>
       <Banner />
-      <AllPublisher />
-      <Prices />
-      <Statistics />
-      <Reviews />
+      <div className="max-w-7xl mx-auto min-h-80 lg:px-20 md:px-10 px-3">
+        <AllPublisher />
+        <Prices />
+        <Statistics />
+        <Reviews />
+      </div>
+
       {/* molal */}
-      <AdModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      {/* <AdModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
     </div>
   );
 }

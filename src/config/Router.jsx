@@ -39,10 +39,6 @@ const Router = () => {
           </Route>
 
           <Route element={<PrivetRoutes />}>
-            <Route path="profile" element={<Profile />} />
-          </Route>
-
-          <Route element={<PrivetRoutes />}>
             <Route path="subscriptions" element={<Subscriptions />} />
           </Route>
 
@@ -78,14 +74,13 @@ const Router = () => {
           <Route path="signup" element={<SignUp />} />
         </Route>
         <Route element={<PrivetRoutes />}>
-          <Route element={<AdminRoutes />}>
-            {/* dashboard */}
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route path="root" element={<Dashboard />} />
-              <Route path="users" element={<AllUser />} />
-              <Route path="articles" element={<AllArticles />} />
-              <Route path="add-publisher" element={<AddPublisher />} />
-            </Route>
+          {/* dashboard */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="root" element={<Dashboard />} />
+            <Route path="users" element={<AllUser />} />
+            <Route path="articles" element={<AllArticles />} />
+            <Route path="add-publisher" element={<AddPublisher />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
         {/* not found page */}

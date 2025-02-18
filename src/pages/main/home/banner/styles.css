@@ -32,9 +32,10 @@
   color: #ffffff;
   text-shadow: 0 1px 40px #000;
   transform: scale(0.8);
+  display: none;
 }
 
-.swiper-button-next:hover {
+/* .swiper-button-next:hover {
   transform: translateX(4px);
   transform: scale(0.8);
 }
@@ -51,4 +52,4 @@
   .swiper-button-prev:hover {
     transform: scale(0.6);
   }
-}
+} */

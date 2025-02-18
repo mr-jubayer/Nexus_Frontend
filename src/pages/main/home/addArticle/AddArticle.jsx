@@ -89,7 +89,7 @@ function AddArticle() {
   };
 
   return (
-    <div className="my-10">
+    <div className="my-10 max-w-7xl mx-auto lg:px-20 md:px-10 px-3 mt-24">
       <Heading title="Create an Article" />
       {/* input fields */}
       <div className="mt-12 mx-auto max-w-[800px] ">

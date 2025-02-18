@@ -20,7 +20,7 @@ function Subscriptions() {
   };
 
   return (
-    <section className="mt-10 grid md:grid-cols-2 place-items-center gap-6 pb-24">
+    <section className="mt-24 grid md:grid-cols-2 place-items-center gap-6 pb-24  max-w-7xl mx-auto lg:px-20 md:px-10 px-3">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | Subscriptions</title>

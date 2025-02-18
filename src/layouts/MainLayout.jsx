@@ -12,12 +12,12 @@ function MainLayout() {
   return (
     <div>
       {/* navbar */}
-      <div className="md:px-5 px-3 py-5 shadow-sm">
+      <div className="fixed top-0 w-full z-50 bg-white shadow-sm">
         <NavBar />
       </div>
       {/* dynamic page */}
-      {/* max-w-6xl mx-auto min-h-80 px-3 */}
-      <div>
+      {/* max-w-7xl mx-auto lg:px-20 md:px-10 px-3 */}
+      <div className="min-h-80">
         <Outlet />
       </div>
       {/* footer */}

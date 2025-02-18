@@ -47,7 +47,7 @@ function AllArticle() {
   };
 
   return (
-    <div>
+    <div className="mt-24 max-w-7xl mx-auto lg:px-20 md:px-10 px-3">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | All Article</title>

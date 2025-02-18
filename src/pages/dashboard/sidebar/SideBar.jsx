@@ -6,11 +6,14 @@ import { TbBrandSoundcloud } from "react-icons/tb";
 import { useEffect, useRef } from "react";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { Helmet } from "react-helmet-async";
+import useUserInfo from "../../../hooks/useUserInfo";
 
 export default function SideBar() {
   const asideRef = useRef();
   const loc = useLocation();
   const navigate = useNavigate();
+  const { userInfo } = useUserInfo();
+  console.log(userInfo);
 
   useEffect(() => {
     if (loc.pathname === "/dashboard") navigate("/dashboard/root");
