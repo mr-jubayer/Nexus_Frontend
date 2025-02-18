@@ -16,7 +16,8 @@ function MainLayout() {
         <NavBar />
       </div>
       {/* dynamic page */}
-      <div className="max-w-6xl mx-auto min-h-80 px-3">
+      {/* max-w-6xl mx-auto min-h-80 px-3 */}
+      <div>
         <Outlet />
       </div>
       {/* footer */}
