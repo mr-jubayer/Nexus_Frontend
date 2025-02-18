@@ -25,23 +25,33 @@ export default function SideBar() {
       value: "Dashboard",
       icon: <MdDashboard />,
     },
-
-    {
-      path: "users",
-      value: "Users",
-      icon: <FaUser />,
-    },
-    {
-      path: "articles",
-      value: "articles",
-      icon: <FaBookReader />,
-    },
-    {
-      path: "add-publisher",
-      value: "Add Publisher",
-      icon: <TbBrandSoundcloud />,
-    },
   ];
+
+  if (userInfo.role === "admin") {
+    adminRoutes.push(
+      {
+        path: "users",
+        value: "Users",
+        icon: <FaUser />,
+      },
+      {
+        path: "articles",
+        value: "articles",
+        icon: <FaBookReader />,
+      },
+      {
+        path: "add-publisher",
+        value: "Add Publisher",
+        icon: <TbBrandSoundcloud />,
+      }
+    );
+  } else {
+    adminRoutes.push({
+      path: "profile",
+      value: "Profile",
+      icon: <TbBrandSoundcloud />,
+    });
+  }
 
   const defaultRoute = [
     {

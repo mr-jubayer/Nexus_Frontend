@@ -77,9 +77,19 @@ const Router = () => {
           {/* dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="root" element={<Dashboard />} />
-            <Route path="users" element={<AllUser />} />
-            <Route path="articles" element={<AllArticles />} />
-            <Route path="add-publisher" element={<AddPublisher />} />
+
+            <Route element={<AdminRoutes />}>
+              <Route path="users" element={<AllUser />} />
+            </Route>
+
+            <Route element={<AdminRoutes />}>
+              <Route path="articles" element={<AllArticles />} />
+            </Route>
+
+            <Route element={<AdminRoutes />}>
+              <Route path="add-publisher" element={<AddPublisher />} />
+            </Route>
+
             <Route path="profile" element={<Profile />} />
           </Route>
         </Route>

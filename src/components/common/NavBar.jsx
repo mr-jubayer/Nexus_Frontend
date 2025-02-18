@@ -23,7 +23,8 @@ function NavBar() {
     defaultRoutes.push(
       { label: "Add Articles", path: "add-article" },
       { label: "My Articles ", path: "/my-articles" },
-      { label: "Subscription", path: "subscriptions" }
+      { label: "Subscription", path: "subscriptions" },
+      { label: "Dashboard ", path: "/dashboard/root" }
     );
   }
 
@@ -32,10 +33,6 @@ function NavBar() {
       label: "Premium Articles ",
       path: "premiume-articles",
     });
-  }
-
-  if (userInfo?.role == "admin") {
-    defaultRoutes.push({ label: "Dashboard ", path: "/dashboard/root" });
   }
 
   const Links = () => (
@@ -118,11 +115,11 @@ function NavBar() {
                 onClick={logoutHandler}
                 className="flex gap-2 text-base items-center  border-myGreen border mr-2"
               >
-                Logout <LuLogOut className="text-xl" />
+                <LuLogOut className="text-xl" />
               </BtnOutline>
               <div className="avatar online cursor-pointer rounded-full">
                 <div className="w-10 rounded-full">
-                  <Link to={"profile"}>
+                  <Link to={"/dashboard/profile"}>
                     <img src={userInfo?.profilePhoto} alt="profile photo" />
                   </Link>
                 </div>
