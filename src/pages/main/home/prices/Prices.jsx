@@ -55,7 +55,7 @@ export default function Prices() {
     <div className="relative mt-14">
       <Heading title=" Choose your plan" />
 
-      <div className="mx-auto my-8 grid lg:grid-cols-3 sm:grid-cols-2 items-center gap-y-6 gap-x-5 sm:mt-10 sm:gap-y-0">
+      <div className="mx-auto mt-7 grid lg:grid-cols-3 sm:grid-cols-2 items-center gap-y-6 gap-x-5 sm:gap-y-0">
         {plans.map((plan) => (
           <div
             key={plan.id}

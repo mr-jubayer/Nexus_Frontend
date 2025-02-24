@@ -15,7 +15,7 @@ export default function PublishersState() {
     queryKey: ["states"],
     queryFn: async () => {
       const { data } = await axiosSecure("/api/articles/states");
-      return [["Publisher", "Count"], ...data]; // Add headers to the data
+      return [["Publisher", "Count"], ...data];
     },
   });
 
