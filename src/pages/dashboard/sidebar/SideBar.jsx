@@ -19,7 +19,7 @@ export default function SideBar() {
     if (loc.pathname === "/dashboard") navigate("/dashboard/root");
   }, [loc.pathname]);
 
-  const adminRoutes = [
+  const DashboardRoutes = [
     {
       path: "/dashboard/root",
       value: "Dashboard",
@@ -28,7 +28,7 @@ export default function SideBar() {
   ];
 
   if (userInfo?.role === "admin") {
-    adminRoutes.push(
+    DashboardRoutes.push(
       {
         path: "users",
         value: "Users",
@@ -45,13 +45,13 @@ export default function SideBar() {
         icon: <TbBrandSoundcloud />,
       }
     );
-  } else {
-    adminRoutes.push({
-      path: "profile",
-      value: "Profile",
-      icon: <TbBrandSoundcloud />,
-    });
   }
+
+  DashboardRoutes.push({
+    path: "profile",
+    value: "Profile",
+    icon: <TbBrandSoundcloud />,
+  });
 
   const defaultRoute = [
     {
@@ -94,7 +94,7 @@ export default function SideBar() {
           </button>
         </div>
         <nav className="mt-4 space-y-2">
-          {adminRoutes.map((route) => (
+          {DashboardRoutes.map((route) => (
             <NavLink
               key={route.value}
               to={route.path}

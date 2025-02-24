@@ -6,7 +6,7 @@ function BtnOutline(
 ) {
   return (
     <button
-      className={`${className}  py-1 px-3 `}
+      className={`${className}  py-1 px-3  border-myGreen border`}
       onClick={onClick}
       type={type}
     >

@@ -5,6 +5,9 @@ import uploadImg from "../../../utils/uploadImg";
 import { ImSpinner9 } from "react-icons/im";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNotifications } from "reapop";
+import BtnOutline from "../../../components/buttons/BtnOutline";
+import { Link } from "react-router";
+import HomeSection from "./HomeSection";
 
 export default function Profile() {
   const { userInfo, refetch } = useUserInfo();
@@ -51,10 +54,11 @@ export default function Profile() {
       notify("Profile Update.", "success");
     }
   };
+
   return (
     <div className="flex flex-col items-center py-8 px-4 mb-44">
       {/* Profile Section */}
-      <div className="w-full max-w-3xl bg-white shadow-sm rounded-lg p-6">
+      <div className="w-full max-w-3xl bg-white shadow-sm  p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <img
@@ -68,7 +72,7 @@ export default function Profile() {
             </div>
           </div>
           <button
-            className="px-4 py-2 text-sm font-medium text-gray-800 border border-gray-300 rounded-md hover:bg-gray-100"
+            className="px-4 py-2 text-sm font-medium text-gray-800 border border-myGreen/40 hover:bg-myGreen/5"
             onClick={() => setIsModalOpen(true)} // Open modal
           >
             Edit Profile
@@ -103,19 +107,23 @@ export default function Profile() {
           {/* Tab Panels */}
           <div className="mt-4">
             {activeTab === "Home" && (
-              <div>Sorry! this section is not ready yet</div>
+              <div>
+                <HomeSection />
+              </div>
             )}
             {activeTab === "About" && (
-              <div className="bg-myGreen/5 py-8">
+              <div className="bg-myGreen/5 py-8 flex items-center flex-col">
                 <h2 className="text-xl text-center font-semibold">
                   Tell the world about yourself
                 </h2>
                 <p className="px-5 py-2 text-sm text-center">
                   Here’s where you can share more about yourself: your history,
                   work experience, accomplishments, interests, dreams, and more.
-                  You can even add images and use rich text to personalize your
-                  bio.
                 </p>
+                <Link to={"/add-article"}>
+                  {" "}
+                  <BtnOutline className="mt-3">Get Started</BtnOutline>{" "}
+                </Link>
               </div>
             )}
           </div>
@@ -125,7 +133,7 @@ export default function Profile() {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+          <div className="bg-white p-6 shadow-lg w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -136,7 +144,7 @@ export default function Profile() {
                   type="text"
                   defaultValue={fullName}
                   name="name"
-                  className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md"
+                  className={`py-2 text-xl px-3 mt-2   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
                 />
               </div>
 
