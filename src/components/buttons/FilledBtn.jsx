@@ -6,7 +6,7 @@ function FilledBtn(
 ) {
   return (
     <button
-      className={`  py-1 px-3 rounded-md  transition-all duration-150 ${className}`}
+      className={`  py-1 px-3   transition-all duration-150 ${className}`}
       onClick={onClick}
       type={type}
       disabled={disabled}

@@ -94,7 +94,7 @@ export default function ArticleCard({ article, refetch }) {
 
   return (
     <div
-      className={` ${isPremium ? "border-2 border-purple-600" : ""} w-full mx-auto border bg-white/50 rounded-lg shadow-sm overflow-hidden `}
+      className={` ${isPremium ? "border-2 border-purple-600" : ""} w-full mx-auto border bg-white/50  shadow-sm overflow-hidden `}
     >
       {/* Header */}
       <div className="flex p-4 border-b justify-between">
@@ -131,7 +131,7 @@ export default function ArticleCard({ article, refetch }) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <h3 className="text-lg font-semibold mb-2">{title.slice(0, 40)}...</h3>
         <p className="text-sm text-gray-700 mb-2">
           {description.length > 120
             ? `${description.slice(0, 120)}...`

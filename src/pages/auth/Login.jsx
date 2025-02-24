@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import BrandLogo1 from "../../components/BrandLogo1";
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
@@ -53,7 +54,7 @@ function Login() {
       </Helmet>
       <div className=" border sm:border-black border-black/30 px-8 py-16 my-7">
         <div className="flex justify-center flex-col items-center mb-4">
-          <h2 className="text-3xl text-myGreen">Login</h2>
+          <BrandLogo1 />
           <p className="mt-1 text-lg">
             To continue to <span className="font-bold ">Nexus</span>
           </p>

@@ -56,12 +56,10 @@ const Router = () => {
             <Route path="my-articles/update/:id" element={<UpdateArticle />} />
           </Route>
 
-          <Route element={<PrivetRoutes />}>
-            <Route
-              path="all-articles/details/:articleId"
-              element={<ArticleDetails />}
-            />
-          </Route>
+          <Route
+            path="all-articles/details/:articleId"
+            element={<ArticleDetails />}
+          />
 
           <Route element={<PrivetRoutes />}>
             <Route path="payment" element={<Payment />} />

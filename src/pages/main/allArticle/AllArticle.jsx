@@ -9,12 +9,12 @@ import { Helmet } from "react-helmet-async";
 function AllArticle() {
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(true);
-
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState({
     title: "",
     publisher: "",
     tags: "",
+    sortBy: "",
   });
 
   useEffect(() => {
@@ -47,12 +47,14 @@ function AllArticle() {
   };
 
   return (
-    <div className="mt-24 max-w-7xl mx-auto lg:px-20 md:px-10 px-3">
+    <div className="md:mt-32 mt-24 max-w-7xl mx-auto lg:px-20 md:px-10 px-3">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | All Article</title>
       </Helmet>
       <Header
+        filter={filter}
+        setFilter={setFilter}
         tagsChangeHandler={tagsChangeHandler}
         pubChangeHandler={pubChangeHandler}
         searchChangeHandler={searchChangeHandler}

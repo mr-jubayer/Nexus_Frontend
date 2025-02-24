@@ -47,7 +47,7 @@ function ArticleDetails() {
 
   if (isLoading) return <Spinner1 />;
   return (
-    <div className="md:my-14 my-5">
+    <div className="mt-24 mb-10 max-w-7xl mx-auto min-h-80 lg:px-20 md:px-10 px-3">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | {title}</title>

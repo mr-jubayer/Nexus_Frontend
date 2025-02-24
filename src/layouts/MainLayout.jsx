@@ -12,7 +12,7 @@ function MainLayout() {
   return (
     <div>
       {/* navbar */}
-      <div className="fixed top-0 w-full z-50 bg-white shadow-sm">
+      <div>
         <NavBar />
       </div>
       {/* dynamic page */}

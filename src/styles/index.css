@@ -12,6 +12,7 @@ html {
   overflow-y: scroll; /* Ensure the vertical scrollbar appears */
   scrollbar-color: gray transparent;
   scrollbar-width: thin;
+  transition: all 0.3s linear;
 }
 
 /* Webkit Scrollbar Customization */

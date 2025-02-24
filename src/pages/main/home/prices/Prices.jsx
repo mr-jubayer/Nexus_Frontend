@@ -8,7 +8,7 @@ const plans = [
     id: "plan-hobby",
     priceMonthly: "00",
     description:
-      "Free for 1 month, then $10.99 per month after. it only available if you haven't tried Premium before. Terms apply $14.99.",
+      "Free for 1 month, then $10.99 per month after. it only available if you haven't tried Premium before.",
     buttonText: "Try free for 1 mongth",
     features: [
       "1 Premium account",
@@ -52,43 +52,47 @@ const plans = [
 
 export default function Prices() {
   return (
-    <div className="relative">
+    <div className="relative mt-14">
       <Heading title=" Choose your plan" />
 
       <div className="mx-auto my-8 grid lg:grid-cols-3 sm:grid-cols-2 items-center gap-y-6 gap-x-5 sm:mt-10 sm:gap-y-0">
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className={` p-8 ring-2 ring-gray-900/10 sm:p-10 bg-white flex flex-col justify-between h-full rounded-md `}
+            className={` p-8 ring-2 ring-gray-900/10 sm:p-10 bg-white flex flex-col justify-between h-full `}
           >
             <div>
-              <h3 className="text-xld font-semibold ">{plan.name}</h3>
-              <p className="mt-4 flex items-baseline gap-x-2">
-                <span className="text-gray-900 text-5xl font-semibold tracking-tight">
-                  {plan.priceMonthly == "00" ? "Free" : `$${plan.priceMonthly}`}
-                </span>
-                <span className="text-gray-500 text-base">
-                  /{!plan.featured ? "for 3 day" : "month"}{" "}
-                </span>
-              </p>
-            </div>
+              <div>
+                <h3 className="text-xld font-semibold ">{plan.name}</h3>
+                <p className="mt-4 flex items-baseline gap-x-2">
+                  <span className="text-gray-900 text-5xl font-semibold tracking-tight">
+                    {plan.priceMonthly == "00"
+                      ? "Free"
+                      : `$${plan.priceMonthly}`}
+                  </span>
+                  <span className="text-gray-500 text-base">
+                    /{!plan.featured ? "for 3 day" : "month"}{" "}
+                  </span>
+                </p>
+              </div>
 
-            <div>
-              <ul
-                role="list"
-                className="mt-8 space-y-3 text-sm sm:mt-10 text-gray-600"
-              >
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex gap-x-3">
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <div>
+                <ul
+                  role="list"
+                  className="mt-8 space-y-3 text-sm sm:mt-10 text-gray-600"
+                >
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex gap-x-3">
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div>
               <Link to={"subscriptions"}>
                 <FilledBtn
-                  className={`w-full mt-8 block rounded-full shadow-sm hover:shadow-md transition-all duration-150 hover:bg-myGreen/90 active:bg-myGreen/80 px-3.5 py-2.5 text-center text-sm font-semibold bg-myGreen  text-white`}
+                  className={`w-full mt-8 block  transition-all duration-150 hover:bg-myGreen/90 active:bg-myGreen/80 px-3.5 py-2.5 text-center text-sm font-semibold bg-myGreen  text-white`}
                 >
                   {plan.buttonText}
                 </FilledBtn>

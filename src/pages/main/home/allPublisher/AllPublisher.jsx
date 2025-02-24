@@ -26,10 +26,7 @@ export default function AllPublisher() {
   });
 
   return (
-    <div className="p-6 ">
-      <h2 className="text-2xl font-semibold text-center mb-8 text-gray-800">
-        <Heading title="Publishers" />
-      </h2>
+    <div className="my-14">
       <Swiper
         slidesPerView={1}
         spaceBetween={20}

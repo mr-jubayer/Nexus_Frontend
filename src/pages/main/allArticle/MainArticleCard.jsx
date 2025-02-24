@@ -15,10 +15,8 @@ export default function MainArticleCard({ article }) {
     title,
     description,
     tags,
-    publisher,
     creationTime,
     thumbnail,
-    status,
     isPremium,
     views,
   } = article || {};
@@ -27,7 +25,7 @@ export default function MainArticleCard({ article }) {
 
   return (
     <div
-      className={`${isPremium ? "border-2 border-purple-600" : ""} max-w-lg mx-auto border bg-white/50 rounded-lg shadow-sm overflow-hidden `}
+      className={`${isPremium ? "border-2 border-purple-600" : ""} max-w-lg mx-auto border bg-white/50 w-full shadow-sm overflow-hidden `}
     >
       {/* Header */}
       <div className="flex p-4 border-b justify-between">
@@ -67,7 +65,7 @@ export default function MainArticleCard({ article }) {
         <h3
           className={`text-lg relative font-semibold mb-2 ${isPremium && "pl-3"}`}
         >
-          {title}
+          {title.slice(0, 70)}...
           {isPremium && (
             <span className="absolute top-0 left-0 w-1 h-full bg-purple-600"></span>
           )}
@@ -80,20 +78,9 @@ export default function MainArticleCard({ article }) {
         <Divider />
         <p className="text-sm  mt-3  ">views: {views || 0}</p>
         <p className="text-sm text-gray-500 ">
-          <strong>Tags:</strong>{" "}
           {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
         </p>
-        <p className="text-sm font-medium my-1">
-          <strong>Status:</strong>{" "}
-          <span
-            className={`${
-              status === "published" ? "text-green-600" : "text-orange-500"
-            } font-bold`}
-          >
-            {status}
-          </span>
-        </p>
-        <p className="mb-2 text-sm text-gray-500">{`Publisher: ${publisher}`}</p>
+
         <Divider />
         <div className="flex justify-center">
           {isPremium ? (

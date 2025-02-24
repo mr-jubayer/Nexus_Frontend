@@ -1,23 +1,38 @@
 import { Link, useNavigate } from "react-router";
-import logo from "../../assets/logo2.png";
 import BtnOutline from "../buttons/BtnOutline";
 import FilledBtn from "../buttons/FilledBtn";
 import Navlink from "../NavLink";
-import { IoMenuSharp } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import { LuLogOut } from "react-icons/lu";
 import { toast } from "react-hot-toast";
 import useUserInfo from "../../hooks/useUserInfo";
+import { useEffect, useRef, useState } from "react";
+import PhoneDrawer from "./PhoneDrawer";
+import { MdOutlineMenu } from "react-icons/md";
+import BrandLogo2 from "../BrandLogo2";
 
 function NavBar() {
   const { user, logoutUser } = useAuth();
   const { userInfo } = useUserInfo();
-  const navigate = useNavigate();
-
+  const [shadow, setShadow] = useState(false);
   const defaultRoutes = [
     { label: "Home", path: "/" },
     { label: "All Articles", path: "all-articles" },
   ];
+  const asideRef = useRef();
+
+  useEffect(() => {
+    const handleSroll = () => {
+      // console.log(window.scrollY);
+
+      if (window.scrollY > 50) {
+        setShadow(true);
+      } else {
+        setShadow(false);
+      }
+    };
+    window.addEventListener("scroll", handleSroll);
+  }, []);
 
   if (user) {
     defaultRoutes.push(
@@ -35,8 +50,12 @@ function NavBar() {
     });
   }
 
+  if (!user) {
+    defaultRoutes.push({ label: "Contact Us", path: "contact" });
+  }
+
   const Links = () => (
-    <ul className="flex lg:flex-row flex-col  lg:items-center">
+    <ul className="flex lg:flex-row flex-col  lg:items-center ">
       {defaultRoutes.map((route) => (
         <Navlink key={route.label} path={route.path}>
           {route.label}
@@ -73,52 +92,44 @@ function NavBar() {
       </span>
     ));
   };
+
+  const handleSidebar = () => {
+    // show sidebar
+    asideRef.current.classList.remove("-translate-x-72");
+  };
   return (
-    <nav>
-      <div className="flex items-center justify-between  w-full py-4 max-w-7xl mx-auto lg:px-20 md:px-10 px-3 z-20 ">
+    <nav
+      className={`fixed top-0 w-full z-50 bg-blackNF shadow-sm ${shadow && "shadow-lg"}  `}
+    >
+      <div className="flex items-center justify-between  w-full py-2  max-w-7xl mx-auto lg:px-20 md:px-10 px-3 z-20 ">
+        {/*  */}
+        <button
+          onClick={handleSidebar}
+          className=" text-white text-xl  lg:hidden"
+        >
+          <MdOutlineMenu />
+        </button>
+        {/* brand name */}
         <div className="flex items-center gap-1">
-          <div className="drawer lg:hidden">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content p-1 active:scale-95 transition-all z-50">
-              {/* Page content here */}
-              <label htmlFor="my-drawer" className="cursor-pointer x">
-                <IoMenuSharp className="text-2xl" />
-              </label>
-            </div>
-            <div className="drawer-side  z-50">
-              <label
-                htmlFor="my-drawer"
-                aria-label="close sidebar"
-                className="drawer-overlay"
-              ></label>
-              <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 ">
-                <Links className={""} />
-              </ul>
-            </div>
-          </div>
-          <img
-            src={logo}
-            onClick={() => navigate("/")}
-            alt="brand name"
-            className="md:h-8 h-[22px] w-full cursor-pointer"
-          />
+          {/* brand name */}
+          <BrandLogo2 />
         </div>
-        <div>
-          <div className="hidden lg:block">
-            <Links />
-          </div>
+        {/* desktop navigation  bar */}
+        <div className="hidden lg:block">
+          <Links />
         </div>
+        {/* profile and login/logout btns */}
         <div>
           {user ? (
             <div className="flex items-center ">
               <BtnOutline
                 onClick={logoutHandler}
-                className="flex gap-2 text-base items-center  border-myGreen border mr-2"
+                className="flex gap-2 text-base items-center  mr-2"
               >
-                <LuLogOut className="text-xl" />
+                <LuLogOut className="text-xl text-white/85" />
               </BtnOutline>
               <div className="avatar online cursor-pointer rounded-full">
-                <div className="w-10 rounded-full">
+                <div className="w-8 rounded-full">
                   <Link to={"/dashboard/profile"}>
                     <img src={userInfo?.profilePhoto} alt="profile photo" />
                   </Link>
@@ -128,10 +139,10 @@ function NavBar() {
           ) : (
             <div>
               <Link to={"/auth/login"}>
-                <BtnOutline>Login</BtnOutline>
+                <BtnOutline className="text-white  text-sm">Login</BtnOutline>
               </Link>
               <Link to={"/auth/signup"}>
-                <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90">
+                <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90 text-sm">
                   Sign Up
                 </FilledBtn>
               </Link>
@@ -139,6 +150,8 @@ function NavBar() {
           )}
         </div>
       </div>
+      {/* mobile drawer  */}
+      <PhoneDrawer Links={Links} asideRef={asideRef} />
     </nav>
   );
 }

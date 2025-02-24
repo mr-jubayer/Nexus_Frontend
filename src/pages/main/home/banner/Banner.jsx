@@ -14,7 +14,6 @@ import { Link } from "react-router";
 
 export default function Banner() {
   const axiosSecure = useAxiosSecure();
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const { data: popularArticles = [] } = useQuery({
     queryKey: ["popularArticles"],
@@ -45,14 +44,13 @@ export default function Banner() {
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
-          waitForTransition: true, // Ensures smooth autoplay
+          waitForTransition: true,
         }}
         speed={1400}
         effect="fade"
-        fadeEffect={{ crossFade: true }} // ✅ Smooth fade effect
+        fadeEffect={{ crossFade: true }}
         modules={[EffectFade, Autoplay, Pagination]}
         className="mySwiper"
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
       >
         {slides.map((art, i) => (
           <SwiperSlide key={i}>

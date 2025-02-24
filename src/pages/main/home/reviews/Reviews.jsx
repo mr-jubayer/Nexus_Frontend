@@ -29,12 +29,12 @@ export default function Reviews() {
 
   return (
     <div className="container mx-auto  ">
-      <Heading title="What People say About Our features" />
-      <div className="border rounded-md px-2 shadow-sm py-5 bg-white mt-5">
+      <Heading title="What People say About Us" />
+      <div className=" rounded-md px-2 shadow-sm py-5 mt-5">
         <ReviewSlider reviews={reviews} />
         <div className="flex justify-center gap-5 mt-10">
           {user ? (
-            <FilledBtn className="rounded-md cursor-pointer flex   justify-center  bg-myGreen px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-myGreen/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mygbg-myGreen">
+            <FilledBtn className=" bg-myGreen  text-white py-2 px-4 hover:bg-myGreen/95">
               <label
                 htmlFor="my_modal_6"
                 className="cursor-pointer flex items-center gap-2"
@@ -44,7 +44,7 @@ export default function Reviews() {
             </FilledBtn>
           ) : (
             <Link to={"auth/login"}>
-              <FilledBtn className="rounded-none cursor-pointer flex w-full justify-center  bg-myGreen px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-myGreen/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mygbg-myGreen">
+              <FilledBtn className=" bg-myGreen">
                 Add Review <IoIosAddCircleOutline />
               </FilledBtn>
             </Link>

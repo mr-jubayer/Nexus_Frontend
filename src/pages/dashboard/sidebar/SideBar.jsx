@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router";
-import logo from "../../../assets/logo2.png";
+import logo from "../../../assets/logob.png";
 import { MdDashboard, MdOutlineMenu } from "react-icons/md";
 import { FaBookReader, FaHome, FaUser } from "react-icons/fa";
 import { TbBrandSoundcloud } from "react-icons/tb";
@@ -7,13 +7,13 @@ import { useEffect, useRef } from "react";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { Helmet } from "react-helmet-async";
 import useUserInfo from "../../../hooks/useUserInfo";
+import BrandLogo1 from "../../../components/BrandLogo1";
 
 export default function SideBar() {
   const asideRef = useRef();
   const loc = useLocation();
   const navigate = useNavigate();
   const { userInfo } = useUserInfo();
-  console.log(userInfo);
 
   useEffect(() => {
     if (loc.pathname === "/dashboard") navigate("/dashboard/root");
@@ -27,7 +27,7 @@ export default function SideBar() {
     },
   ];
 
-  if (userInfo.role === "admin") {
+  if (userInfo?.role === "admin") {
     adminRoutes.push(
       {
         path: "users",
@@ -66,7 +66,7 @@ export default function SideBar() {
     asideRef.current.classList.remove("-translate-x-72");
   };
   const closeSlideBar = () => {
-    // show sidebar
+    // hide sidebar
     asideRef.current.classList.add("-translate-x-72");
   };
 
@@ -88,12 +88,7 @@ export default function SideBar() {
         className="transition-all duration-300 w-64 bg-white md:shadow-md shadow-2xl h-full md:relative  fixed top-0 left-0  md:-translate-x-0 -translate-x-72"
       >
         <div className="p-4 border-b border-gray-200 flex justify-between">
-          <img
-            src={logo}
-            alt="brand name"
-            className="md:h-9 md:block  h-[20px] cursor-pointer"
-            onClick={() => navigate("/")}
-          />
+          <BrandLogo1 />
           <button onClick={closeSlideBar} className="md:hidden">
             <MdOutlineArrowBackIosNew className="text-xl" />
           </button>

@@ -3,7 +3,7 @@ import Input from "../inputs/Input";
 
 function Footer() {
   return (
-    <footer className="bg-[#0F0F11] py-8 text-gray-100">
+    <footer className="bg-blackNF py-8 text-gray-100">
       <div className="max-w-6xl  mx-auto px-4">
         {/* Upper Footer */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -85,7 +85,7 @@ function Footer() {
               />
               <FilledBtn
                 type="submit"
-                className="w-full bg-myGreen text-white rounded hover:bg-myGreen/90 focus:outline-none focus:ring-2 focus:ring-myGreen/95"
+                className="w-full bg-myGreen text-white  hover:bg-myGreen/90 focus:outline-none focus:ring-2 focus:ring-myGreen/95"
               >
                 Subscribe
               </FilledBtn>
