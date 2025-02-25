@@ -8,11 +8,11 @@ export default function ReviewModal({ refetch }) {
   return (
     <div>
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box">
+      <div className="modal " role="dialog">
+        <div className="modal-box dark:bg-black2 ">
           <ModalBox refetch={refetch} />
           <div className="modal-action">
-            <label htmlFor="my_modal_6" className="btn">
+            <label htmlFor="my_modal_6" className="text-white bg-whiteGray p-2">
               Cancel
             </label>
           </div>
@@ -57,9 +57,12 @@ function ModalBox({ refetch }) {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div
+        className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8  
+      "
+      >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold  mb-3">
+          <h2 className="mt-10 text-center text-2xl font-bold  mb-3 dark:text-darkHeading">
             Please write a clear and polite text
           </h2>
         </div>
@@ -70,7 +73,7 @@ function ModalBox({ refetch }) {
             <div className="flex items-center gap-4">
               <label
                 htmlFor="rating"
-                className="text-sm font-medium text-gray-900"
+                className="text-sm font-medium text-gray-900 dark:text-darkHeading"
               >
                 Rating:
               </label>
@@ -94,7 +97,7 @@ function ModalBox({ refetch }) {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="review"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-gray-900 dark:text-darkHeading"
                 >
                   Write here:
                 </label>
@@ -108,7 +111,8 @@ function ModalBox({ refetch }) {
                   value={review}
                   onChange={(e) => setReview(e.target.value)}
                   required
-                  className={`block px-2 py-1 rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                  placeholder="Type reviews..."
+                  className={`overflow-y-auto  py-6 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  dark:bg-black2 dark:text-white dark:border-whiteGray/50`}
                 ></textarea>
               </div>
             </div>

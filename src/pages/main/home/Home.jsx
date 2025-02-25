@@ -5,13 +5,15 @@ import Reviews from "./reviews/Reviews";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import LatestArtilces from "./LatestArtilces/LatestArtilces";
+import AdModal from "./homeModal/AdModal";
+import InsightNews from "./InsightNews/InsightNews";
 
 function Home() {
   let [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     let showAd = setTimeout(() => {
-      setIsOpen(true);
+      // setIsOpen(true);
     }, 10000);
     return () => showAd;
   }, []);
@@ -26,11 +28,12 @@ function Home() {
         <Prices />
         <AllPublisher />
         <LatestArtilces />
+        <InsightNews />
         <Reviews />
       </div>
 
       {/* molal */}
-      {/* <AdModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+      <AdModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }

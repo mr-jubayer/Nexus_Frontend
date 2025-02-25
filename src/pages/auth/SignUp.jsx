@@ -120,7 +120,7 @@ function SignUp() {
             {" "}
             <p className="text-sm text-error mt-1">{firebaseErr} </p>
             <div
-              className={`mt-4 flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+              className={`flex items-center gap-3  py-2 text-xl px-6 mt-3  rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner dark:bg-black2 `}
             >
               {/* hide it */}
               <input

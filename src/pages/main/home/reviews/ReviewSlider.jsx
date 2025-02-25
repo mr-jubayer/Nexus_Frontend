@@ -22,7 +22,7 @@ function ReviewSlider({ reviews }) {
   };
 
   if (!reviews.length) {
-    return <h2>Not Revies Availible!</h2>;
+    return <h2>No Reviews Available!</h2>;
   }
   return (
     <div className="slider-container relative ">

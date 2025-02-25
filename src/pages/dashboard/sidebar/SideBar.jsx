@@ -80,7 +80,7 @@ export default function SideBar() {
         <title>Nexus | DashBoard</title>
       </Helmet>
       <button
-        className="text-xl cursor-pointer md:hidden top-2 left-2 rounded-md absolute hover:bg-slate-100 focus:bg-slate-200 transition-all duration-200 p-1"
+        className="text-xl cursor-pointer md:hidden top-2 left-2 rounded-md absolute hover:bg-slate-100 focus:bg-slate-200 transition-all duration-200 dark:text-white text-black1 p-1"
         onClick={handleSidebar}
       >
         <MdOutlineMenu />
@@ -103,7 +103,7 @@ export default function SideBar() {
             </div>
           )}
           <button onClick={closeSlideBar} className="md:hidden">
-            <MdOutlineArrowBackIosNew className="text-xl" />
+            <MdOutlineArrowBackIosNew className="text-xl dark:text-white text-black1" />
           </button>
         </div>
         <nav className="mt-4 space-y-2">

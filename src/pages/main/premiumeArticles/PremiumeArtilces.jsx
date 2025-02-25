@@ -21,7 +21,7 @@ function PremiumeArtilces() {
   });
   const navigate = useNavigate();
 
-  if (!userInfo?.premiumeToken) navigate("/");
+  if (!userInfo?.premiumeToken || userInfo.role === "admin") navigate("/");
   if (isLoading) return <Spinner1 />;
   return (
     <div className="my-10 max-w-7xl mx-auto lg:px-20 md:px-10 px-3 mt-24">

@@ -28,7 +28,7 @@ export default function Reviews() {
   if (isLoading) return <h2 className="text-2xl">Loading...</h2>;
 
   return (
-    <div className="container mx-auto  mt-14">
+    <div className="mx-auto  mt-14">
       <Heading title="What People say About Us" />
       <div className=" rounded-md px-2 shadow-sm py-5 ">
         <ReviewSlider reviews={reviews} />
