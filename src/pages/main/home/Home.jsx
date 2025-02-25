@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import LatestArtilces from "./LatestArtilces/LatestArtilces";
 import AdModal from "./homeModal/AdModal";
 import InsightNews from "./InsightNews/InsightNews";
+import TodaysBlog from "./totaysBlog/TodaysBlog";
+import AncentSecretBorneo from "./ancentSecretBorneo/AncentSecretBorneo";
 
 function Home() {
   let [isOpen, setIsOpen] = useState(false);
@@ -29,6 +31,8 @@ function Home() {
         <AllPublisher />
         <LatestArtilces />
         <InsightNews />
+        <TodaysBlog />
+        <AncentSecretBorneo />
         <Reviews />
       </div>
 

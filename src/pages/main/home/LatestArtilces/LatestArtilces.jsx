@@ -30,10 +30,10 @@ function LatestArtilces() {
                 <div className="group-hover:ring-1 group-hover:ring-myGreen transition-all duration-300">
                   <img
                     src={article.thumbnail}
-                    className="bg-green-300 md:h-48 h-60 object-cover group-hover:scale-95  transition-all duration-300"
+                    className="bg-green-300 md:h-48 h-60 object-cover group-hover:scale-95  transition-all duration-300 w-full "
                   />
                 </div>
-                <h2 className="text-xl text-center mt-2 px-2 group-hover:text-myGreen mb-3 text-darkHeading">
+                <h2 className="text-xl text-center mt-2 px-2 group-hover:text-myGreen mb-3 dark:text-darkHeading">
                   {article.title.split(" ")[0] +
                     " " +
                     article.title.split(" ")[1] +
