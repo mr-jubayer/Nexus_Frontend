@@ -1,10 +1,11 @@
 import { Chart } from "react-google-charts";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useTheme from "../../../hooks/useTheme";
 
 export default function TagsState() {
   const axiosSecure = useAxiosSecure();
-
+  const { theme } = useTheme();
   const { data: chartData = [], isLoading } = useQuery({
     queryKey: ["tags-state"],
     queryFn: async () => {
@@ -32,30 +33,34 @@ export default function TagsState() {
     );
 
   const options = {
-    title: "Tags Distribution",
-    hAxis: {
-      title: "Tags",
-      textStyle: { fontSize: 12 },
+    pieHole: 0.4,
+
+    pieStartAngle: 100,
+    sliceVisibilityThreshold: 0.02,
+    legend: {
+      position: "bottom",
+      alignment: "center",
+      textStyle: {
+        fontSize: 14,
+        color: "white",
+      },
     },
-    vAxis: {
-      title: "Count",
-      textStyle: { fontSize: 12 },
-    },
-    chartArea: { width: "80%", height: "70%" },
-    legend: { position: "none" },
-    bar: { groupWidth: "70%" },
   };
 
+  if (theme === "dark") {
+    options.backgroundColor = "424242";
+    options.color = "white";
+  }
+
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-11/12 mx-auto">
-      <h2 className="text-center text-xl font-semibold text-gray-800 mb-4">
+    <div className="bg-white shadow-md p-4 w-11/12 mx-auto dark:bg-black2">
+      <h2 className="text-center text-xl font-semibold text-gray-800 mb-4 dark:text-darkHeading ">
         Tags Statistics
       </h2>
       <Chart
-        className="h-[300px] w-full mx-auto"
+        className=" md:h-[250px] h-[200px]"
         chartType="ColumnChart"
         width="100%"
-        height="300px"
         data={chartData}
         options={options}
       />

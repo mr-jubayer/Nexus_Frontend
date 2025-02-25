@@ -66,22 +66,24 @@ function ProfileEdit({ isModalOpen, setIsModalOpen }) {
     <div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 shadow-lg w-full max-w-md">
-            <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
+          <div className="bg-white p-6 shadow-lg w-full max-w-md dark:bg-[#181818] ">
+            <h2 className="text-xl font-semibold mb-4 dark:text-darkHeading">
+              Edit Profile
+            </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <input
                   type="text"
                   defaultValue={userInfo.fullName}
                   name="name"
-                  className={`py-1 text-lg px-3 mt-2   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                  className={` md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  block dark:bg-black1 dark:text-white  `}
                 />
                 {userInfo.contactNumber && (
                   <input
                     type="number"
                     defaultValue={userInfo.contactNumber}
                     name="contactNumber"
-                    className={`py-1 text-lg px-3 mt-2   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                    className={` md:py-2 py-1 text-sm px-2  mt-2  rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  block dark:bg-black1 dark:text-white  `}
                   />
                 )}
                 {userInfo.address && (
@@ -95,7 +97,7 @@ function ProfileEdit({ isModalOpen, setIsModalOpen }) {
               </div>
 
               <div
-                className={`flex items-center gap-3  py-2 text-lg px-3    w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner dark:bg-black1 `}
               >
                 {/* hide it */}
                 <input
@@ -116,14 +118,14 @@ function ProfileEdit({ isModalOpen, setIsModalOpen }) {
               <div className="flex justify-end space-x-4 mt-4">
                 <button
                   type="button"
-                  className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200"
+                  className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 dark:bg-black1 dark:text-white hover:bg-gray-200"
                   onClick={() => setIsModalOpen(false)} // Close modal
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm font-medium text-white bg-myGreen rounded-md hover:bg-myGreen"
+                  className="px-4 py-2 text-sm font-medium text-white bg-myGreen  hover:bg-myGreen"
                 >
                   {loading ? (
                     <span>

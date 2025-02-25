@@ -1,16 +1,11 @@
 import Chart from "react-google-charts";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
-const options = {
-  title: "User Distribution",
-  pieHole: 0.4,
-  is3D: false,
-  chartArea: { width: "90%", height: "80%" },
-};
+import useTheme from "../../../hooks/useTheme";
 
 export default function UserStates() {
   const axiosSecure = useAxiosSecure();
+  const { theme } = useTheme();
 
   const { data: states = [], isLoading } = useQuery({
     queryKey: ["users-states"],
@@ -29,6 +24,26 @@ export default function UserStates() {
     },
   });
 
+  const options = {
+    pieHole: 0.4,
+
+    pieStartAngle: 100,
+    sliceVisibilityThreshold: 0.02,
+    legend: {
+      position: "bottom",
+      alignment: "center",
+      textStyle: {
+        fontSize: 14,
+        color: "white",
+      },
+    },
+  };
+
+  if (theme === "dark") {
+    options.backgroundColor = "#424242";
+    options.color = "white";
+  }
+
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-[300px]">
@@ -37,8 +52,8 @@ export default function UserStates() {
     );
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-11/12 mx-auto">
-      <h2 className="text-center text-xl font-semibold text-gray-800 mb-4">
+    <div className="bg-white shadow-md p-4 w-11/12 mx-auto dark:bg-black2">
+      <h2 className="text-center text-xl font-semibold text-gray-800 mb-4 dark:text-darkHeading">
         Users Statistics
       </h2>
 

@@ -44,7 +44,7 @@ function AllArticles() {
         <button
           onClick={() => handleChangePage(page - 1)}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-300 rounded-md mr-2 disabled:bg-gray-500"
+          className="px-4 py-2 bg-myGreen text-white ml-2 disabled:bg-gray-500  mr-2"
         >
           Previous
         </button>
@@ -56,7 +56,7 @@ function AllArticles() {
               <button
                 key={index}
                 onClick={() => handleChangePage(index + 1)}
-                className={`px-4 py-2 rounded-md ${page === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                className={`px-4 py-2  ${page === index + 1 ? "bg-myGreen text-white" : "bg-gray-200"}`}
               >
                 {index + 1}
               </button>
@@ -67,7 +67,7 @@ function AllArticles() {
         <button
           onClick={() => handleChangePage(page + 1)}
           disabled={page === Math.ceil(data.total / rowsPerPage)}
-          className="px-4 py-2 bg-gray-300 rounded-md ml-2 disabled:bg-gray-500"
+          className="px-4 py-2 bg-myGreen text-white ml-2 disabled:bg-gray-500 "
         >
           Next
         </button>

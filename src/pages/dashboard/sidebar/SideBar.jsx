@@ -8,12 +8,14 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { Helmet } from "react-helmet-async";
 import useUserInfo from "../../../hooks/useUserInfo";
 import BrandLogo1 from "../../../components/BrandLogo1";
+import useTheme from "../../../hooks/useTheme";
 
 export default function SideBar() {
   const asideRef = useRef();
   const loc = useLocation();
   const navigate = useNavigate();
   const { userInfo } = useUserInfo();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (loc.pathname === "/dashboard") navigate("/dashboard/root");
@@ -85,10 +87,21 @@ export default function SideBar() {
       </button>
       <aside
         ref={asideRef}
-        className="transition-all duration-300 w-64 bg-white md:shadow-md shadow-2xl h-full md:relative  fixed top-0 left-0  md:-translate-x-0 -translate-x-72"
+        className="transition-all duration-300 w-64 bg-white dark:bg-black2  md:shadow-md shadow-2xl h-full md:relative  fixed top-0 left-0  md:-translate-x-0 -translate-x-72"
       >
-        <div className="p-4 border-b border-gray-200 flex justify-between">
-          <BrandLogo1 />
+        <div className="p-4 border-b border-gray-200 flex justify-between dark:border-whiteGray/35">
+          {theme === "dark" ? (
+            <BrandLogo1 />
+          ) : (
+            <div>
+              <img
+                src={logo}
+                alt="brand name"
+                className="  md:h-6 h-5 cursor-pointer"
+                onClick={() => navigate("/")}
+              />
+            </div>
+          )}
           <button onClick={closeSlideBar} className="md:hidden">
             <MdOutlineArrowBackIosNew className="text-xl" />
           </button>
@@ -99,7 +112,7 @@ export default function SideBar() {
               key={route.value}
               to={route.path}
               className={({ isActive }) =>
-                `${isActive ? "border-l-4 bg-green-100" : ""} flex items-center px-4 py-2 text-gray-700 hover:bg-green-100 transition-all duration-200 border-l-green-600  gap-2 `
+                `${isActive ? "border-l-4 font-bold bg-green-100 text-green-600 dark:bg-black1" : "dark:text-white/90 dark:hover:bg-black1 hover:bg-green-100"} flex items-center px-4 py-2 text-gray-700 hover:bg-green-100  transition-all duration-200 border-l-green-600  gap-2 `
               }
             >
               <span>{route.icon}</span>
@@ -107,13 +120,13 @@ export default function SideBar() {
             </NavLink>
           ))}
 
-          <div className="mt-4 border-t pt-4 border-gray-200">
+          <div className="mt-4 border-t pt-4 border-gray-200 dark:border-whiteGray/35">
             {defaultRoute.map((route) => (
               <NavLink
                 key={route.value}
                 to={route.path}
                 className={({ isActive }) =>
-                  `${isActive ? "border-l-4 bg-green-100" : ""} flex items-center px-4 py-2 text-gray-700 hover:bg-green-100 transition-all duration-200 border-l-green-600  gap-2 `
+                  `${isActive ? "border-l-4 font-bold bg-green-100 text-green-600 dark:bg-black1" : "dark:text-white/90 dark:hover:bg-black1 hover:bg-green-100"} flex items-center px-4 py-2 text-gray-700 hover:bg-green-100  transition-all duration-200 border-l-green-600  gap-2 `
                 }
               >
                 <span>{route.icon}</span>

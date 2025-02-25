@@ -67,14 +67,14 @@ function AddPublisher() {
         {/* title */}
 
         <input
-          className={`md:h-16 h-12  text-2xl px-4 block   py-1 rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+          className={`md:h-16 h-12  text-2xl px-4 block   py-1 rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  dark:bg-black2 dark:text-white  `}
           placeholder="Publisher Name..."
           required={true}
           value={publisherName}
           onChange={(e) => setPublisherName(e.target.value)}
         />
         <div
-          className={`flex items-center gap-3  py-2 text-xl px-4   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+          className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner dark:bg-black2 `}
         >
           {/* hide it */}
           <input
@@ -91,7 +91,7 @@ function AddPublisher() {
           >
             Upload Logo <FaFileUpload className="text-3xl" />
           </button>
-          {selectedImg}
+          <span className="text-whiteGray">{selectedImg}</span>
         </div>
 
         <div>

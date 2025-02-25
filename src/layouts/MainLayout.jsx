@@ -4,7 +4,7 @@ import Footer from "../components/common/Footer";
 import PageLoader from "../components/spinners/PageLoader";
 import ReapopToaster from "../components/reapopToaster";
 import useAuth from "../hooks/useAuth";
-import ThemeController from "../components/ThemeController";
+import Theme from "../components/Theme";
 
 function MainLayout() {
   const { loading } = useAuth();
@@ -27,7 +27,7 @@ function MainLayout() {
       {/* toaster */}
       <ReapopToaster />
       {/* theme controller */}
-      <ThemeController />
+      <Theme />
     </div>
   );
 }

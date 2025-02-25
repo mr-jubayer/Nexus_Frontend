@@ -38,8 +38,8 @@ export default function AllUser() {
   const axiosSecure = useAxiosSecure();
 
   // Pagination state
-  const [page, setPage] = useState(1); // Start at page 1
-  const [rowsPerPage, setRowsPerPage] = useState(5); // Default rows per page
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   // Fetching paginated data
   const { data, isLoading, refetch } = useQuery({
@@ -107,10 +107,14 @@ export default function AllUser() {
               <StyledTableCell align="right">Status</StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className="dark:border-whiteGray/50 dark:bg-black2">
             {data?.users?.map((user) => (
               <StyledTableRow key={user._id}>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className=" dark:border-whiteGray/50"
+                >
                   <div className="flex gap-2 items-center">
                     <div>
                       <img
@@ -120,12 +124,18 @@ export default function AllUser() {
                       />
                     </div>
                     <div>
-                      <p className="text-lg">{user.fullName}</p>
-                      <p className="opacity-80">{user.role}</p>
+                      <p className="text-lg dark:text-darkHeading">
+                        {user.fullName}
+                      </p>
+                      <p className="opacity-80 dark:text-whiteGray">
+                        {user.role}
+                      </p>
                     </div>
                   </div>
                 </StyledTableCell>
-                <StyledTableCell align="right">{user.email}</StyledTableCell>
+                <StyledTableCell align="right" className="dark:text-whiteGray">
+                  {user.email}
+                </StyledTableCell>
                 <StyledTableCell align="right">
                   {user.role === "admin" ? (
                     <h2>Admin</h2>
@@ -149,7 +159,7 @@ export default function AllUser() {
         <button
           onClick={() => handleChangePage(page - 1)}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-300 rounded-md mr-2 disabled:bg-gray-500"
+          className="px-4 py-2 bg-myGreen text-white mr-2 disabled:bg-gray-500 "
         >
           Previous
         </button>
@@ -161,7 +171,7 @@ export default function AllUser() {
               <button
                 key={index}
                 onClick={() => handleChangePage(index + 1)}
-                className={`px-4 py-2 rounded-md ${page === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                className={`px-4 py-2  ${page === index + 1 ? "bg-myGreen text-white" : "bg-gray-200"}`}
               >
                 {index + 1}
               </button>
@@ -172,7 +182,7 @@ export default function AllUser() {
         <button
           onClick={() => handleChangePage(page + 1)}
           disabled={page === Math.ceil(data?.total / rowsPerPage)}
-          className="px-4 py-2 bg-gray-300 rounded-md ml-2 disabled:bg-gray-500"
+          className="px-4 py-2 bg-myGreen text-white ml-2 disabled:bg-gray-500 "
         >
           Next
         </button>

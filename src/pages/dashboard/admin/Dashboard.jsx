@@ -13,12 +13,12 @@ function Dashboard() {
         <link rel="icon" type="image/png" href="/dashboardfav.png" />
         <title>Nexus | DashBoard</title>
       </Helmet>
-      <PublishersState />
-      <div className="my-12">
-        <Divider />
+      <div className="grid grid-cols-2">
+        <PublishersState />
+
+        <TagsState />
       </div>
-      <TagsState />
-      <div className="my-12">
+      <div className="md:my-5 my-2">
         <Divider />
       </div>
       <UserStates />

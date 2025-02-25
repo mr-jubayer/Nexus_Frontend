@@ -51,8 +51,10 @@ function HomeSection() {
     <>
       {/* about the user */}
       {!userInfo?.contactNumber || !userInfo?.address ? (
-        <div className="bg-myGreen/5 p-2">
-          <h2 className="mb-2">Please complete your profile below</h2>
+        <div className="bg-myGreen/5 p-2 dark:bg-black1">
+          <h2 className="mb-2 dark:text-darkHeading/90">
+            Please complete your profile below
+          </h2>
           {!submittedNumber && !userInfo?.contactNumber && (
             <form
               onSubmit={handleAddNumber}
@@ -62,7 +64,7 @@ function HomeSection() {
                 type="number"
                 name="contactNumber"
                 placeholder="Enter your contact number.."
-                className={` md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={` md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  block dark:bg-black2 dark:text-white  `}
                 required
               />
               <button className="bg-myGreen text-white text-sm px-3 md:py-2 py-1 ">
@@ -79,7 +81,7 @@ function HomeSection() {
                 type="text"
                 name="address"
                 placeholder="Enter your home address.."
-                className={`md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={` md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  block dark:bg-black2 dark:text-white  `}
               />
               <button className="bg-myGreen text-white text-sm px-3 md:py-2 py-1 ">
                 Add
@@ -92,21 +94,31 @@ function HomeSection() {
       )}
 
       {userInfo?.contactNumber || userInfo?.address ? (
-        <div className="bg-myGreen/5 p-2 mt-4">
-          <h2 className="mb-3 text-xl font-medium">Information</h2>
+        <div className="bg-myGreen/5 p-2 mt-4 dark:bg-black1">
+          <h2 className="mb-3 text-xl font-medium dark:text-darkHeading/85">
+            Information
+          </h2>
           {userInfo?.contactNumber && (
-            <p>Contact Number: {userInfo?.contactNumber} </p>
+            <p className="dark:text-whiteGray">
+              Contact Number: {userInfo?.contactNumber}{" "}
+            </p>
           )}
-          {userInfo?.address && <p>Home Address: {userInfo?.address} </p>}
+          {userInfo?.address && (
+            <p className="dark:text-whiteGray">
+              Home Address: {userInfo?.address}{" "}
+            </p>
+          )}
         </div>
       ) : (
         ""
       )}
       {/* user Reading list */}
-      <div className="bg-myGreen/5 p-2 mt-4">
-        <h2 className="mb-3 text-xl font-medium">Reading List</h2>
+      <div className="bg-myGreen/5 p-2 mt-4 dark:bg-black1  dark:text-whiteGray">
+        <h2 className="mb-3 text-xl font-medium dark:text-white/85">
+          Reading List
+        </h2>
         <Divider />
-        <span className="mt-2 block" />
+        <span className="mt-2 block " />
         <div>
           <p>No Story!</p>
         </div>

@@ -15,7 +15,7 @@ export default function Profile() {
   return (
     <div className="flex flex-col items-center py-8 px-4 mb-44">
       {/* Profile Section */}
-      <div className="w-full max-w-3xl bg-white shadow-sm  p-6">
+      <div className="w-full max-w-3xl bg-white dark:bg-black2 shadow-sm  p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <img
@@ -24,12 +24,16 @@ export default function Profile() {
               className="md:w-20 w-12 aspect-square  rounded-full object-cover"
             />
             <div>
-              <h1 className="md:text-2xl text-xl font-semibold">{fullName}</h1>
-              <p className="text-gray-600 md:text-base text-sm">{email}</p>
+              <h1 className="md:text-2xl text-xl font-semibold dark:text-darkHeading">
+                {fullName}
+              </h1>
+              <p className="text-gray-600 md:text-base text-sm dark:text-whiteGray">
+                {email}
+              </p>
             </div>
           </div>
           <button
-            className="px-4 py-2 text-sm font-medium text-gray-800 border border-myGreen/40 hover:bg-myGreen/5"
+            className="px-4 py-2 text-sm font-medium text-gray-800 border border-myGreen/40 dark:border-whiteGray dark:text-white hover:bg-myGreen/5"
             onClick={() => setIsModalOpen(true)} // Open modal
           >
             Edit Profile
@@ -43,7 +47,7 @@ export default function Profile() {
               className={`px-4 py-2 text-sm font-medium ${
                 activeTab === "Home"
                   ? "border-b-2 border-indigo-600 text-indigo-600"
-                  : "text-gray-600"
+                  : "text-gray-600 dark:text-whiteGray"
               }`}
               onClick={() => setActiveTab("Home")}
             >
@@ -53,7 +57,7 @@ export default function Profile() {
               className={`px-4 py-2 text-sm font-medium ${
                 activeTab === "About"
                   ? "border-b-2 border-indigo-600 text-indigo-600"
-                  : "text-gray-600"
+                  : "text-gray-600 dark:text-whiteGray"
               }`}
               onClick={() => setActiveTab("About")}
             >
@@ -69,7 +73,7 @@ export default function Profile() {
               </div>
             )}
             {activeTab === "About" && (
-              <div className="bg-myGreen/5 py-8 flex items-center flex-col">
+              <div className="bg-myGreen/5  py-8 flex items-center flex-col">
                 <h2 className="text-xl text-center font-semibold">
                   Tell the world about yourself
                 </h2>

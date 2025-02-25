@@ -94,7 +94,7 @@ export default function ArticleCard({ article, refetch }) {
 
   return (
     <div
-      className={` ${isPremium ? "border-2 border-purple-600" : ""} w-full mx-auto border bg-white/50  shadow-sm overflow-hidden `}
+      className={` ${isPremium ? "border-2 border-purple-600 dark:border-purple-600" : ""} w-full mx-auto border bg-white/50 dark:border-blackGray/50  dark:bg-black1 shadow-sm overflow-hidden `}
     >
       {/* Header */}
       <div className="flex p-4 border-b justify-between">
@@ -106,11 +106,13 @@ export default function ArticleCard({ article, refetch }) {
           />
 
           <div>
-            <p className="font-bold">{authorInfo.fullName}</p>
-            <p className="text-sm">{authorInfo.email}</p>
+            <p className="font-bold dark:text-darkHeading">
+              {authorInfo.fullName}
+            </p>
+            <p className="text-sm dark:text-whiteGray">{authorInfo.email}</p>
           </div>
         </div>
-        <div className="self-start text-xs ">
+        <div className="self-start text-xs  text-whiteGray">
           <p>{time} </p>
         </div>
       </div>
@@ -124,26 +126,26 @@ export default function ArticleCard({ article, refetch }) {
         />
         {isPremium && (
           <div className="px-3 py-1 bg-purple-600 text-white absolute top-0 right-0 rounded-none">
-            Premiume
+            Premium
           </div>
         )}
       </div>
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{title.slice(0, 40)}...</h3>
-        <p className="text-sm text-gray-700 mb-2">
+        <h3 className="text-lg dark:text-darkHeading font-semibold mb-2">
+          {title.slice(0, 40)}...
+        </h3>
+        <p className="text-sm text-gray-700 mb-2 dark:text-whiteGray">
           {description.length > 120
             ? `${description.slice(0, 120)}...`
             : description}
         </p>
         <Divider />
-        <p className="text-sm text-gray-500 mt-3 ">
-          <strong>Tags:</strong>{" "}
+        <p className="text-sm text-gray-500 mt-3  dark:text-whiteGray">
           {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
         </p>
         <p className="text-sm font-medium my-1">
-          <strong>Status:</strong>{" "}
           <span
             className={`${
               status === "published" ? "text-green-600" : "text-orange-500"
@@ -152,11 +154,15 @@ export default function ArticleCard({ article, refetch }) {
             {status}
           </span>
         </p>
-        <p className="text-sm text-gray-500">{`Publisher: ${publisher}`}</p>
+        <p className="text-sm text-gray-500 dark:text-whiteGray">
+          {" "}
+          By
+          {` ${publisher}`}
+        </p>
       </div>
 
       {/* Actions */}
-      <div className="flex justify-between p-4 border-t ">
+      <div className="flex justify-between p-4 border-t dark:border-whiteGray/50">
         {status === "requested" && (
           <div className="space-x-3">
             <button
@@ -168,7 +174,7 @@ export default function ArticleCard({ article, refetch }) {
             </button>
             <button
               title="Decline"
-              className="text-red-600 hover:text-red-800"
+              className="text-red-600 hover:text-red-800 "
               onClick={() => setIsModalOpen(true)}
             >
               <CloseIcon fontSize="large" />
@@ -191,7 +197,7 @@ export default function ArticleCard({ article, refetch }) {
             </button>
           )}
           <button
-            className="text-gray-600 hover:text-gray-800"
+            className="text-gray-600 hover:text-gray-800 dark:text-whiteGray dark:hover:text-gray-600"
             onClick={() => setIsDeleteModalOpen(true)}
           >
             <DeleteIcon fontSize="large" />
@@ -201,32 +207,36 @@ export default function ArticleCard({ article, refetch }) {
 
       {/* Decline Modal */}
       <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <DialogTitle>Decline Article</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Reason for Decline"
-            type="text"
-            fullWidth
-            multiline
-            rows={4}
-            value={declineReason}
-            onChange={(e) => setDeclineReason(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setIsModalOpen(false)} variant="outlined">
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmitDecline}
-            variant="contained"
-            color="error"
-          >
-            Submit
-          </Button>
-        </DialogActions>
+        <div className="bg-black2">
+          <DialogTitle className="dark:text-darkHeading">
+            Decline Article
+          </DialogTitle>
+          <DialogContent>
+            <textarea
+              rows={5}
+              role="decline-reason"
+              required={true}
+              className={`overflow-y-auto  py-6 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner mt-2  dark:bg-black2 dark:text-white`}
+              placeholder="Reason for Decline..."
+              value={declineReason}
+              onChange={(e) => setDeclineReason(e.target.value)}
+            ></textarea>
+          </DialogContent>
+          <DialogActions>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="py-1 px-2 dark: dark:bg-white bg-black"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmitDecline}
+              className="py-1 px-2  text-white bg-myGreen"
+            >
+              Submit
+            </button>
+          </DialogActions>
+        </div>
       </Dialog>
       {/* delete modal */}
       <Dialog
@@ -236,15 +246,18 @@ export default function ArticleCard({ article, refetch }) {
         <DialogTitle>Are you sure to delete it?</DialogTitle>
 
         <DialogActions>
-          <Button
+          <button
             onClick={() => setIsDeleteModalOpen(false)}
-            variant="outlined"
+            className="py-1 px-2 dark: dark:bg-white bg-black"
           >
             Cancel
-          </Button>
-          <Button onClick={handleDelete} variant="contained" color="error">
+          </button>
+          <button
+            onClick={handleDelete}
+            className="py-1 px-2  text-white bg-myGreen"
+          >
             Delete
-          </Button>
+          </button>
         </DialogActions>
       </Dialog>
       {/* Confirm premium modal */}
@@ -253,9 +266,12 @@ export default function ArticleCard({ article, refetch }) {
         onClose={() => setIsPremiumeModalOpen(false)}
       >
         <DialogActions>
-          <Button onClick={handlePremium} variant="contained" color="error">
-            Confirm Update Premiume
-          </Button>
+          <button
+            onClick={handlePremium}
+            className="py-1 px-2  text-white bg-myGreen"
+          >
+            Confirm Update Premium
+          </button>
         </DialogActions>
       </Dialog>
     </div>
