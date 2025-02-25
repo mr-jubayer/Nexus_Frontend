@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 function AncentSecretBorneo() {
   const axiosPublic = useAxiosPublic();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["articleOfAncient"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(
@@ -14,6 +14,8 @@ function AncentSecretBorneo() {
       return data;
     },
   });
+
+  if (isLoading) return;
 
   return (
     <div className="grid md:grid-cols-2 gap-5  items-center">
