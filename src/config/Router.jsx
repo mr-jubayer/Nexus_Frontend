@@ -17,6 +17,7 @@ import Profile from "../pages/dashboard/common/Profile";
 import NotFound from "../pages/error/NotFound";
 import AllArticle from "../pages/main/allArticle/AllArticle";
 import ArticleDetails from "../pages/main/articleDetails/ArticleDetails";
+import Contact from "../pages/main/contact/Contact";
 import AddArticle from "../pages/main/home/addArticle/AddArticle";
 import MyArticles from "../pages/main/myArticles/MyArticles";
 import UpdateArticle from "../pages/main/myArticles/UpdateArticle";
@@ -43,6 +44,7 @@ const Router = () => {
           </Route>
 
           <Route path="all-articles" element={<AllArticle />} />
+          <Route path="contact" element={<Contact />} />
 
           <Route element={<PrivetRoutes />}>
             <Route path="premiume-articles" element={<PremiumeArtilces />} />
