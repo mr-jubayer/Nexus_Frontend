@@ -57,7 +57,7 @@ function AddPublisher() {
   };
 
   return (
-    <div className="max-w-[700px] mx-auto  p-8 border-2  border-myGreen rounded-md">
+    <div className="max-w-[700px] mx-auto  p-8 border-2  border-myGreen ">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | Add pulisher</title>

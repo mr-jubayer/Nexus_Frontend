@@ -24,13 +24,13 @@ function PremiumeArtilces() {
   if (!userInfo?.premiumeToken) navigate("/");
   if (isLoading) return <Spinner1 />;
   return (
-    <div>
+    <div className="my-10 max-w-7xl mx-auto lg:px-20 md:px-10 px-3 mt-24">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Nexus | Premiume Articles</title>
       </Helmet>
-      <div className="mb-8 mt-6 ">
-        <Heading title="Premiume Article" />
+      <div className=" mt-6 ">
+        <Heading title="Premium Article" />
       </div>
       <Divider />
       {articles.length ? (

@@ -13,15 +13,23 @@ import uploadImg from "../../../utils/uploadImg";
 import urlReducer from "../../../utils/urlReducer";
 import FilledBtn from "../../../components/buttons/FilledBtn";
 import Heading from "../../../components/Heading";
-import useUserInfo from "../../../hooks/useUserInfo";
 import Spinner1 from "../../../components/spinners/Spinner1";
 import { useNavigate, useParams } from "react-router";
+import Input from "../../../components/inputs/Input";
 
 const animatedComponents = makeAnimated();
 
 function UpdateArticle() {
   const axiosSecure = useAxiosSecure();
   const param = useParams();
+  const { register, reset, handleSubmit } = useForm();
+  const inputRef = useRef();
+  const [tags, setTags] = useState([]);
+  const [publisher, setPublisher] = useState(null);
+  const [selectedImg, setSelectedImg] = useState("(< click)");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { notify } = useNotifications();
 
   const { data: publishers = [] } = useQuery({
     queryKey: ["publishers"],
@@ -40,15 +48,6 @@ function UpdateArticle() {
       return data;
     },
   });
-
-  const { register, reset, handleSubmit } = useForm();
-  const inputRef = useRef();
-  const [tags, setTags] = useState([]);
-  const [publisher, setPublisher] = useState(null);
-  const [selectedImg, setSelectedImg] = useState("(< click)");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { notify } = useNotifications();
 
   // Initialize form values when article data is available
   useEffect(() => {
@@ -115,13 +114,42 @@ function UpdateArticle() {
 
   if (isLoading) return <Spinner1 />;
 
+  let colorStyles = {};
+
+  if (localStorage.getItem("theme") === "dark") {
+    colorStyles = {
+      control: (provided, state) => ({
+        ...provided,
+        boxShadow: "none",
+        border: "none",
+        backgroundColor: "#0000",
+        width: "100%",
+      }),
+      option: (styles, { isFocused, isSelected }) => ({
+        ...styles,
+        backgroundColor: isSelected
+          ? "#007bff"
+          : isFocused
+            ? "#191919df"
+            : "#000",
+        color: "#8F9094",
+        cursor: "pointer",
+      }),
+      singleValue: (styles) => ({
+        ...styles,
+        color: "#8F9094",
+      }),
+    };
+  }
+
   return (
-    <div className="my-10">
+    <div className="mt-24 mb-10 max-w-7xl mx-auto min-h-80 lg:px-20 md:px-10 px-3">
       <Heading title="Update Article" />
       <div className="mt-12 mx-auto max-w-[800px]">
         <form onSubmit={handleSubmit(submitPostHandler)} className="space-y-3">
-          <input
-            className="md:h-20 h-16 text-3xl px-6 py-1 rounded-none w-full focus:outline-none ring-1 ring-black/30 focus:ring-myGreen focus:shadow-inner"
+          <Input
+            defaultValue={article.title}
+            className="md:h-20 h-16 text-3xl px-6"
             placeholder="Title"
             {...register("title")}
             required
@@ -131,10 +159,13 @@ function UpdateArticle() {
             role="description"
             {...register("description")}
             required
-            className="overflow-y-auto py-6 text-xl px-6 rounded-none w-full focus:outline-none ring-1 ring-black/30 focus:ring-myGreen focus:shadow-inner"
+            className={`overflow-y-auto  py-6 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  dark:bg-black2 dark:text-white`}
             placeholder="Description..."
           ></textarea>
-          <div className="flex items-center gap-3 py-3 text-xl px-6 rounded-none w-full focus:outline-none ring-1 ring-black/30 focus:ring-myGreen focus:shadow-inner">
+          <div
+            c
+            className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner dark:bg-black2 `}
+          >
             <input
               type="file"
               accept="image/*"
@@ -149,7 +180,7 @@ function UpdateArticle() {
             >
               Upload Thumbnail <FaFileUpload className="text-3xl" />
             </button>
-            {selectedImg}
+            <span className="text-whiteGray"> {selectedImg} </span>
           </div>
           <div>
             <div className="space-y-3 gap-3 py-4 text-xl px-6 rounded-none w-full focus:outline-none ring-1 ring-black/30 focus:ring-myGreen focus:shadow-inner">
@@ -159,20 +190,21 @@ function UpdateArticle() {
                 value={tags}
                 isMulti
                 options={Tags}
+                styles={colorStyles}
                 placeholder="Select Tags #"
-                className="cursor-text w-full focus:outline-none ring-1 ring-black/30 focus:ring-myGreen focus:shadow-inner"
+                className={` dark:bg-black2   cursor-text w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
                 onChange={(v) => setTags(v)}
               />
               <CreatableSelect
-                placeholder="Publisher"
+                placeholder={"Publisher"}
                 isClearable
-                options={publishers.map((pub) => ({
-                  label: pub.name,
-                  value: pub.name,
-                }))}
-                className="h-full cursor-text w-full focus:outline-none ring-1 ring-black/30 focus:ring-myGreen focus:shadow-inner"
+                styles={colorStyles}
+                options={publishers}
+                className={` dark:bg-black2   cursor-text w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
                 value={publisher}
-                onChange={(v) => setPublisher(v)}
+                onChange={(v) => {
+                  setPublisher(v);
+                }}
               />
             </div>
           </div>

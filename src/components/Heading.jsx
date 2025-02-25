@@ -2,7 +2,7 @@ function Heading({ title = "Title", subTitle = "", className = "" }) {
   return (
     <div className="mx-auto max-w-4xl text-center ">
       <p
-        className={`mt-2 text-xl font-semibold tracking-tight text-balance text-gray-900 sm:text-3xl ${className}`}
+        className={`mt-2 text-xl font-semibold tracking-tight text-balance text-gray-900 dark:text-darkHeading sm:text-3xl ${className}`}
       >
         {title}
       </p>

@@ -52,16 +52,15 @@ function Login() {
         <meta charSet="utf-8" />
         <title>Nexus | Login</title>
       </Helmet>
-      <div className=" border sm:border-black border-black/30 px-8 py-16 my-7">
+      <div className=" border sm:border-black border-black/30 px-8 py-16 my-7 dark:border-whiteGray/40">
         <div className="flex justify-center flex-col items-center mb-4">
           <BrandLogo1 />
-          <p className="mt-1 text-lg">
-            To continue to <span className="font-bold ">Nexus</span>
-          </p>
         </div>
         {/* social login */}
         <SocialLogin label={"in"} />
-        <div className="divider">OR</div>
+        <div className="divider before:bg-whiteGray/20 after:bg-whiteGray/20 dark:text-whiteGray">
+          OR
+        </div>
         {/* email and pass login */}
         <form
           onSubmit={handleSubmit(submitHandler)}
@@ -91,7 +90,9 @@ function Login() {
               {isVisible ? (
                 <span className="text-myGreen">Hide</span>
               ) : (
-                <span className="text-yellow-600">Show</span>
+                <span className="text-yellow-600 dark:text-whiteGray">
+                  Show
+                </span>
               )}
             </div>
           </InputBox>
@@ -107,14 +108,14 @@ function Login() {
             )}
           </FilledBtn>
         </form>
-        <div className="flex gap-2 mt-3 justify-center">
+        <div className="flex gap-2 mt-3 justify-center dark:text-whiteGray">
           <p>New to Nexus?</p>{" "}
           <Link to={"/auth/signup"}>
             <span className="text-myGreen underline">Create new account</span>
           </Link>
         </div>
       </div>
-      <p className="px-10 text-center -mt-4 text-sm">
+      <p className="px-10 text-center -mt-4 text-sm dark:text-whiteGray">
         {" "}
         By proceeding, you agree to Terms of Use and Privacy Policy of{" "}
         <span className="font-bold text-myGreen">Nexus</span>

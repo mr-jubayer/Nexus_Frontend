@@ -33,7 +33,7 @@ function LatestArtilces() {
                     className="bg-green-300 md:h-48 h-60 object-cover group-hover:scale-95  transition-all duration-300"
                   />
                 </div>
-                <h2 className="text-xl text-center mt-2 px-2 group-hover:text-myGreen mb-3">
+                <h2 className="text-xl text-center mt-2 px-2 group-hover:text-myGreen mb-3 text-darkHeading">
                   {article.title.split(" ")[0] +
                     " " +
                     article.title.split(" ")[1] +
@@ -51,7 +51,10 @@ function LatestArtilces() {
                     article.title.split(" ")[7]}
                 </h2>
                 <Divider />
-                <p className="mt-3 text-center"> {article.publisher} </p>
+                <p className="mt-3 text-center text-whiteGray">
+                  {" "}
+                  {article.publisher}{" "}
+                </p>
               </div>
             </Link>
           );

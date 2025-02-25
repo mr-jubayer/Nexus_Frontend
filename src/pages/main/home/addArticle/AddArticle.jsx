@@ -88,6 +88,34 @@ function AddArticle() {
     inputRef.current.click();
   };
 
+  let colorStyles = {};
+
+  if (localStorage.getItem("theme") === "dark") {
+    colorStyles = {
+      control: (provided, state) => ({
+        ...provided,
+        boxShadow: "none",
+        border: "none",
+        backgroundColor: "#0000",
+        width: "100%",
+      }),
+      option: (styles, { isFocused, isSelected }) => ({
+        ...styles,
+        backgroundColor: isSelected
+          ? "#007bff"
+          : isFocused
+            ? "#191919df"
+            : "#000",
+        color: "#8F9094",
+        cursor: "pointer",
+      }),
+      singleValue: (styles) => ({
+        ...styles,
+        color: "#8F9094",
+      }),
+    };
+  }
+
   return (
     <div className="my-10 max-w-7xl mx-auto lg:px-20 md:px-10 px-3 mt-24">
       <Heading title="Create an Article" />
@@ -108,12 +136,12 @@ function AddArticle() {
             role="description"
             {...register("description")}
             required={true}
-            className={`overflow-y-auto  py-6 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+            className={`overflow-y-auto  py-6 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner  dark:bg-black2 dark:text-white`}
             placeholder="Description..."
           ></textarea>
           {/* image file uploader */}
           <div
-            className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+            className={`flex items-center gap-3  py-3 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner dark:bg-black2 `}
           >
             {/* hide it */}
             <input
@@ -126,26 +154,27 @@ function AddArticle() {
             {/* on click button run input file */}
             <button
               type={"button"}
-              className="flex  items-center gap-2 bg-myGreen rounded-sm px-5 py-3 text-white"
+              className="flex  items-center gap-2 bg-myGreen  rounded-sm px-5 py-3 text-white"
               onClick={handleUploadThumbnail}
             >
               Upload Thumbnail <FaFileUpload className="text-3xl" />
             </button>
-            {selectedImg}
+            <span className="text-whiteGray"> {selectedImg} </span>
           </div>
           {/* tags and publishers */}
           <div>
             <div
-              className={`space-y-3 gap-3  py-4 text-xl px-6   rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+              className={`md:px-4 px-2 dark:border-whiteGray/40 border space-y-3 gap-3  py-4 text-xl    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
             >
               <Select
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 value={tags}
                 isMulti
+                styles={colorStyles}
                 options={Tags}
                 placeholder={"Select Tags # "}
-                className={`   cursor-text w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={` dark:bg-black2   cursor-text w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
                 onChange={(v) => {
                   setTags(v);
                 }}
@@ -153,8 +182,9 @@ function AddArticle() {
               <CreatableSelect
                 placeholder={"Publisher"}
                 isClearable
+                styles={colorStyles}
                 options={publishers}
-                className={` h-full cursor-text w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={` dark:bg-black2   cursor-text w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
                 value={publisher}
                 onChange={(v) => {
                   setPublisher(v);

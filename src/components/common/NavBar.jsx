@@ -122,12 +122,12 @@ function NavBar() {
         <div>
           {user ? (
             <div className="flex items-center ">
-              <BtnOutline
+              <button
                 onClick={logoutHandler}
-                className="flex gap-2 text-base items-center  mr-2"
+                className="flex gap-2 text-base items-center  mr-3"
               >
                 <LuLogOut className="text-xl text-white/85" />
-              </BtnOutline>
+              </button>
               <div className="avatar online cursor-pointer rounded-full">
                 <div className="w-8 rounded-full">
                   <Link to={"/dashboard/profile"}>
@@ -139,7 +139,7 @@ function NavBar() {
           ) : (
             <div>
               <Link to={"/auth/login"}>
-                <BtnOutline className="text-white  text-sm">Login</BtnOutline>
+                <button className="text-white  text-sm px-2">Login</button>
               </Link>
               <Link to={"/auth/signup"}>
                 <FilledBtn className="bg-myGreen text-white hover:bg-myGreen/90 text-sm">

@@ -24,19 +24,6 @@ import toast from "react-hot-toast";
 import useUserInfo from "../../../hooks/useUserInfo";
 import { Helmet } from "react-helmet-async";
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  borderRadius: "8px",
-  boxShadow: 24,
-  p: 4,
-  width: "90%",
-  maxWidth: 400,
-};
-
 export default function MyArticles() {
   const axiosSecure = useAxiosSecure();
   const { userInfo, isLoading: userLoading } = useUserInfo();
@@ -105,6 +92,23 @@ export default function MyArticles() {
     }
   };
 
+  const modalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    boxShadow: 24,
+    p: 4,
+    width: "90%",
+    maxWidth: 400,
+  };
+
+  if (localStorage.getItem("theme") === "dark") {
+    modalStyle.bgcolor = "#191919";
+  } else {
+    modalStyle.bgcolor = "#fff";
+  }
+
   if (userLoading || isLoading) return <Spinner1 />;
 
   return (
@@ -117,22 +121,42 @@ export default function MyArticles() {
       <Divider />
 
       {articles.length ? (
-        <TableContainer className="mt-8">
+        <TableContainer className="mt-8 ">
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>#</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Premium</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>
+                  <span className="dark:text-darkHeading">#</span>
+                </TableCell>
+                <TableCell>
+                  <span className="dark:text-darkHeading">Title</span>
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <span className="dark:text-darkHeading"> Status </span>
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <span className="dark:text-darkHeading"> Premium </span>
+                </TableCell>
+                <TableCell>
+                  <span className="dark:text-darkHeading"> Actions </span>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {articles.map((article, index) => (
                 <TableRow key={article._id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{article.title}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <span className="text-darkHeading">{index + 1}</span>{" "}
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <span className="dark:text-darkHeading">
+                      {article.title}
+                    </span>{" "}
+                  </TableCell>
                   <TableCell>
                     {article.status === "published" ? (
                       <Typography sx={{ color: "green" }}>Approved</Typography>
@@ -156,7 +180,11 @@ export default function MyArticles() {
                       <Typography sx={{ color: "orange" }}>Pending</Typography>
                     )}
                   </TableCell>
-                  <TableCell>{article.isPremium ? "Yes" : "No"}</TableCell>
+                  <TableCell>
+                    <span className="dark:text-whiteGray">
+                      {article.isPremium ? "Yes" : "No"}
+                    </span>
+                  </TableCell>
                   <TableCell>
                     <FilledBtn
                       onClick={() =>
@@ -195,23 +223,23 @@ export default function MyArticles() {
       {/* Modal for Decline Reason */}
       <Modal open={openModal} onClose={handleCloseModal}>
         <Box sx={modalStyle}>
-          <Typography variant="h6" className="mb-2 text-error font-bold mb-4">
+          <Typography
+            variant="h6"
+            className="mb-2 text-error font-bold dark:text-darkHeading "
+          >
             Decline Reason
           </Typography>
           <br />
-          <Typography className="border p-5 rounded-md ">
+          <Typography className="border p-3 dark:border-whiteGray/35 dark:text-whiteGray">
             {selectedReason}
           </Typography>{" "}
           <br />
-          <Button
-            size="small"
-            variant="contained"
-            color="primary"
+          <FilledBtn
             onClick={handleCloseModal}
-            className="mt-4 "
+            className="mt-4 dark:bg-white dark:text-black bg-whiteGray text-white "
           >
             Close
-          </Button>
+          </FilledBtn>
         </Box>
       </Modal>
     </div>

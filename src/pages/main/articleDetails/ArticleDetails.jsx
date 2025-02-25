@@ -53,11 +53,13 @@ function ArticleDetails() {
         <title>Nexus | {title}</title>
       </Helmet>
       <h3
-        className={`md:text-5xl text-2xl capitalize relative font-semibold mb-3 `}
+        className={`md:text-5xl text-2xl capitalize relative font-semibold mb-3 dark:text-darkHeading`}
       >
         {title}
       </h3>
-      <div className={` mx-auto border bg-white/50   `}>
+      <div
+        className={` mx-auto border dark:border-whiteGray/35 bg-white/50   dark:bg-black1`}
+      >
         {/* Header */}
         <div className="flex p-4 border-b justify-between">
           <div className="flex items-center">
@@ -68,11 +70,13 @@ function ArticleDetails() {
             />
 
             <div>
-              <p className="font-bold">{authorInfo.fullName}</p>
-              <p className="text-sm">{authorInfo.email}</p>
+              <p className="font-bold dark:text-darkHeading">
+                {authorInfo.fullName}
+              </p>
+              <p className="text-sm dark:text-whiteGray">{authorInfo.email}</p>
             </div>
           </div>
-          <div className="self-start md:text-lg ">
+          <div className="self-start md:text-lg  dark:text-whiteGray">
             <p>{time} </p>
           </div>
         </div>
@@ -91,10 +95,13 @@ function ArticleDetails() {
           )}
           <div className="flex justify-between items-center ">
             <p className="text-gray-500 md:text-xl p-2">
-              Published in:{" "}
-              <span className="text-black font-bold ">{publisher}</span>`
+              By:{" "}
+              <span className="text-black font-bold  dark:text-darkHeading">
+                {publisher}
+              </span>
+              `
             </p>
-            <p className="md:text-lg text-xs text-nowrap pr-3">
+            <p className="md:text-lg text-xs text-nowrap pr-3 dark:text-whiteGray">
               Views: {views || 0}
             </p>
           </div>
@@ -102,22 +109,11 @@ function ArticleDetails() {
 
         {/* Content */}
         <div className="p-4">
-          <p className="text-lg text-gray-700 mb-2">{description}</p>
-          <Divider />
-          <h2 className="my-4 font-semibold text-xl">More Info</h2>
-          <p className=" text-gray-500 mt-3 ">
-            <strong>Tags:</strong>{" "}
+          <p className=" text-gray-500 mb-3 ">
             {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
           </p>
-          <p className=" font-medium my-1">
-            <strong>Status:</strong>{" "}
-            <span
-              className={`${
-                status === "published" ? "text-green-600" : "text-orange-500"
-              } font-bold`}
-            >
-              {status}
-            </span>
+          <p className="text-lg text-gray-700 mb-2 dark:text-whiteGray">
+            {description}
           </p>
         </div>
       </div>

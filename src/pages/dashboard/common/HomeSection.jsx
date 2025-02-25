@@ -62,10 +62,10 @@ function HomeSection() {
                 type="number"
                 name="contactNumber"
                 placeholder="Enter your contact number.."
-                className={` py-2 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={` md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
                 required
               />
-              <button className="bg-myGreen text-white text-sm px-3 py-2 ">
+              <button className="bg-myGreen text-white text-sm px-3 md:py-2 py-1 ">
                 Add
               </button>
             </form>
@@ -79,9 +79,9 @@ function HomeSection() {
                 type="text"
                 name="address"
                 placeholder="Enter your home address.."
-                className={`py-2 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
+                className={`md:py-2 py-1 text-sm px-2    rounded-none w-full focus:outline-none ring-1 ring-black/30  focus:ring-myGreen focus:shadow-inner `}
               />
-              <button className="bg-myGreen text-white text-sm px-3 py-2 ">
+              <button className="bg-myGreen text-white text-sm px-3 md:py-2 py-1 ">
                 Add
               </button>
             </form>

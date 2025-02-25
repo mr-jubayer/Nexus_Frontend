@@ -102,11 +102,12 @@ function PaymentCard() {
   };
 
   if (!amount) return <Navigate to={"/subscriptions"} />;
-
+  // lassName =
+  //   "mt-24 grid md:grid-cols-2 place-items-center gap-6 pb-24  max-w-7xl mx-auto lg:px-20 md:px-10 px-3";
   return (
-    <div className="max-w-[600px] mx-auto my-12 p-8 rounded-lg  border-2 border-myGreen">
+    <div className="max-w-[600px] mx-auto mt-24 my-12 p-8 rounded-lg  border-2 border-myGreen ">
       <Heading title="Payment" />
-      <form onSubmit={handlePaymentSubmit} className="space-y-6">
+      <form onSubmit={handlePaymentSubmit} className="space-y-6 mt-5">
         {/* Card Input */}
         <div className="p-4 border border-myGreen rounded-md  focus-within:ring-4 focus-within:ring-myGreen ">
           <CardElement

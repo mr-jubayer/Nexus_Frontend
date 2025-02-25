@@ -59,18 +59,18 @@ export default function Prices() {
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className={` p-8 ring-2 ring-gray-900/10 sm:p-10 bg-white flex flex-col justify-between h-full `}
+            className={` dark:border-blackGray/50 dark:border shadow-sm p-8 ring-2 ring-gray-900/10 sm:p-10 dark:text-darkHeading flex flex-col justify-between h-full `}
           >
             <div>
               <div>
-                <h3 className="text-xld font-semibold ">{plan.name}</h3>
+                <h3 className="text-xl font-semibold ">{plan.name}</h3>
                 <p className="mt-4 flex items-baseline gap-x-2">
-                  <span className="text-gray-900 text-5xl font-semibold tracking-tight">
+                  <span className=" text-5xl font-semibold tracking-tight">
                     {plan.priceMonthly == "00"
                       ? "Free"
                       : `$${plan.priceMonthly}`}
                   </span>
-                  <span className="text-gray-500 text-base">
+                  <span className="text-gray-500 dark:text-whiteGray text-base">
                     /{!plan.featured ? "for 3 day" : "month"}{" "}
                   </span>
                 </p>
@@ -79,7 +79,7 @@ export default function Prices() {
               <div>
                 <ul
                   role="list"
-                  className="mt-8 space-y-3 text-sm sm:mt-10 text-gray-600"
+                  className="mt-8 space-y-3 text-sm sm:mt-10 text-gray-600 dark:text-whiteGray"
                 >
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex gap-x-3">
@@ -97,7 +97,9 @@ export default function Prices() {
                   {plan.buttonText}
                 </FilledBtn>
               </Link>
-              <p className="mt-6 text-base text-gray-600">{plan.description}</p>
+              <p className="mt-6 text-base text-gray-600 dark:text-whiteGray">
+                {plan.description}
+              </p>
             </div>
           </div>
         ))}

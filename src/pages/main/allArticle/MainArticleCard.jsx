@@ -25,7 +25,7 @@ export default function MainArticleCard({ article }) {
 
   return (
     <div
-      className={`${isPremium ? "border-2 border-purple-600" : ""} max-w-lg mx-auto border bg-white/50 w-full shadow-sm overflow-hidden `}
+      className={`${isPremium ? "border-2 border-purple-600" : ""} max-w-lg mx-auto border bg-white/50 dark:bg-black1/90 dark:border-blackGray/50 w-full shadow-sm overflow-hidden `}
     >
       {/* Header */}
       <div className="flex p-4 border-b justify-between">
@@ -37,11 +37,13 @@ export default function MainArticleCard({ article }) {
           />
 
           <div>
-            <p className="font-bold">{authorInfo.fullName}</p>
-            <p className="text-sm">{authorInfo.email}</p>
+            <p className="font-bold dark:text-darkHeading">
+              {authorInfo.fullName}
+            </p>
+            <p className="text-sm dark:text-whiteGray">{authorInfo.email}</p>
           </div>
         </div>
-        <div className="self-start text-xs ">
+        <div className="self-start text-xs dark:text-whiteGray">
           <p>{time} </p>
         </div>
       </div>
@@ -63,21 +65,23 @@ export default function MainArticleCard({ article }) {
       {/* Content */}
       <div className="p-4">
         <h3
-          className={`text-lg relative font-semibold mb-2 ${isPremium && "pl-3"}`}
+          className={`text-lg relative font-semibold mb-2 ${isPremium && "pl-3"} dark:text-darkHeading`}
         >
           {title.slice(0, 70)}...
           {isPremium && (
             <span className="absolute top-0 left-0 w-1 h-full bg-purple-600"></span>
           )}
         </h3>
-        <p className="text-sm text-gray-700 mb-2">
+        <p className="text-sm text-gray-700 mb-2 dark:text-whiteGray">
           {description.length > 120
             ? `${description.slice(0, 120)}...`
             : description}
         </p>
-        <Divider />
-        <p className="text-sm  mt-3  ">views: {views || 0}</p>
-        <p className="text-sm text-gray-500 ">
+        <Divider className="dark:bg-whiteGray/40" />
+        <p className="text-sm  mt-3   dark:text-whiteGray">
+          views: {views || 0}
+        </p>
+        <p className="text-sm text-gray-500  dark:text-whiteGray">
           {tags.length ? tags.map((tag) => `#${tag} `) : "No tags"}
         </p>
 

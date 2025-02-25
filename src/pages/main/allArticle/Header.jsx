@@ -35,21 +35,21 @@ function Header({
   return (
     <div>
       <div>
-        <h2 className="text-4xl text-center font-semibold ">
+        <h2 className="text-4xl text-center font-semibold  dark:text-darkHeading">
           Explore 100+ Free & Premium Articles
         </h2>
-        <p className="text-lg text-[#424242] md:w-7/12 mx-auto text-center mt-2">
+        <p className="text-lg text-[#424242] md:w-7/12 mx-auto text-center mt-2 dark:text-whiteGray">
           Explore a wealth of information. Access 100+ free news articles and
           dive into the stories shaping today's world
         </p>
       </div>
       <div className=" mt-8 text-black mb-6   gap-4 ">
         <div className="my-5 max-w-[800px] mx-auto">
-          <div className="flex shadow-sm items-center md:px-5 px-3 bg-myGreen/5">
+          <div className="flex shadow-sm items-center md:px-5 px-3 bg-myGreen/5 dark:bg-slate-200/5">
             <div className="relative border-r-2">
               <button
                 onClick={() => setIsOpen((prev) => !prev)}
-                className=" md:w-auto w-full  md:px-3 px-1   transition-all duration-150 list-none cursor-pointer flex gap-1 items-center md:text-base text-sm    justify-center"
+                className="dark:text-darkHeading  md:w-auto w-full  md:px-3 px-1   transition-all duration-150 list-none cursor-pointer flex gap-1 items-center md:text-base text-sm    justify-center"
               >
                 Sort
                 {isOpen ? (
@@ -83,26 +83,26 @@ function Header({
             </div>
             <input
               onChange={searchChangeHandler}
-              className="bg-transparent   md:h-full md:py-5 py-3 md:px-6 px-3 md:text-2xl text-base text-black  w-full outline-none"
+              className="bg-transparent   md:h-full md:py-5 py-3 md:px-6 px-3 md:text-2xl text-base text-black  dark:text-whiteGray w-full outline-none"
               placeholder="Search for articles..."
             />
           </div>
         </div>
         {/* others sorting functionality (with - tags | with - publishers) */}
         <div className="flex justify-center gap-2 text-sm mb-12">
-          <p>Also Search by: </p>
+          <p className="dark:text-whiteGray">Also Search by: </p>
           {/* publisher s */}
           <div>
             <Select
               onChange={pubChangeHandler}
               className={clsx(
-                " text-black font-medium cursor-pointer",
-                "focus:outline-none"
+                " text-black font-medium  dark:bg-black1 dark:text-darkHeading cursor-pointer",
+                "focus:outline-none white"
               )}
             >
               <option value={""}>Publishers</option>
               {publishers.map((pub, i) => (
-                <option key={i} value={pub.label}>
+                <option className="text-whiteGray" key={i} value={pub.label}>
                   {pub.label}
                 </option>
               ))}
@@ -113,13 +113,13 @@ function Header({
             <Select
               onChange={tagsChangeHandler}
               className={clsx(
-                " text-black font-medium cursor-pointer",
-                "focus:outline-none list-none"
+                " text-black font-medium  dark:bg-black1 dark:text-darkHeading cursor-pointer",
+                "focus:outline-none white"
               )}
             >
               <option value={""}>Tags</option>
               {Tags.map((tag, i) => (
-                <option key={i} value={tag.label}>
+                <option className="text-whiteGray" key={i} value={tag.label}>
                   {tag.label}
                 </option>
               ))}

@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 
 function ReviewCard({ review }) {
   return (
-    <div className="my-2 md:mx-2  p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="my-2 md:mx-2  p-6 border border-gray-200 dark:border-whiteGray/35 shadow-sm hover:shadow-md transition-shadow duration-300">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-1 text-indigo-600">
           {[...Array(review.rating)].map((_, i) => (
@@ -13,7 +13,9 @@ function ReviewCard({ review }) {
         <div className="text-sm text-gray-400">{review.date}</div>
       </div>
 
-      <p className="text-gray-800 text-base mb-5">{review.reviewText}</p>
+      <p className="text-gray-800 text-base mb-5 dark:text-whiteGray">
+        {review.reviewText}
+      </p>
 
       <div className="flex items-center gap-4">
         <img
@@ -22,7 +24,9 @@ function ReviewCard({ review }) {
           alt={`${review.name}'s profile`}
         />
         <div>
-          <h3 className="font-semibold text-lg text-gray-800">{review.name}</h3>
+          <h3 className="font-semibold text-lg text-gray-800 dark:text-darkHeading">
+            {review.name}
+          </h3>
           <p className="text-sm text-gray-500">{review.role}</p>
         </div>
       </div>

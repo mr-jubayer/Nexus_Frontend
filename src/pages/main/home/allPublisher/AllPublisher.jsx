@@ -46,8 +46,8 @@ export default function AllPublisher() {
         className="mySwiper"
       >
         {publishers.map((pub) => (
-          <SwiperSlide key={pub._id} className="flex justify-center  my-3">
-            <div className=" w-full max-w-xs bg-gray-100/50 transition-all duration-200 rounded-md shadow-sm p-5 flex flex-col items-center gap-4 hover:shadow-md ">
+          <SwiperSlide key={pub._id} className="flex justify-center  my-3 ">
+            <div className=" w-full max-w-xs bg-gray-100/50 dark:bg-black1 transition-all duration-200  shadow-sm p-5 flex flex-col items-center gap-4 hover:shadow-md ">
               <div className=" md:h-28 h-24 flex justify-center items-center rounded-full overflow-hidden">
                 <img
                   src={pub.logo}
@@ -55,7 +55,9 @@ export default function AllPublisher() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-medium text-gray-700">{pub.label}</h3>
+              <h3 className="text-lg font-medium text-gray-700 dark:text-darkHeading">
+                {pub.label}
+              </h3>
             </div>
           </SwiperSlide>
         ))}
