@@ -25,9 +25,11 @@ function Home() {
         <meta charSet="utf-8" />
         <title>Nexus | Home</title>
       </Helmet>
-      <Banner />
-      <div className="max-w-7xl mx-auto min-h-80 lg:px-20 md:px-10 px-3 ">
+      <div className="bg-[#F1F4FE] dark:bg-black2/20">
+        <Banner />
         <Prices />
+      </div>
+      <div className="max-w-7xl mx-auto min-h-80 lg:px-20 md:px-10 px-3 ">
         <AllPublisher />
         <LatestArtilces />
         <InsightNews />

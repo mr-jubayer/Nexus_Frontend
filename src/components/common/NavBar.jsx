@@ -99,7 +99,7 @@ function NavBar() {
   };
   return (
     <nav
-      className={`fixed top-0 w-full z-50 bg-blackNF shadow-sm ${shadow && "shadow-lg"}  `}
+      className={`fixed top-0 w-full z-50 shadow-md ${shadow && "shadow-xl"} shadow-gray-300/40    py-3 bg-white dark:bg-black1 dark:shadow-gray-900/40`}
     >
       <div className="flex items-center justify-between  w-full py-2  max-w-7xl mx-auto lg:px-20 md:px-10 px-3 z-20 ">
         {/*  */}

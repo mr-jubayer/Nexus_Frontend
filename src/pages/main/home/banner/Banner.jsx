@@ -1,21 +1,16 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination"; // Added to ensure pagination styles
 import "./styles.css";
-
-import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import FilledBtn from "../../../../components/buttons/FilledBtn";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import Heading from "../../../../components/Heading";
 import { Link } from "react-router";
 
 export default function Banner() {
   const axiosSecure = useAxiosSecure();
 
-  const { data: popularArticles = [] } = useQuery({
+  const { data: popularArticles = [], isLoading } = useQuery({
     queryKey: ["popularArticles"],
     queryFn: async () => {
       const { data } = await axiosSecure(`/api/articles/popular`);
@@ -23,68 +18,76 @@ export default function Banner() {
     },
   });
 
-  const slides =
-    popularArticles.length < 3
-      ? [...popularArticles, ...popularArticles]
-      : popularArticles;
-
-  // ✅ Force autoplay to start
-  useEffect(() => {
-    const swiper = document.querySelector(".mySwiper")?.swiper;
-    if (swiper) {
-      swiper.autoplay.start();
-    }
-  }, []);
-
+  const firstArticle = popularArticles[0];
   return (
-    <div className="xl:h-[550px] w-full md:h-[500px] h-[560px]">
-      <Swiper
-        slidesPerView={1}
-        loop={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-          waitForTransition: true,
-        }}
-        speed={1400}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        modules={[EffectFade, Autoplay, Pagination]}
-        className="mySwiper"
-      >
-        {slides.map((art, i) => (
-          <SwiperSlide key={i}>
-            <motion.div
-              className="relative h-full w-full object-cover "
-              style={{
-                backgroundImage: `url('${art.thumbnail}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 2, ease: "easeOut" } }}
-            >
-              <div className="bg-black/50 w-full h-full flex flex-col justify-end  text-left">
-                <div className="max-w-7xl mx-auto pb-5 lg:px-20 md:px-10 px-3 drop-shadow-2xl ">
-                  <h1 className="text-white md:text-5xl text-3xl font-bold mb-2 uppercase text-left">
-                    {art?.title?.slice(0, 20)}
-                  </h1>
-                  <h2 className="text-white lg:w-10/12 w-11/12 md:text-lg text-base drop-shadow-2xl ">
-                    {art?.description?.slice(0, 200)}
-                  </h2>
-                  <Link to={`all-articles/details/${art._id}`}>
-                    <FilledBtn className="bg-myGreen text-white border-b-2 mt-5 w-[200px] py-3 hover:bg-black2 hover:border-myGreen border-black1">
-                      Explore
-                    </FilledBtn>
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="pt-24 ">
+      <div className="max-w-7xl mx-auto lg:px-20 md:px-10 px-3   grid grid-cols-12 md:gap-8">
+        {/* left container */}
+        {isLoading ? (
+          <div className="col-span-8 h-[400px] bg-black/10"></div>
+        ) : (
+          <div className="relative col-span-8 max-h-[400px] w-full ">
+            <img
+              src={firstArticle?.thumbnail}
+              alt={firstArticle?.title}
+              className="w-full h-full object-cover rounded-md shadow-sm"
+            />
+            <div className="text-4xl absolute bottom-2   text-white   drop-shadow-2xl">
+              <p className="bg-black1 text-lg  pl-8 md:w-44">
+                {new Date(firstArticle?.creationTime).getDate() +
+                  "/" +
+                  new Date(firstArticle?.creationTime).getMonth() +
+                  1 +
+                  "/" +
+                  new Date(firstArticle?.creationTime).getFullYear()}
+              </p>
+
+              <h2 className="bg-[#1b8f19] px-4 py-1.5 pl-8 mt-2">
+                {firstArticle?.title.slice(0, 34)}
+              </h2>
+              <h2 className="mt-1 bg-[#1b8f19] px-3 py-1.5 pl-8">
+                {firstArticle?.title.slice(34, -1)}
+              </h2>
+            </div>
+          </div>
+        )}
+        <div className="col-span-4">
+          <Heading title="Trending Articles" className="text-left mb-5" />
+          {popularArticles?.slice(1)?.map((article) => (
+            <TrendingArticle key={article._id} article={article} />
+          ))}
+        </div>
+      </div>
     </div>
+  );
+}
+
+function TrendingArticle({ article }) {
+  return (
+    <Link to={`/all-articles/details/${article._id}`}>
+      <div className="mb-5 flex gap-4 items-center group/edit  cursor-pointer">
+        <div className="">
+          <img
+            src={article.thumbnail}
+            alt={article.title}
+            className="w-24 aspect-square object-cover rounded-full group-hover/edit:scale-95 transition-all duration-300"
+          />
+        </div>
+        <div>
+          <p className=" text-sm   dark:text-white/90">
+            {new Date(article.creationTime).getDate() +
+              " / " +
+              new Date(article.creationTime).getMonth() +
+              " / " +
+              new Date(article.creationTime).getFullYear()}{" "}
+            - <span className="text-[#1b8f19]"> {article.publisher} </span>
+          </p>
+          <h2 className="text-mds mt-1  leading-5 group-hover/edit:underline dark:text-white/90">
+            {" "}
+            {article.title.slice(0, 38)}...
+          </h2>
+        </div>
+      </div>
+    </Link>
   );
 }

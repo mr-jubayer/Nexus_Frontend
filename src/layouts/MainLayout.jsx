@@ -12,13 +12,8 @@ function MainLayout() {
   if (loading) return <PageLoader />;
   return (
     <div className="dark:bg-black1">
-      {/* navbar */}
-      <div>
-        <NavBar />
-      </div>
-      {/* dynamic page */}
-      {/* max-w-7xl mx-auto lg:px-20 md:px-10 px-3 */}
-      <div className="min-h-80 ">
+      <NavBar />
+      <div className="min-h-80">
         <Outlet />
       </div>
       {/* footer */}

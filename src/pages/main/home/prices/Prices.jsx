@@ -52,7 +52,7 @@ const plans = [
 
 export default function Prices() {
   return (
-    <div className="relative mt-14">
+    <div className="relative mt-14 max-w-7xl mx-auto min-h-80 lg:px-20 md:px-10 px-3 pb-10">
       <Heading title=" Choose your plan" />
 
       <div className="mx-auto mt-7 grid lg:grid-cols-3 sm:grid-cols-2 items-center gap-y-6 gap-x-5 sm:gap-y-0">
