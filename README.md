@@ -12,8 +12,8 @@
 
 ## Admin Credentials
 
-- **Email**: admin@nexus.com
-- **Password**: @adminN123
+- **Email**: N/A
+- **Password**: N/A
 
 ---
 
